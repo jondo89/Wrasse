@@ -1,0 +1,24 @@
+{
+  "name": "Wrasse",
+  "description": "",
+  "sitename" : "Wrasse",
+  "website" : "https://wrasse.herokuapp.com/",
+  "repo" : "https://github.com/Isithelo/wrasse",
+  "scripts": {
+  },
+  "env": {
+    "MONGODB_URI": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "mongolab"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}

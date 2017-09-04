@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {{> css}}
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="msvalidate.01" content="6F54F88A443C656EFB178CEF11C4E7E9" />
+  <meta name="google-site-verification" content="V6ZQykcqytIxvH_JCfowxQfGXB9Qn-rgaQ-iIrtoW3c" />  
+    <meta name="flattr:id" content="ljw99y">
+  <title>{{sitename}}</title>
+  <style type="text/css">
+    .outer{
+      background-color: rgba(0,0,0,0.5);
+      filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=1,startColorStr="#E6FFFFFF",endColorStr="#E6FFFFFF");
+      -ms-filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=1,startColorStr="#E6FFFFFF",endColorStr="#E6FFFFFF");
+    }
+
+  .recaptch-placeholder{
+    min-height: 88px;
+    
+    
+  }
+
+
+  </style><!-- Place this tag in your head or just before your close body tag. -->
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+ 
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+       
+        {{> javascript}}
+      </head>
+      <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.9";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+      <body id="page-top">
+        {{> header}}
+        <header>
+          <div class="container" >
+            <div class="row">
+              <div class="col-sm-7">
+                <div class="header-content" >
+                  <div class="header-content-inner">
+                    <div class="well outer"  >
+                     <h1> 
+                       {{sitename}} is an open source issue tracking system. 
+                     </h1>  
+                     <h3 style="color: #c7c7c7">Work to do.</h3>
+                     <div class="row">
+                      <div class="col-md-6">
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-5">
+            <div class="header-content">
+              <div class="header-content-inner">
+                {{> signuphomepage}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+      {{> analytics}}
+    </body>
+    </html>
