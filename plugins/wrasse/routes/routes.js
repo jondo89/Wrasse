@@ -126,17 +126,14 @@ var issueController = require(directory+'controllers/issue');
 
 ///////////////////////////   THESE ROUTES CAN BE REMOVED FOR CUSTOM SITES   ///////////////////////////
 var wrasseController = require(directory+'controllers/wrassepages'); 
+///////////////////////////////////
+////       COMPONENTS         //// 
 /////////////////////////////////
-////       TEMPALTES        //// 
-///////////////////////////////
-app.get('/working', wrasseController.working);
-app.get('/primer', wrasseController.primer);
+app.get('/issues', issueController.issues);
+ 
 ///////////////////////////   THESE ROUTES CAN BE REMOVED FOR CUSTOM SITES   ///////////////////////////
  
-app.get('/createissue', issueController.createissue);
-app.get('/readissue', issueController.readissue);
-app.get('/updateissue', issueController.updateissue);
-app.get('/deleteissue', issueController.deleteissue);
+ 
 
 
 

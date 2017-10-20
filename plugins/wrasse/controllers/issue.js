@@ -1,16 +1,6 @@
  
 var User = require('../../../models/User');
-var braintree = require("braintree");
-
-////////////////////////////////////////////
-///////   BRAINTREE INTEGRATION    ////////
-//////////////////////////////////////////
-var gateway = braintree.connect({
-  environment: braintree.Environment.Sandbox,
-  merchantId: process.env.MERCHANTID,
-  publicKey: process.env.PUBLICKEY,
-  privateKey: process.env.PRIVATEKEY
-});
+ 
 
 ///////////////////////////////////////////////
 ////     SET YOUR APP.JSON DETAILS        //// 
@@ -21,42 +11,30 @@ var sitename = myModule.sitename
 var website = myModule.website
 var repo = myModule.repo
 
-/////////////////////////////
-/////  CREATE ISSUE    ///// 
-///////////////////////////
-exports.createissue = function(req, res) {
-  res.render('tools/createissue',{
-    pagetitle: 'createissue | '+sitename+'',
-    layout:false
-  })
-}; 
+/////////////////////////////////
+////       DEBUGGING        //// 
+///////////////////////////////
+var debugMode = true
+function debugging(req,query){
+  if (query) {
+    console.log()
+    console.log('----------  DEBUGGING  ----------')
+    console.log('Directory Name : '+__dirname)
+    console.log('Original req URL : '+req.originalUrl)
+    console.log('----------  DEBUGGING  ----------')
+    console.log()
+  }
+}
 
-/////////////////////////////
-/////  READ ISSUE    ///// 
-///////////////////////////
-exports.readissue = function(req, res) {
-  res.render('tools/readissue',{
-    pagetitle: 'read issue | '+sitename+'',
-    layout:false
-  })
-}; 
-
-/////////////////////////////
-/////  UPDATE ISSUE    ///// 
-///////////////////////////
-exports.updateissue = function(req, res) {
-  res.render('tools/updateissue',{
-    pagetitle: 'updateissue | '+sitename+'',
-    layout:false
-  })
-}; 
-
-/////////////////////////////
-/////  DELETE ISSUE    ///// 
-///////////////////////////
-exports.deleteissue = function(req, res) {
-  res.render('tools/deleteissue',{
-    pagetitle: 'deleteissue | '+sitename+'',
-    layout:false
-  })
-}; 
+///////////////////////////////////////////
+////       ISSUE PAGE ROUTING         //// 
+/////////////////////////////////////////
+exports.issues = function(req, res) {
+    var ids = '58d371b01373c63dccdee169'
+    var Formids = '58aa74140b9d3241280ecf17'
+    res.render('../../../plugins/wrasse/views/issues', {
+      pagetitle: 'Components | '+sitename ,
+      items : JSON.stringify(ids),
+      Formids : JSON.stringify(Formids)
+    }); 
+}

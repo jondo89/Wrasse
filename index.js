@@ -192,7 +192,11 @@ app.set('views', path.join(__dirname, 'plugins/wrasse/views/'));
 //Wrasse Routing
 var wrasseRouting = require('./plugins/wrasse/routes/routes');
 app.use('/', wrasseRouting);
-
+ //Set Handlebars view directory for plugins
+app.set('views', path.join(__dirname, 'plugins/semini/views/'));
+//Fratenate Routing
+var seminiRouting = require('./plugins/semini/routes/routes');
+app.use('/', seminiRouting);
 /////////////////////////////
 ////       404          //// 
 ///////////////////////////

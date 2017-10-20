@@ -21,14 +21,7 @@ var sitename = myModule.sitename
 var website = myModule.website
 var repo = myModule.repo
 
-////////////////////////
-/////  PHASE 1    ///// 
-//////////////////////
-exports.primer = function(req, res) {
-  res.render('primer',{
-    pagetitle: 'primer | '+sitename+'',
-  })
-}; 
+ 
 
 ////////////////////////
 /////  PHASE 2    ///// 

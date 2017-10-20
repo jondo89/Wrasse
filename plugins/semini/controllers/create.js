@@ -1,4 +1,4 @@
-var wrasseModel      = require('../models/wrasse.js');
+var formsModel      = require('../models/forms.js');
 var ObjectId = require('mongodb').ObjectID;
 
 ///////////////////////////////////////////////
@@ -26,7 +26,8 @@ function debugging(req,query){
 }
 
 //Create an entry
-exports.create = function(req, res) {
+exports.createform = function(req, res) {
+  debugging(req,debugMode)
   var dataset = req.body  
 //console.log('/////////////DEBUG CREATE FOR ACTIVE = TRUE Stage 1 //////////////')
 //console.log('Init req.body',dataset)
@@ -35,7 +36,6 @@ exports.create = function(req, res) {
 //Imidiate login redirect.
 if (req.user) {
   console.log('User logged in.')
-
   if (dataset.revision != 'created') {
     console.log('ID Injection Step 1.')
 //this is the area where the items are assigned the Elment ID.
@@ -75,7 +75,7 @@ if (req.user) {
     console.log('user id is working')
     if (dataset.elementID !='') {
       console.log('step 1 - dataset.elementID : ',dataset.elementID)
-      wrasseModel.update(
+      formsModel.update(
       {
         $and : 
         [
@@ -95,7 +95,7 @@ if (req.user) {
       res.send(err);
     } else{
     }
-    var create = new wrasseModel(dataset);  
+    var create = new formsModel(dataset);  
     create.save(function (err, doc) {  
 //CROPTI IMAGE SAVING
 if ( dataset.entry.image) {
@@ -120,7 +120,7 @@ if (err) {
   })
       } else {
         console.log('new items are here')
-        var create = new wrasseModel(dataset);  
+        var create = new formsModel(dataset);  
         create.save(function (err, doc) {  
 //CROPTI IMAGE SAVING
 if ( dataset.entry.image) {
@@ -150,9 +150,9 @@ if (err) {
     res.send({redirect: '/signin'});
   }
 } else {
-  res.send(
-    {redirect: '/signin'}
-    );
+  console.log('step 8 - user not logged in')
+  userid=''
+  res.send({redirect: '/signin'});
 }
 };
 

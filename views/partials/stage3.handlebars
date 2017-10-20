@@ -1,0 +1,105 @@
+<div id='stage3'>
+
+  <h1>Stage 3 - Push the Navigation Items Form.</h1>
+  <p>Create the default database generation structure.</p>
+
+  <h3>Data Set</h3>
+  <textarea class="form-control" class="form-control " id="schema3" name="schema"  style="height: 250px">
+  {
+  "name": "Navigation Items",
+  "detail": "Use for the creation Navigation Items.",
+  "objectType": "form",
+  "entry": {
+    "options": {
+      "form": {
+        "buttons": {
+          "submit": {
+            "title": "Submit",
+            "id": "submit",
+            "click": ""
+          }
+        }
+      },
+      "helper": "Use this form to add all Navigation Items.",
+      "fields": {
+        "detail": {
+          "type": "text",
+          "rows": 4,
+          "cols": 40,
+          "helper": "Detail for the element to be created.",
+          "validate": true
+        },
+        "objectType": {
+          "type": "select"
+        },
+        "revision": {
+          "type": "select",
+          "helper": "Autopoulated by the server."
+        },
+        "active": {
+          "type": "select",
+          "required": false
+        },
+        "entry": {
+          "type": "json",
+          "rows": 4,
+          "cols": 40,
+          "helper": "All entry data is stored here.",
+          "validate": false
+        }
+      },
+      "focus": ""
+    },
+    "schema": {
+      "title": "Navigation Items",
+      "type": "object",
+      "properties": {
+        "description": {
+          "title": "Description"
+        },
+        "value": {
+          "title": "Value"
+        },
+                "type": {
+            "title": "Type",
+            "enum": [
+               "text","checkbox","field","multi","WYSIWYG"
+            ]
+         },
+        "unit": {
+          "title": "Unit"
+        },
+                "order": {
+          "title": "Order"
+        },
+        "detail": {
+          "title": "Detail"
+        },
+        "standard": {
+          "title": "Standard"
+        },
+        "parent": {
+          "title": "Parent"
+        },
+        "icon": {
+          "title": "Icon"
+        },
+        "template": {
+          "title": "Template"
+        },
+        "headings": {
+          "title": "Headings",
+          "enum": [
+            "value",
+            "detail"
+          ]
+        }
+      }
+    }
+  }
+} </textarea>
+    <p></p>
+    <div class="btn-group" role="group" aria-label="...">
+      <button type="button" class="btn btn-default" id="setData1">Set Form Data</button>
+    </div>
+  </div>

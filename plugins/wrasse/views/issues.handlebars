@@ -1,0 +1,99 @@
+ <div class="row">
+  <div class="col-md-12">
+    <h1>Issues</h1>
+    <p>Issues CRUD. Everything needs to be ajax</p><hr>
+  </div> 
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <legend><h3>Create</h3></legend>
+        <h4>Load the form with ajax</h4>
+        <p>The issue form id for this database. This will change when you initiate the mongodB collection, the form page has the id of the issue forms.</p>
+        <pre>id : 59e837ba9399ad427c493d4f</pre>
+           <a class="btn btn-success" id="changeButton" onclick="deployIssueForm(this.id)" data-toggle="modal" data-target="#myModal" title="Add items">New Issue</a> 
+          <div id="formLoadPoint"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <legend><h3>Read</h3></legend>
+        <h4>View an item </h4>
+        <h4>View all items</h4>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <legend><h3>Update</h3></legend>
+        <h4>Load an item with ajax , </h4>
+        <h4>load the form with ajax</h4>
+        <h4>save to the correct collection</h4>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <legend><h3>Delete</h3></legend>
+        <h4>Delete an item permenantly</h4>
+        <h4>Delete an item with rev change</h4>
+      </div>
+    </div>
+  </div>
+</div>  
+  
+ 
+
+
+
+<script type="text/javascript">
+
+
+/////////////////////////////////
+////  FIXED ID VARIABLES    //// 
+///////////////////////////////
+var addtemplatevariable = '59e837ba9399ad427c493d4f'
+var templateload = '59e837ba9399ad427c493d4f'
+
+
+
+
+///////////////////////////////////////////////
+////  MODIFY THE IDS OF RELEVANT ITEMS    //// 
+/////////////////////////////////////////////
+function uniqueIdforchangeButton(){
+  $('#changeButton').attr('id', addtemplatevariable);
+}
+
+$('document').ready(function(){
+  uniqueIdforchangeButton()
+})
+
+ ////////////////////////////////////
+//////  CREATE COMPONENT     //////
+//////////////////////////////////
+function deployIssueForm(id){
+  loadformModal(id,'','component','59e837b69399ad427c493d4e','','')
+}
+ 
+
+//////////////////////////////////////
+////////    GET FORM BY ID  /////////
+////////////////////////////////////                                                                                                              
+function loadformModal(formdata,idItem,raw,parentid,headings,entry){
+  var headings = JSON.stringify(headings)
+  var entry = JSON.stringify(entry)
+  jQuery.ajax({
+    'url': '/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings+'&entry='+entry,
+    'async': true,
+    'global': false,
+    'success': function (dataSchemaObject) {
+      $('#formAreaModal').html(dataSchemaObject)
+    }
+  });
+}
+
+</script>

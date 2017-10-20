@@ -1,0 +1,41 @@
+<div id='stage6'>
+  <h1>Stage 6 - Form Page.</h1>
+  <p>Create the default database generation structure.</p>
+  <h3>Data Set</h3>
+  <textarea class="form-control" class="form-control " id="schema6" name="schema"  style="height: 250px">
+{
+    "entry" : {
+        "tabs" : [ 
+            "table", 
+            "form"
+        ],
+        "headings" : [ 
+            "description", 
+            "value", 
+            "units", 
+            "detail"
+        ],
+        "layout" : [ 
+            "add", 
+            "parentraw", 
+            "copy"
+        ],
+        "buttons" : [ 
+            "modify", 
+            "delete"
+        ],
+        "icon" : "glyphicon glyphicon-cog",
+        "description" : "Issues",
+        "parent" : "#"
+    },
+    "objectType" : "form",
+    "collectionName" : "issue",
+    "detail" : "Tracking site issues.",
+    "name" : "Issues"
+}
+  </textarea>
+   <p></p>
+     <div class="btn-group" role="group" aria-label="...">
+      <button type="button" class="btn btn-default" id="setData4">Set Form Data</button>
+    </div>
+</div>
