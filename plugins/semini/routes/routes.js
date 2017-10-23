@@ -134,31 +134,26 @@ var seminiController = require(directory+'controllers/seminipages');
 ////       TEMPALTES        //// 
 ///////////////////////////////
 app.get('/forms', seminiController.forms);
-app.get('/read', seminiController.read);
-app.get('/update', seminiController.update);
-app.get('/delete', seminiController.delete);
+ 
+ 
 ///////////////////////////   THESE ROUTES CAN BE REMOVED FOR CUSTOM SITES   ///////////////////////////
  
 /////////////////////////////////////////
 ////       CREATE CONTROLLERS       //// 
 ///////////////////////////////////////
-app.post('/createform', creatController.createform);
-app.get('/getdata', readController.getdata);//get data by array of ids.
+app.post('/forms/createform', creatController.createform);
+app.get('/forms/getdata', readController.getdata);//get data by array of ids.
 
 /////////////////////////////////////////
 ////       READ CONTROLLERS         //// 
 ///////////////////////////////////////
-app.get('/getprimer',   readController.getprimer);//get the primer form.
-app.get('/getraw',   readController.getraw);//get the raw form.
-app.get('/jstree', readController.jstree);//get jstree 
-app.get('/templateload', readController.templateload);//Load Template
-app.get('/templatename', readController.templatename);//get the select templatename
-
-
-
- 
-app.get('/getdatacomp', readController.getdatacomp);//get data by array of ids.
-app.get('/getform',  readController.getform);//search for the form to load.
+app.get('/forms/getprimer',   readController.getprimer);//get the primer form.
+app.get('/forms/getraw',   readController.getraw);//get the raw form.
+app.get('/forms/jstree', readController.jstree);//get jstree 
+app.get('/forms/templateload', readController.templateload);//Load Template
+app.get('/forms/templatename', readController.templatename);//get the select templatename
+app.get('/forms/getdatacomp', readController.getdatacomp);//get data by array of ids.
+app.get('/forms/getform',  readController.getform);//search for the form to load.
 
 //last line
 module.exports = app;

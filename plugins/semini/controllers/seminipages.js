@@ -50,29 +50,4 @@ exports.forms = function(req, res) {
 })
 }; 
 
-/////////////////////
-/////  READ    ///// 
-///////////////////
-exports.read = function(req, res) {
-  res.render('read',{
-    pagetitle: 'read | '+sitename+'',
-  })
-}; 
-
-///////////////////////
-/////  UPDATE    ///// 
-/////////////////////
-exports.update = function(req, res) {
-  res.render('update',{
-    pagetitle: 'update | '+sitename+'',
-  })
-}; 
-
-///////////////////////
-/////  DELETE    ///// 
-/////////////////////
-exports.delete = function(req, res) {
-  res.render('delete',{
-    pagetitle: 'delete | '+sitename+'',
-  })
-}; 
+ 

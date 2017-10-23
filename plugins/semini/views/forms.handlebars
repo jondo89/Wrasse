@@ -2,7 +2,7 @@
   <div class="col-md-6">
     <h1>Forms</h1>
     <p>Use the interface below to modify all site forms.</p>
-  </div> 
+  </div>
   <div class="col-md-6" style="text-align: right">
   <div class="btn-group" role="group" aria-label="...">
     <a  class="btn btn-default btn-xs"  data-toggle="modal" data-target="#myModal" onclick="newMenuItem()" title="Add items"><i class="fa fa-plus" aria-hidden="true"></i></a>
@@ -45,7 +45,7 @@
 /////////////////////////////
 ////     DEBUG AREA     //// 
 ///////////////////////////
-console.log( 'forms loading' )
+console.log( 'Tempalte Name : plugins/semini/views/forms' )
 console.log( '-------------------------' )
 console.log( 'databaseid : ',databaseid )
 console.log( 'Formids : ',Formids )
@@ -53,14 +53,14 @@ console.log( 'navmenuHeadings : ',navmenuHeadings )
 console.log( 'databaseMenu : ',databaseMenu )
 console.log( 'temp : ',temp )
 console.log( '-------------------------' )
-console.log( 'forms loading' )
+console.log( 'Tempalte Name : plugins/semini/views/forms' )
 
 /////////////////////////////////// 
 //////  GET JSTREE BY ID    //////
 ///////////////////////////////// 
 function jstreeGet(ids){
   jQuery.ajax({
-    'url': '/jstree?ids='+ids,
+    'url': '/forms/jstree?ids='+ids,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -253,7 +253,7 @@ if(ids){
   jQuery.ajax({
    'async': true,
    'global': false,
-   'url': '/templateload?ids='+ids,
+   'url': '/forms/templateload?ids='+ids,
    'success': function (dataSchemaObject) {
      jQuery('#panel').html("")
      jQuery('#panel').html(dataSchemaObject)
@@ -293,7 +293,7 @@ function collapse() {
 function newMenuItems(formdata,idItem,raw,parentid,injectParentid,headings){
   var headings = JSON.stringify(headings)
   jQuery.ajax({
-    'url': '/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings,
+    'url': '/forms/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {

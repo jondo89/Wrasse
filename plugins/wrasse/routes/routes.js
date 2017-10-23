@@ -1,7 +1,4 @@
-/*
-                                                                                                    
-                                                                                                    
-                                                                                                    
+/*                                              
                                                                                                     
                                              `,;'@@@';,                                             
                                         '@@@@@@@@@@@@@@@@@@@:                                       
@@ -95,11 +92,6 @@
                                   :@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@`                                 
                                      :@@@@@@@@@@@@@@@@@@@@@@@@@`                                    
                                          ,#@@@@@@@@@@@@@@@'`                                        
-                                                                                                    
-                                                                                                    
-                                                                                                    
-                                                                                                    
-
       */
 var express = require('express');
 var path = require('path');
@@ -122,19 +114,36 @@ var app = express.Router();
 var directory = '../../../plugins/wrasse/'
 
 // Controllers
-var issueController = require(directory+'controllers/issue');
+var createController = require(directory+'controllers/create'); 
+var readController = require(directory+'controllers/read');
 
 ///////////////////////////   THESE ROUTES CAN BE REMOVED FOR CUSTOM SITES   ///////////////////////////
 var wrasseController = require(directory+'controllers/wrassepages'); 
+
 ///////////////////////////////////
 ////       COMPONENTS         //// 
 /////////////////////////////////
-app.get('/issues', issueController.issues);
+app.get('/issues', wrasseController.issues);
  
 ///////////////////////////   THESE ROUTES CAN BE REMOVED FOR CUSTOM SITES   ///////////////////////////
  
  
+/////////////////////////////////////////
+////       CREATE CONTROLLERS       //// 
+///////////////////////////////////////
+app.post('/issues/createform', createController.create);
+ 
 
+/////////////////////////////////////////
+////       READ CONTROLLERS         //// 
+///////////////////////////////////////
+app.get('/issues/getprimer',   readController.getprimer);//get the primer form.
+app.get('/issues/getraw',   readController.getraw);//get the raw form.
+app.get('/issues/jstree', readController.jstree);//get jstree 
+app.get('/issues/templateload', readController.templateload);//Load Template
+app.get('/issues/templatename', readController.templatename);//get the select templatename
+app.get('/issues/getdatacomp', readController.getdatacomp);//get data by array of ids.
+app.get('/issues/getform',  readController.getform);//search for the form to load.
 
 
 //last line

@@ -1,26 +1,12 @@
-     <div role="tabpanel" class="tab-pane active" id="tableComponent">
-       <div class="row">
-        <div class="col-md-3">
-        </div>
-        <div class="col-md-7">
-        </div>
-      </div><div id="searchArea"></div>
-      <p></p>  
-      <div id='formDelivery' style="/*overflow: auto;*/">
-      </div>
-    </div>
-    <style type="text/css">
-      .dt-buttons{
-        padding-bottom: 15px;
-      }
-    </style>
-    <script type="text/javascript">
-      $('#searchArea').append('<p></p><div style="padding-top:15px" class="collapse" id="collapseExample"> <div style="text-align:center">   <div id="AdvancedSearch"></div> </div> </div>')
-
+     <div role="tabpanel" class="tab-pane" id="tableassembly">
+       <p></p> 
+       <div id='formDelivery'></div>
+     </div>  
+     <script type="text/javascript">
 /////////////////////////////
 ////     DEBUG AREA     //// 
 ///////////////////////////
-console.log( 'tableComponent loading' )
+console.log( 'tableassembly loading' )
 console.log( '-------------------------' )
 console.log( 'items : ',items )
 console.log( 'query1 : ',query1 )
@@ -30,20 +16,21 @@ console.log( 'query4 : ',query4 )
 console.log( 'tablelistdata : ',tablelistdata )
 console.log( 'formids : ',formids )
 console.log( '-------------------------' )
-console.log( 'tableComponent loading' )
 
+console.log( 'Tempalte Name : plugins/wrasse/views/tools/tableassembly' )
+
+
+var tableID = create_uid()
 var modifiedTableListData
 var modifiedListData
 
 tablelistdata.sort(function(a, b) {
- if (a.entry.order && b.entry.order) {
-  return parseFloat(a.entry.order) - parseFloat(b.entry.order);
-}
-});
-query3.sort(function(a, b) {
   if (a.entry.order && b.entry.order) {
     return parseFloat(a.entry.order) - parseFloat(b.entry.order);
   }
+});
+query3.sort(function(a, b) {
+  return parseFloat(a.entry['590062f0f1db7d38d0dd9a31']) - parseFloat(b.entry['590062f0f1db7d38d0dd9a31']);
 });
 query2.sort(function(a, b) {
   return parseFloat(a.entry.order) - parseFloat(b.entry.order);
@@ -68,7 +55,6 @@ function dataFormatComp(){
   for (var i = 0; i < tablelistdata.length; i++) {
     tempVar1 = []
     for(key in tablelistdata[i].entry){
-      tempVar = []
       for (var j = 0; j < query2.length; j++) {
         if (query2[j].elementID == key) {
           tempVar = {
@@ -76,13 +62,11 @@ function dataFormatComp(){
             'value' : tablelistdata[i].entry[query2[j].elementID],
             'units' : query2[j]['entry']['units'],
             'detail' : query2[j]['entry']['detail'],
-            'id' : query2[j]['elementID'] 
+            'id' : query2[j]['elementID']['elementID']
           }
         }
       }
-      if (tempVar != "") {
-        tempVar1.push(tempVar)
-      }
+      tempVar1.push(tempVar) 
     }
     tempVar2[tablelistdata[i].elementID] = tempVar1
   }
@@ -130,9 +114,9 @@ if (items.entry.headings) {
 } else {
   var tableHeadings = ['name','detail','userID','id','parentid','childType','description']
 }
-var tempVarIDs = formids+'_tableloadID'
+var tempVarIDs = formids+'tableloadID'
     //inject the ID html table into the page.
-    $('#'+formids).html('<table id="'+tempVarIDs+'" class="table table-bordered table-compressed table-hover " cellspacing="0" width="100%"></table>')
+    $('#'+formids).html('<table id="'+tempVarIDs+'" class="table table-bordered table-compressed table-hover" cellspacing="0" width="100%"></table>')
     //error message text
     var html = ''
     html += '<div class="alert alert-danger" role="alert"> '
@@ -177,42 +161,11 @@ for (var i = 0; i < data.length; i++) {
   if (items.entry.buttons) {
     html += '<tr><td class="details-control" style="text-align:center;vertical-align:middle; " id="'+data[i]['_id']+'" data-parentid="'+data[i]['parentid']+'" data-childType="'+componentFom+'"><i class="fa fa-plus-square-o" aria-hidden="true" ></i></td>'
   }else{
-    html += '<tr>'
+    html += '<tr> '
   }
   for (var j = 0; j < headings.length; j++) {
-    switch(true){
-      case(headings[j]=='Url'):
-      if (data[i][headings[j]] != undefined) {
-        html += '<td style=" vertical-align:middle">'
-        html += '<a href="'+data[i][headings[j]]+'" target="_blank">Link</a>'
-      } else {
-        html += '<td style=" vertical-align:middle">'
-        html += "Blank"
-      }
-      break;
-      case(headings[j]=='image'):
-      if (data[i][headings[j]] != undefined) {
-        html += '<td style=" vertical-align:middle">'
-        html+='<div class="component-thumb-img">'
-        html += '<img style="max-width:150px" src="/uploads/'+data[i]['_id']+'.jpg" alt="..." class="img-rounded">'
-        html+='</div>'
-      } else {
-        html += '<td style=" vertical-align:middle">'
-        html+='<div class="component-thumb-img">'
-        html += '<img style="max-width:150px" src="/img/defaults/default_product.png" alt="..." class="img-rounded">'
-        html+='</div>'
-      }
-      break;
-      default:
-      if ( data[i][headings[j]] == undefined) {
-        html += '<td style=" vertical-align:middle;background-color:#f5f5f5">'
-        html += "-"
-      }else {
-        html += '<td style=" vertical-align:middle">'
-        html += data[i][headings[j]]
-      }
-      break;
-    }
+    html += '<td style=" vertical-align:middle">'
+    html += data[i][headings[j]]
     html += '</td>'
   }
   html += '</tr>'
@@ -221,87 +174,6 @@ html += '<tbody>'
 $('#'+id).html(html)
 } 
 
-/////////////////////////////////////////////////////////////////////
-////////    USED FOR THE COMPILATION OF THE DETAILS TABLE  /////////
-/////////////////////////////////////////////////////////////////////
-function detailTableLoad (data,id){
-  var  html = ''
-  html+='<div> <!-- Nav tabs --> <ul class="nav nav-tabs" role="tablist">'
-  html+= '<li role="presentation" class="active"><a href="#home_'+id+'" aria-controls="home" role="tab" data-toggle="tab">Detail</a></li>'
-  html+=  '<li role="presentation"><a href="#profile_'+id+'" aria-controls="profile_'+id+'" role="tab" data-toggle="tab">History</a></li>'
-  html+= '</ul> <!-- Tab panes --> <div class="tab-content">'
-  html+=  '<div role="tabpanel" class="tab-pane active" id="home_'+id+'">'
-
-  html+='<h4>Item Detail</h4> '  
-
-html+='<div class="component-detail-img"><img src="uploads/'+id+'.jpg"></div>'
-
- 
-//pull in the element id of query 2 for the correct mofiy form
-var componentFom = query1[0].elementID
-html += '<table class="table table-bordered table-condensed">  '
-html += '<thead><tr><th>Description</th><th>Value</th><th>Units</th><th>Detail</th></tr></thead>'
-html += '<tbody>'
-for (key in data) {
-  for (var i = 0; i < data[key].length; i++) {
-    if (key == id) {
-      html += '<tr>'
-      html += '<td>'
-      html += data[key][i]['description']
-      html += '</td>'
-      html += '<td>'
-      switch(true){
-        case(data[key][i]['description']=='Url'):
-        if (data[key][i]['value'] != undefined) {
-          html += '<a href="'+data[key][i]['value']+'" target="_blank">Link</a>'
-        } else {
-          html += "Blank"
-        }
-        break;
-        case(data[key][i]['description']=='Image'):
-        if (data[key][i]['value'] != undefined) {
-          html += '<img style="max-width:150px" src="'+data[key][i]['value']+'" alt="..." class="img-rounded">'
-        } else {
-          html += "Blank"
-        }
-        break;
-        default:
-
-        html += data[key][i]['value']
-        break;
-      }
-      html += '</td>'      
-       
-
-
-      if ( data[key][i]['units'] == undefined) {
-        html += '<td style=" vertical-align:middle;background-color:#f5f5f5">'
-        html += "-"
-      }else {
-        html += '<td style=" vertical-align:middle">'
-        html += data[key][i]['units']
-      }
-      html += '</td>'
-      if ( data[key][i]['detail'] == undefined) {
-        html += '<td style=" vertical-align:middle;background-color:#f5f5f5">'
-        html += "-"
-      }else {
-        html += '<td style=" vertical-align:middle">'
-        html += data[key][i]['detail']
-      }
-      html += '</td>'
-      html += '</tr>'
-    }
-  }
-}
-html += '</tbody>'
-html += '</table>'
-html+= '</div> <div role="tabpanel" class="tab-pane" id="profile_'+id+'">'
-html+= '<h4>Revision History</h4><p>The table below shows the component history of this item.</p>'
-//This is dummy data for the presentaion.
-html+= '</div> </div> </div>'
-return html
-} 
 
 //////////////////////////////////////////////
 //////  CHECK IF AN OBJECT IS AN ARRAY //////
@@ -310,16 +182,12 @@ function isArray(obj){
   return !!obj && obj.constructor === Array;
 }
 
+
 function loadDataTable(id){
 //the use of var here is critical , each instantiate needs to be unique.
 var table = jQuery('#'+id).DataTable({
   'destroy':true,
-  "pagingType": "numbers",        
-  "dom": 'Bfrtip',
-  "buttons": [
-  { extend: 'csv', text: '<i class="fa fa-file-excel-o" aria-hidden="true"></i>' ,className:'btn btn-default btn-xs' ,filename: 'Data export' ,title: 'Table export'}, 
-  { extend: 'pdf', text: '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>' ,className:'btn btn-default btn-xs' ,filename: 'Data export' ,title: 'Table export'}
-  ]
+  "pagingType": "numbers",
   //  'order': [[ 2, 'asc' ]] ,
 });
   //Add event listener for opening and closing details
@@ -348,36 +216,6 @@ var table = jQuery('#'+id).DataTable({
            });
           }
         });
-//Start of advanced filter option.
-var html = ''
-var counter = 0
-html+='<form class="form-horizontal">'
-html+='<fieldset>'
-html+='<div class="row">'
-$( '#'+id+' thead th' ).each(function(){
-  if ($( this ).text()=='') {
-    counter+=1
-  }  else {
-    html+='<div class="col-md-4" id="filter_col'+counter+1+'" data-column="'+counter+'" style="padding-bottom:5px">'
-    html+='  <input  name="textinput" type="text" placeholder="Search '+$( this ).text()+'" class="form-control input-md" id="col'+counter+'_filter">'
-    html+='  </div>'
-    counter+=1
-  }
-})
-html+='</div>'
-html+='</fieldset>'
-html+='</form>'
-$('#AdvancedSearch').html(html)
-function filterColumn ( i ) {
-  table.column( i ).search(
-    $('#col'+i+'_filter').val()
-    ).draw();
-}
-$('input.form-control').on( 'keyup click', function () {
-  filterColumn( $(this).parents('div').attr('data-column') );
-} );
-$('.dt-buttons').prepend('<a class="btn btn-default btn-xs" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-search" aria-hidden="true"></i></a>')
-//end of advanced filter option.
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -386,69 +224,58 @@ $('.dt-buttons').prepend('<a class="btn btn-default btn-xs" role="button" data-t
 function formatDefault ( d ) {
   // `d` is the original data object for the row
   var html=''
-  html += detailTableLoad  (modifiedListData,d)
-  {{#if user}}
-  html+='<h4>Options</h4><p>The following options are availble for this item.</p>'
-  html +='<div class="row">'
+  html += '<div id="'+d+'_loadingArea" > </div>'
+  for (var i = 0; i < query3.length; i++) {
+    if (query3[i].elementID==d) {
+     singleidcall(query3[i].entry['58ff3cb221acae2b40b09b2c'],d)
+   }
+ }
+ 
+ html+='<h4>Options</h4><p>The following options are availble for this item.</p>'
+ html +='<div class="btn-group" role="group" aria-label="...">'
 
-  html +='<div class="col-md-7">'
-  html +='<div class="btn-group" role="group" aria-label="...">'
-  for (var j = 0; j < items.entry.buttons.length; j++) {
-    switch(true){
-      case (items.entry.buttons[j] == 'modify'):
-      html += '<button type="button" class="btn btn-default" id="'+d+'_read" onclick="modifyItemComp(this.id)"  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="top" title="Edit ths item.">Modify</button>'
-      break;
-      case (items.entry.buttons[j] == 'rawitem'):
-      html += '<button type="button" class="btn btn-default" id="'+d+'_raw" onclick="EditWithraw(this.id)"  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="top" title="Edit ths item.">Raw</button>'  
-      break;  
-      case (items.entry.buttons[j] == 'copyitem'):
-      html += '<button type="button" class="btn btn-success" id="'+d+'_copyitem" onclick="copthisitem(this.id)"  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="top" title="Edit ths item.">Copy</button>' 
-      break;  
-      case (items.entry.buttons[j] == 'comp'):
-      html += '<button type="button" class="btn btn-default"  id="'+d+'_comp" onclick="createComp(this.id)"  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="top" title="Create child item.">Create component</button>'
-      break;  
-      case (items.entry.buttons[j] == 'Modifynorevraw'):
-      html += '<button type="button" class="btn btn-default" id="'+d+'_1" onclick="useForm(this.id)"  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="top" title="Edit ths item.">Modifynorevraw</button>'
-      break;  
-      case (items.entry.buttons[j] == 'norevraw'):
-      html += '<button type="button" class="btn btn-default" id="'+d+'_1" onclick="useForm(this.id)"  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="top" title="Edit ths item.">norevraw</button>'
-      break;  
-    }
-  }   
-  html +=' </div> <div class="btn-group" role="group" aria-label="...">'
-  for (var j = 0; j < items.entry.buttons.length; j++) {
-    switch(true){
-      case (items.entry.buttons[j] == 'delete'):
-      html += '<button type="button" class="btn btn-danger" data-_id="'+d+'" id="'+d+'_del" data-toggle="modal" data-target="#myModal" onclick="deleteEntry(this.id)"  data-toggle="tooltip" data-placement="top" title="Delete this item">Remove</button>'
-      break;
-      case (items.entry.buttons[j] == 'permdelete'):
-      html += '<button type="button" class="btn btn-danger" id="'+d+'_perm" onclick="permdelete(this.id)"  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="top" title="Edit ths item.">Delete</button>'
-      break;  
-    }
-  }  
-  html +='</div> <div class="col-md-1"></div><div class="btn-group" role="group" aria-label="...">'
-  for (var j = 0; j < items.entry.buttons.length; j++) {
-    switch(true){
-      case (items.entry.buttons[j] == 'addcomp'):
-      html += '<button type="button" class="btn btn-primary" id="'+d+'_addcomp" onclick="demo_create(this.id)">Add</button>'
-      break; 
-    }
-  } 
-  html +='  </div>'
-  html +='</div>'
-  html +='<div class="col-md-5">'
-  html +='<pre> id : '+d+'</pre>'
-  html += '<div id="'+d+'_loadingArea" ></div>'
-  html +='</div>'
-  html +='</div>'
-  {{/if}}
-  return html;
+ for (var j = 0; j < items.entry.buttons.length; j++) {
+  switch(true){
+    case (items.entry.buttons[j] == 'modify'):
+    html += '<button type="button" class="btn btn-default" id="'+d+'_read" onclick="modifyItemComp(this.id)"  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="top" title="Edit ths item.">Modify</button>'
+    break;
+    case (items.entry.buttons[j] == 'rawitem'):
+    html += '<button type="button" class="btn btn-default" id="'+d+'_raw" onclick="EditWithraw(this.id)"  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="top" title="Edit ths item.">Raw</button>'  
+    break;  
+    case (items.entry.buttons[j] == 'comp'):
+    html += '<button type="button" class="btn btn-default"  id="'+d+'_comp" onclick="createComp(this.id)"  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="top" title="Create child item.">Create component</button>'
+    break;  
+    case (items.entry.buttons[j] == 'Modifynorevraw'):
+    html += '<button type="button" class="btn btn-default" id="'+d+'_1" onclick="useForm(this.id)"  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="top" title="Edit ths item.">Modifynorevraw</button>'
+    break;  
+    case (items.entry.buttons[j] == 'norevraw'):
+    html += '<button type="button" class="btn btn-default" id="'+d+'_1" onclick="useForm(this.id)"  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="top" title="Edit ths item.">norevraw</button>'
+    break;  
+  }
+}   
+
+html +='</div><div class="btn-group" role="group" aria-label="...">'
+
+for (var j = 0; j < items.entry.buttons.length; j++) {
+  switch(true){
+    case (items.entry.buttons[j] == 'delete'):
+    html += '<button type="button" class="btn btn-danger" data-_id="'+d+'" id="'+d+'_del" data-toggle="modal" data-target="#myModal" onclick="deleteEntryAssembly(this.id)"  data-toggle="tooltip" data-placement="top" title="Delete this item">Remove</button>'
+    break;
+    case (items.entry.buttons[j] == 'permdelete'):
+    html += '<button type="button" class="btn btn-danger" id="'+d+'_perm" onclick="permDeleteAssy(this.id)"  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="top" title="Edit ths item.">Delete</button>'
+    break;  
+  }
+}  
+
+html +='  </div>'
+html +='<p></p><pre>'+d+'</pre>'
+return html;
 }
 
 /////////////////////////
 //////  DELETE   ///////
 ///////////////////////
-function deleteEntry(id){
+function deleteEntryAssembly(id){
   id = id.replace('_del', '');  
   _id = $( "#"+id ).data( "_id" )  
   html = ''
@@ -456,7 +283,7 @@ function deleteEntry(id){
   html += '<h3>Are you sure you what to do this ?</h3>'
   html += '<p>This action can be undone.</p>'
   html +='<div class="btn-group" role="group" aria-label="..." style="align:center">'
-  html +='  <button type="button" class="btn btn-danger" onclick="deleteEntrys('
+  html +='  <button type="button" class="btn btn-danger" onclick="deleteEntrysAssy('
   html +="'"
   html +=id
   html +="'"
@@ -468,7 +295,7 @@ function deleteEntry(id){
 //////////////////////////////
 //////  PERM DELETE   ///////
 ////////////////////////////
-function permdelete(id){
+function permDeleteAssy(id){
   id = id.replace('_perm', '');  
   _id = $( "#"+id ).data( "_id" )  
   html = ''
@@ -476,7 +303,7 @@ function permdelete(id){
   html += '<h3>Are you sure you what to do this ?</h3>'
   html += '<p>This action cannot be undone.</p>'
   html +='<div class="btn-group" role="group" aria-label="..." style="align:center">'
-  html +='  <button type="button" class="btn btn-danger" onclick="deleteEntrysPerm('
+  html +='  <button type="button" class="btn btn-danger" onclick="deleteEntrysPermAssy('
   html +="'"
   html +=id
   html +="'"
@@ -488,7 +315,7 @@ function permdelete(id){
 /////////////////////////////
 //////  DELETE AJAX  ///////
 ///////////////////////////
-function deleteEntrys(_id){
+function deleteEntrysAssy(_id){
   jQuery.ajax({
     'url': '/deleteentry?idItem='+_id,
     'async': true,
@@ -502,7 +329,7 @@ function deleteEntrys(_id){
 /////////////////////////////
 //////  DELETE AJAX  ///////
 ///////////////////////////
-function deleteEntrysPerm(_id){
+function deleteEntrysPermAssy(_id){
   jQuery.ajax({
     'url': '/deleteentryperm?idItem='+_id,
     'async': true,
@@ -522,6 +349,16 @@ function loadDetail(id){
   html+='<span class="sr-only">Loading...</span>'
   html += '</div>'
   $('#'+id+'_loadingArea').html(html)
+/*
+  jQuery.ajax({
+    'async': true,
+    'global': false,
+    'url': '/getlongdata?data='+id,
+    'success': function (dataSchemaObject) {
+      $('#'+id+'_loadingArea').html(dataSchemaObject)
+    }
+  });
+  */
 }
 
 //////////////////////////////////////////////
@@ -554,25 +391,23 @@ function modifyItemComp(id){
   if (!childType) {
     loadformModal(id,id,'self',id)
   } else {
-  //INSTRUCTIONS
-  ////////////////////////////////////////////////////////////////////
+
   //Strucuture of the query
-  //formdata,idItem,raw,parentid,headings,entry
+    //formdata,idItem,raw,parentid,headings,entry
   //formdata:
-  //Which form to use.
+    //Which form to use.
   //idItem:
-  //Which item to edit.
+    //Which item to edit.
   //Use the raw function for defining how to edit the data :
-  //raw:['use' , 'self' , 'edit' , 'component']
+    //raw:['use' , 'self' , 'edit' , 'component']
   //parentid:
-  //Inject a parent id.
+    //Inject a parent id.
   //Headings
-  //used for limiting the information shown on each form
+    //used for limiting the information shown on each form
   //Inject a default entry.
-  //entry is used to manually add additional information to the form.
+    //entry is used to manually add additional information to the form.
+
   //Find and inject the group menu id number.
-  //INSTRUCTIONS
-  ////////////////////////////////////////////////////////////////////  
   if (items.elementID) {
     var parentIdTemp = items.elementID
   } else {
@@ -583,53 +418,8 @@ function modifyItemComp(id){
     var entry = {
       elementID : id
     } 
-    console.log('Tracing here',childType,id,'componentedit',parentIdTemp,headings, entry)
   //The id of the emement needs to be injected into the form , as it does not have that data.
   loadformModal(childType,id,'componentedit',parentIdTemp,headings, entry)
-}
-}
-
-//////////////////////////
-//////  COPY       //////
-////////////////////////
-function copthisitem(id){
-  id = id.replace('_copyitem', '');
-  childType = $('#'+id+'').data('childtype')
-  //Used for the check self when modifiing.
-  if (!childType) {
-    loadformModal(id,id,'self',id)
-  } else {
-  //INSTRUCTIONS
-  ////////////////////////////////////////////////////////////////////
-  //Strucuture of the query
-  //formdata,idItem,raw,parentid,headings,entry
-  //formdata:
-  //Which form to use.
-  //idItem:
-  //Which item to edit.
-  //Use the raw function for defining how to edit the data :
-  //raw:['use' , 'self' , 'edit' , 'component']
-  //parentid:
-  //Inject a parent id.
-  //Headings
-  //used for limiting the information shown on each form
-  //Inject a default entry.
-  //entry is used to manually add additional information to the form.
-  //Find and inject the group menu id number.
-  //INSTRUCTIONS
-  ////////////////////////////////////////////////////////////////////  
-  if (items.elementID) {
-    var parentIdTemp = items.elementID
-  } else {
-    var parentIdTemp = items._id
-  }
-  var headings = ["description","parent"]
-  if (true) {}
-    var entry = {
-      elementID : id
-    } 
-  //The id of the emement needs to be injected into the form , as it does not have that data.
-  loadformModal(childType,id,'componentcopy',parentIdTemp,headings, entry)
 }
 }
 
@@ -715,5 +505,108 @@ function createComp(id){
     loadformModal(parentid,'','use',id)
   }
 }
+
+//////////////////////////////////// 
+//////  PRIMARY AJAX CALL    //////
+//////////////////////////////////
+function singleidcall(elementid,d) {
+  //AJAX REQUEST TO SERVER
+   jQuery.ajax({
+    'async': true,
+    'global': false,
+    'url': '/singleidcall?ids='+elementid,
+    'success': function (dataSchemaObject) {   
+      var html = datableloadforAssy(dataFormatCompforassy(dataSchemaObject),dataSchemaObject,elementid)
+      $('#'+d+'_loadingArea').html(html)
+    }
+  }); 
+}
+
+///////////////////////////////////////////////
+////  MODIFY THE IDS OF RELEVANT ITEMS    //// 
+/////////////////////////////////////////////
+function uniqueIdforcomponentformButton(theAreaToChange){
+  jQuery('#singleComponent').attr("id",theAreaToChange);
+}
+
+///////////////////////////////////////////////////
+////        REQUIRED FORMATING OF DATA        //// 
+/////////////////////////////////////////////////
+function dataFormatCompforassy(dataset){
+  if (dataset.query) {
+      var tempVar = []
+  var tempVar1 = []
+  var tempVar2 = []
+  tempVar1 = []
+  for(key in dataset.query.entry){
+    for (var j = 0; j < dataset.query2.length; j++) {
+      if (dataset.query2[j].elementID == key) {
+        tempVar = {
+          'description' : dataset.query2[j]['entry']['description'],
+          'value' : dataset.query.entry[dataset.query2[j].elementID],
+          'units' : dataset.query2[j]['entry']['units'],
+          'detail' : dataset.query2[j]['entry']['detail'],
+          'id' : dataset.query2[j]['elementID'] 
+        }
+      }
+    }
+    tempVar1.push(tempVar) 
+  }
+  tempVar2[dataset.query.elementID] = tempVar1
+  }
+
+
+  return tempVar1
+}
+
+///////////////////////////////
+//////  LOAD THE TABLE  //////
+/////////////////////////////
+function datableloadforAssy(dataset,originalData,elementid) {
+  var tableHeadings = ['description','value','units','detail','id' ]
+  //Unique if for the forms.
+  var thistable = create_uid()
+  //create a new unique element ID for this component.  
+  uniqueIdforcomponentformButton(thistable)
+  var tempVarIDs = thistable+'tableloadID'
+  //inject the ID html table into the page.
+  html = detailTableLoadforAssembly  (dataset,originalData,elementid)
+  return html
+};
+
+/////////////////////////////////////////////////////////////////////
+////////    USED FOR THE COMPILATION OF THE DETAILS TABLE  /////////
+/////////////////////////////////////////////////////////////////////
+function detailTableLoadforAssembly (data,originalData,id){
+  var  html = ''
+  html+='<h4>Item Detail</h4><p>The table below shows the full item detail.</p>'  
+  html += '<table class="table table-bordered table-condensed">  '
+  html += '<thead><tr>'
+  html += '<thead><tr><th>Description</th><th>Value</th><th>Units</th><th>Detail</th></tr></thead>'
+  html += '<tbody>'
+  for (var i = 0; i < data.length; i++) {
+    html += '<tr>'
+    html += '<td>'
+    html += data[i]['description']
+    html += '</td>'
+    html += '<td>'
+    if (data[i]['description']=='Url') {
+      html += '<a href="'+data[i]['value']+'" target="_blank">Link</a>'
+    } else  {
+      html += data[i]['value']
+    }
+    html += '</td>'      
+    html += '<td>'
+    html += data[i]['units']
+    html += '</td>'
+    html += '<td>'
+    html += data[i]['detail']
+    html += '</td>'
+    html += '</tr>'
+  }
+  html += '</tbody>'
+  html += '</table>'
+  return html
+} 
 
 </script>

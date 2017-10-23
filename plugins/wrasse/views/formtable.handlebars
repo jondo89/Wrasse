@@ -67,7 +67,7 @@ query2.sort(function(a, b) {
 /////////////////////////////
 ////     DEBUG AREA     //// 
 ///////////////////////////
-console.log( 'Tempalte Name : plugins/semini/views/formtable' )
+console.log( 'Tempalte Name : plugins/wrasse/views/formtable' )
 console.log( '-------------------------' )
 console.log( 'items : ',items )
 console.log( 'query1 : ',query1 )
@@ -78,7 +78,7 @@ console.log( 'tablelistdata : ',tablelistdata )
 console.log( 'formids : ',formids )
 console.log( 'templateload : ',templateload )
 console.log( '-------------------------' )
-console.log( 'Tempalte Name : plugins/semini/views/formtable' )
+console.log( 'Tempalte Name : plugins/wrasse/views/formtable' )
 
 
 if(items.elementID) {
@@ -168,7 +168,7 @@ if(template){
   jQuery.ajax({
    'async': true,
    'global': false,
-   'url': '/forms/templatename?template='+template,
+   'url': '/issues/templatename?template='+template,
    'success': function (dataSchemaObject) {
      jQuery('#'+location).append(dataSchemaObject)
    }

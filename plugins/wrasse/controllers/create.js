@@ -1,4 +1,4 @@
-var formsModel      = require('../models/forms.js');
+var wrasseModel      = require('../../../plugins/wrasse/models/wrasse.js');
 var ObjectId = require('mongodb').ObjectID;
 
 ///////////////////////////////////////////////
@@ -18,6 +18,7 @@ function debugging(req,query){
   if (query) {
     console.log()
     console.log('----------  DEBUGGING  ----------')
+    console.log('File Name : plugins/wrasse/controller/create')
     console.log('Directory Name : '+__dirname)
     console.log('Original req URL : '+req.originalUrl)
     console.log('----------  DEBUGGING  ----------')
@@ -26,8 +27,7 @@ function debugging(req,query){
 }
 
 //Create an entry
-exports.createform = function(req, res) {
-  debugging(req,debugMode)
+exports.create = function(req, res) {
   var dataset = req.body  
 //console.log('/////////////DEBUG CREATE FOR ACTIVE = TRUE Stage 1 //////////////')
 //console.log('Init req.body',dataset)
@@ -76,7 +76,7 @@ if (req.user) {
     console.log('user id is working')
     if (dataset.elementID !='') {
       console.log('step 1 - dataset.elementID : ',dataset.elementID)
-      formsModel.update(
+      wrasseModel.update(
       {
         $and : 
         [
@@ -96,7 +96,7 @@ if (req.user) {
       res.send(err);
     } else{
     }
-    var create = new formsModel(dataset);  
+    var create = new wrasseModel(dataset);  
     create.save(function (err, doc) {  
 //CROPTI IMAGE SAVING
 if ( dataset.entry.image) {
@@ -121,7 +121,7 @@ if (err) {
   })
       } else {
         console.log('new items are here')
-        var create = new formsModel(dataset);  
+        var create = new wrasseModel(dataset);  
         create.save(function (err, doc) {  
 //CROPTI IMAGE SAVING
 if ( dataset.entry.image) {
@@ -151,9 +151,9 @@ if (err) {
     res.send({redirect: '/signin'});
   }
 } else {
-    console.log('step 8 - user not logged in')
-    userid=''
-    res.send({redirect: '/signin'});
+  res.send(
+    {redirect: '/signin'}
+    );
 }
 };
 
