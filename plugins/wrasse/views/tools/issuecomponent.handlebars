@@ -1,21 +1,29 @@
      <div role="tabpanel" class="tab-pane active" id="tableComponent">
        <div class="row">
         <div class="col-md-3">
+
         </div>
         <div class="col-md-7">
+
         </div>
+        
       </div><div id="searchArea"></div>
       <p></p>  
-      <div id='formDelivery' style="/*overflow: auto;*/">
-      </div>
-    </div>{{itmes.collectionName}}
-    <style type="text/css">
-      .dt-buttons{
-        padding-bottom: 15px;
-      }
-    </style>
-    <script type="text/javascript">
-      $('#searchArea').append('<p></p><div style="padding-top:15px" class="collapse" id="collapseExample"> <div style="text-align:center">   <div id="AdvancedSearch"></div> </div> </div>')
+      
+
+
+
+
+    <div id='formDelivery' style="/*overflow: auto;*/">
+    </div>
+  </div>{{itmes.collectionName}}
+  <style type="text/css">
+  .dt-buttons{
+    padding-bottom: 15px;
+  }
+</style>
+<script type="text/javascript">
+  $('#searchArea').append('<p></p><div style="padding-top:15px" class="collapse" id="collapseExample"> <div style="text-align:center">   <div id="AdvancedSearch"></div> </div> </div>')
 
 /////////////////////////////
 ////     DEBUG AREA     //// 
@@ -154,13 +162,16 @@ if (tableData !== null) {
 }
 };
 
+
+      
+
 ////////////////////////////
 ////////    READ  /////////
 ///////////////////////////
 function dataTableLoad (data,id,headings){
   html = ''
   if (items.entry.buttons) {
-    html += '<thead><tr><th  style="width:1px"></th>'
+    html += '<thead><tr style="text-align"><td colspan="3"><span><a onclick="sort()"><i class="fa fa-check" aria-hidden="true"></i>  8 Open     </a></span><span><a onclick=sort()"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>  5 Closed  </a></span></th></tr><tr><td style="width:1px"></th>'
   }else{
    html += '<thead><tr>'
  }
@@ -175,47 +186,52 @@ html += '<tbody>'
 var componentFom = query1[0].elementID
 for (var i = 0; i < data.length; i++) {
   if (items.entry.buttons) {
-    html += '<tr><td class="details-control" style="text-align:center;vertical-align:middle; " id="'+data[i]['_id']+'" data-parentid="'+data[i]['parentid']+'" data-childType="'+componentFom+'"><i class="fa fa-plus-square-o" aria-hidden="true" ></i></td>'
-  }else{
-    html += '<tr>'
-  }
-  for (var j = 0; j < headings.length; j++) {
-    switch(true){
-      case(headings[j]=='Url'):
-      if (data[i][headings[j]] != undefined) {
-        html += '<td style=" vertical-align:middle">'
-        html += '<a href="'+data[i][headings[j]]+'" target="_blank">Link</a>'
-      } else {
-        html += '<td style=" vertical-align:middle">'
-        html += "Blank"
-      }
-      break;
-      case(headings[j]=='image'):
-      if (data[i][headings[j]] != undefined) {
-        html += '<td style=" vertical-align:middle">'
-        html+='<div class="component-thumb-img">'
-        html += '<img style="max-width:150px" src="/uploads/'+data[i]['_id']+'.jpg" alt="..." class="img-rounded">'
-        html+='</div>'
-      } else {
-        html += '<td style=" vertical-align:middle">'
-        html+='<div class="component-thumb-img">'
-        html += '<img style="max-width:150px" src="/img/defaults/default_product.png" alt="..." class="img-rounded">'
-        html+='</div>'
-      }
-      break;
-      default:
-      if ( data[i][headings[j]] == undefined) {
-        html += '<td style=" vertical-align:middle;background-color:#f5f5f5">'
-        html += "-"
-      }else {
-        html += '<td style=" vertical-align:middle">'
-        html += data[i][headings[j]]
-      }
-      break;
+//Icon Changes on the closed and open items.
+if (data[i].Closed == true) { 
+  html += '<tr><td class="details-control" style="text-align:center;vertical-align:middle;color:#5cb85c " id="'+data[i]['_id']+'" data-parentid="'+data[i]['parentid']+'" data-childType="'+componentFom+'"><i class="fa fa-check" aria-hidden="true"></i></td>'
+} else {
+ html += '<tr><td class="details-control" style="text-align:center;vertical-align:middle;color:#d9534f " id="'+data[i]['_id']+'" data-parentid="'+data[i]['parentid']+'" data-childType="'+componentFom+'"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></td>'
+}
+}else{
+  html += '<tr>'
+}
+for (var j = 0; j < headings.length; j++) {
+  switch(true){
+    case(headings[j]=='Url'):
+    if (data[i][headings[j]] != undefined) {
+      html += '<td style=" vertical-align:middle">'
+      html += '<a href="'+data[i][headings[j]]+'" target="_blank">Link</a>'
+    } else {
+      html += '<td style=" vertical-align:middle">'
+      html += "Blank"
     }
-    html += '</td>'
+    break;
+    case(headings[j]=='image'):
+    if (data[i][headings[j]] != undefined) {
+      html += '<td style=" vertical-align:middle">'
+      html+='<div class="component-thumb-img">'
+      html += '<img style="max-width:150px" src="/uploads/'+data[i]['_id']+'.jpg" alt="..." class="img-rounded">'
+      html+='</div>'
+    } else {
+      html += '<td style=" vertical-align:middle">'
+      html+='<div class="component-thumb-img">'
+      html += '<img style="max-width:150px" src="/img/defaults/default_product.png" alt="..." class="img-rounded">'
+      html+='</div>'
+    }
+    break;
+    default:
+    if ( data[i][headings[j]] == undefined) {
+      html += '<td style=" vertical-align:middle;background-color:#f5f5f5">'
+      html += "-"
+    }else {
+      html += '<td style=" vertical-align:middle">'
+      html += data[i][headings[j]]
+    }
+    break;
   }
-  html += '</tr>'
+  html += '</td>'
+}
+html += '</tr>'
 }
 html += '<tbody>'
 $('#'+id).html(html)
@@ -234,9 +250,9 @@ function detailTableLoad (data,id){
 
   html+='<h4>Item Detail</h4> '  
 
-html+='<div class="component-detail-img"><img src="uploads/'+id+'.jpg"></div>'
+  html+='<div class="component-detail-img"><img src="uploads/'+id+'.jpg"></div>'
 
- 
+
 //pull in the element id of query 2 for the correct mofiy form
 var componentFom = query1[0].elementID
 html += '<table class="table table-bordered table-condensed">  '
@@ -271,7 +287,7 @@ for (key in data) {
         break;
       }
       html += '</td>'      
-       
+
 
 
       if ( data[key][i]['units'] == undefined) {
@@ -319,7 +335,7 @@ var table = jQuery('#'+id).DataTable({
   "buttons": [
   { extend: 'csv', text: '<i class="fa fa-file-excel-o" aria-hidden="true"></i>' ,className:'btn btn-default btn-xs' ,filename: 'Data export' ,title: 'Table export'}, 
   { extend: 'pdf', text: '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>' ,className:'btn btn-default btn-xs' ,filename: 'Data export' ,title: 'Table export'}
-  ]
+  ] 
   //  'order': [[ 2, 'asc' ]] ,
 });
   //Add event listener for opening and closing details
@@ -490,7 +506,7 @@ function permdelete(id){
 ///////////////////////////
 function deleteEntrys(_id){
   jQuery.ajax({
-    'url': '/deleteentry?idItem='+_id,
+    'url': '/issues/deleteentry?idItem='+_id,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -504,7 +520,7 @@ function deleteEntrys(_id){
 ///////////////////////////
 function deleteEntrysPerm(_id){
   jQuery.ajax({
-    'url': '/deleteentryperm?idItem='+_id,
+    'url': '/issues/deleteentryperm?idItem='+_id,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -531,7 +547,7 @@ function deployFormComponent(formToUse){
   //This is hard wired , and likely to cause issues.
   var headings = ["description","detail","icon","headings"]
   var entry =''
-  loadformModal(formToUse,'','component',items.elementID,headings,entry)
+  loadformModalwrasse(formToUse,'','component',items.elementID,headings,entry)
 }
 
 //////////////////////////////////////////////
@@ -541,7 +557,7 @@ function deployFormUse(formToUse){
   //This is hard wired , and likely to cause issues.
   var headings = ["description","detail","icon","headings"]
   var entry =''
-  loadformModal(formToUse,'','use',templateload,headings,entry)
+  loadformModalwrasse(formToUse,'','use',templateload,headings,entry)
 }
 
 //////////////////////////
@@ -552,7 +568,7 @@ function modifyItemComp(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformModal(id,id,'self',id)
+    loadformModalwrasse(id,id,'self',id)
   } else {
   //INSTRUCTIONS
   ////////////////////////////////////////////////////////////////////
@@ -585,7 +601,7 @@ function modifyItemComp(id){
     } 
     console.log('Tracing here',childType,id,'componentedit',parentIdTemp,headings, entry)
   //The id of the emement needs to be injected into the form , as it does not have that data.
-  loadformModal(childType,id,'componentedit',parentIdTemp,headings, entry)
+  loadformModalwrasse(childType,id,'componentedit',parentIdTemp,headings, entry)
 }
 }
 
@@ -597,7 +613,7 @@ function copthisitem(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformModal(id,id,'self',id)
+    loadformModalwrasse(id,id,'self',id)
   } else {
   //INSTRUCTIONS
   ////////////////////////////////////////////////////////////////////
@@ -629,7 +645,7 @@ function copthisitem(id){
       elementID : id
     } 
   //The id of the emement needs to be injected into the form , as it does not have that data.
-  loadformModal(childType,id,'componentcopy',parentIdTemp,headings, entry)
+  loadformModalwrasse(childType,id,'componentcopy',parentIdTemp,headings, entry)
 }
 }
 
@@ -638,7 +654,7 @@ function copthisitem(id){
 ////////////////////////////////////////////////
 function deployparentrawForm(parentid){
   parentid = parentid.replace('_parentraw', '');
-  loadformModal(parentid,parentid,'raw',parentid)
+  loadformModalwrasse(parentid,parentid,'raw',parentid)
 }
 
 //////////////////////////////////////////////////
@@ -646,17 +662,18 @@ function deployparentrawForm(parentid){
 ////////////////////////////////////////////////
 function copyParentRaw(parentid){
   parentid = parentid.replace('_copy', '');
-  loadformModal(parentid,parentid,'copyraw',parentid)
+  loadformModalwrasse(parentid,parentid,'copyraw',parentid)
 }
 
 //////////////////////////////////////
 ////////    GET FORM BY ID  /////////
 ////////////////////////////////////                                                                                                              
-function loadformModal(formdata,idItem,raw,parentid,headings,entry){
+function loadformModalwrasse(formdata,idItem,raw,parentid,headings,entry){
+  console.log( 'Button click : plugins/wrasse/views/plugins/issuecomponent' )
   var headings = JSON.stringify(headings)
   var entry = JSON.stringify(entry)
   jQuery.ajax({
-    'url': '/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings+'&entry='+entry,
+    'url': '/issues/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings+'&entry='+entry,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -670,7 +687,7 @@ function loadformModal(formdata,idItem,raw,parentid,headings,entry){
 ////////////////////////
 function useForm(id){
   id = id.replace('_use', '');
-  loadformModal(id,'','use',id)
+  loadformModalwrasse(id,'','use',id)
 }
 
 //////////////////////////
@@ -681,9 +698,9 @@ function modifyItem(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformModal(id,id,'self',id)
+    loadformModalwrasse(id,id,'self',id)
   } else {
-    loadformModal(childType,id,'self',id)
+    loadformModalwrasse(childType,id,'self',id)
   }
 }
 
@@ -695,9 +712,9 @@ function EditWithraw(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformModal(id,id,'raw',id)
+    loadformModalwrasse(id,id,'raw',id)
   } else {
-    loadformModal(childType,id,'raw',id)
+    loadformModalwrasse(childType,id,'raw',id)
   }
 }
 
@@ -710,9 +727,9 @@ function createComp(id){
   //there is some kind of wierd lowcase requiremtns.
   parentid = $('#'+id+'').data('parentid')
   if (!childType) {
-    loadformModal(childType,'','use',id)
+    loadformModalwrasse(childType,'','use',id)
   } else {
-    loadformModal(parentid,'','use',id)
+    loadformModalwrasse(parentid,'','use',id)
   }
 }
 

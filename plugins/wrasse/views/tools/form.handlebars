@@ -34,7 +34,6 @@ $('document').ready(function(){
 })  
 
 
-console.log( '------------------------------------------------' )
 console.log( 'Tempalte Name : plugins/wrasse/views/tools/form' )
 console.log( '------------------------------------------------' )
 
@@ -43,7 +42,7 @@ console.log( '------------------------------------------------' )
 ////////////////////////////////////                                                                                                              
 function loadtableformdisplay(formdata,idItem,raw,parentid){
   jQuery.ajax({
-    'url': '/forms/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid,
+    'url': '/issues/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {

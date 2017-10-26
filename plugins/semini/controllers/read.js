@@ -689,13 +689,13 @@ var query1 = formModel.find(
 /////////////////////////////
 ////      DEBUG         //// 
 ///////////////////////////
-/*
+ 
 console.log('-----------getdatacomp------------')
 console.log('formdata : ',JSON.stringify(formdata))
 console.log('idItem : ',JSON.stringify(idItem))
 console.log('raw :',JSON.stringify(raw))
 console.log('-----------getdatacomp------------')
-*/
+ 
 /////////////////////////////
 ////      DEBUG         //// 
 ///////////////////////////

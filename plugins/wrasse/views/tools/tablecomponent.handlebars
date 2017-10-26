@@ -20,7 +20,7 @@
 /////////////////////////////
 ////     DEBUG AREA     //// 
 ///////////////////////////
-console.log( 'tableComponent loading' )
+console.log( 'Tempalte Name : plugins/wrasse/views/tools/tablecomponent' )
 console.log( '-------------------------' )
 console.log( 'items : ',items )
 console.log( 'query1 : ',query1 )
@@ -29,7 +29,6 @@ console.log( 'query3 : ',query3 )
 console.log( 'query4 : ',query4 )
 console.log( 'tablelistdata : ',tablelistdata )
 console.log( 'formids : ',formids )
-console.log( '-------------------------' )
 console.log( 'Tempalte Name : plugins/wrasse/views/tools/tablecomponent' )
 
 
@@ -532,7 +531,7 @@ function deployFormComponent(formToUse){
   //This is hard wired , and likely to cause issues.
   var headings = ["description","detail","icon","headings"]
   var entry =''
-  loadformModal(formToUse,'','component',items.elementID,headings,entry)
+  loadformModalwrasse(formToUse,'','component',items.elementID,headings,entry)
 }
 
 //////////////////////////////////////////////
@@ -542,7 +541,7 @@ function deployFormUse(formToUse){
   //This is hard wired , and likely to cause issues.
   var headings = ["description","detail","icon","headings"]
   var entry =''
-  loadformModal(formToUse,'','use',templateload,headings,entry)
+  loadformModalwrasse(formToUse,'','use',templateload,headings,entry)
 }
 
 //////////////////////////
@@ -553,7 +552,7 @@ function modifyItemComp(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformModal(id,id,'self',id)
+    loadformModalwrasse(id,id,'self',id)
   } else {
   //INSTRUCTIONS
   ////////////////////////////////////////////////////////////////////
@@ -586,7 +585,7 @@ function modifyItemComp(id){
     } 
     console.log('Tracing here',childType,id,'componentedit',parentIdTemp,headings, entry)
   //The id of the emement needs to be injected into the form , as it does not have that data.
-  loadformModal(childType,id,'componentedit',parentIdTemp,headings, entry)
+  loadformModalwrasse(childType,id,'componentedit',parentIdTemp,headings, entry)
 }
 }
 
@@ -598,7 +597,7 @@ function copthisitem(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformModal(id,id,'self',id)
+    loadformModalwrasse(id,id,'self',id)
   } else {
   //INSTRUCTIONS
   ////////////////////////////////////////////////////////////////////
@@ -630,7 +629,7 @@ function copthisitem(id){
       elementID : id
     } 
   //The id of the emement needs to be injected into the form , as it does not have that data.
-  loadformModal(childType,id,'componentcopy',parentIdTemp,headings, entry)
+  loadformModalwrasse(childType,id,'componentcopy',parentIdTemp,headings, entry)
 }
 }
 
@@ -639,7 +638,7 @@ function copthisitem(id){
 ////////////////////////////////////////////////
 function deployparentrawForm(parentid){
   parentid = parentid.replace('_parentraw', '');
-  loadformModal(parentid,parentid,'raw',parentid)
+  loadformModalwrasse(parentid,parentid,'raw',parentid)
 }
 
 //////////////////////////////////////////////////
@@ -647,13 +646,13 @@ function deployparentrawForm(parentid){
 ////////////////////////////////////////////////
 function copyParentRaw(parentid){
   parentid = parentid.replace('_copy', '');
-  loadformModal(parentid,parentid,'copyraw',parentid)
+  loadformModalwrasse(parentid,parentid,'copyraw',parentid)
 }
 
 //////////////////////////////////////
 ////////    GET FORM BY ID  /////////
 ////////////////////////////////////                                                                                                              
-function loadformModal(formdata,idItem,raw,parentid,headings,entry){
+function loadformModalwrasse(formdata,idItem,raw,parentid,headings,entry){
   var headings = JSON.stringify(headings)
   var entry = JSON.stringify(entry)
   jQuery.ajax({
@@ -671,7 +670,7 @@ function loadformModal(formdata,idItem,raw,parentid,headings,entry){
 ////////////////////////
 function useForm(id){
   id = id.replace('_use', '');
-  loadformModal(id,'','use',id)
+  loadformModalwrasse(id,'','use',id)
 }
 
 //////////////////////////
@@ -682,9 +681,9 @@ function modifyItem(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformModal(id,id,'self',id)
+    loadformModalwrasse(id,id,'self',id)
   } else {
-    loadformModal(childType,id,'self',id)
+    loadformModalwrasse(childType,id,'self',id)
   }
 }
 
@@ -696,9 +695,9 @@ function EditWithraw(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformModal(id,id,'raw',id)
+    loadformModalwrasse(id,id,'raw',id)
   } else {
-    loadformModal(childType,id,'raw',id)
+    loadformModalwrasse(childType,id,'raw',id)
   }
 }
 
@@ -711,9 +710,9 @@ function createComp(id){
   //there is some kind of wierd lowcase requiremtns.
   parentid = $('#'+id+'').data('parentid')
   if (!childType) {
-    loadformModal(childType,'','use',id)
+    loadformModalwrasse(childType,'','use',id)
   } else {
-    loadformModal(parentid,'','use',id)
+    loadformModalwrasse(parentid,'','use',id)
   }
 }
 

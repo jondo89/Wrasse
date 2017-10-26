@@ -50,7 +50,7 @@ var tablelistdata = {{{query3}}};
 //Unique if for the forms.
 var formids = create_uid()
 
-var templateload = {{{templateload}}}
+var templateloadwrasse = {{{templateloadwrasse}}}
 
 
 /////////////////////////////////////
@@ -77,7 +77,7 @@ return parseFloat(a.entry.order) - parseFloat(b.entry.order);
 /////////////////////////////
 ////     DEBUG AREA     //// 
 ///////////////////////////
-console.log( 'Template Loading : plugins/semini/views' )
+console.log( 'Template Loading : plugins/wrasse/views/group' )
 console.log( '-------------------------' )
 console.log( 'items : ',items )
 console.log( 'query1 : ',query1 )
@@ -87,7 +87,7 @@ console.log( 'query4 : ',query4 )
 console.log( 'tablelistdata : ',tablelistdata )
 console.log( 'formids : ',formids )
 console.log( '-------------------------' )
-console.log( 'Template Loading : plugins/semini/views' )
+console.log( 'Template Loading : plugins/wrasse/views/group' )
 
 
 if(items.elementID) {
@@ -130,7 +130,7 @@ if (!items.elementID) {
     jQuery.ajax({
       'async': true,
       'global': false,
-      'url': '/semini/groups?data='+ids,
+      'url': '/issues/groups?data='+ids,
       'success': function (dataSchemaObject) {
         input = JSON.parse(dataSchemaObject);
         groupShow(input)
@@ -194,11 +194,11 @@ function viewCatagory(id){
 function layoutView() {
 if (items.entry.layout) {
  for (var i = 0; i < items.entry.layout.length; i++) {
-    templateLoad(items.entry.layout[i],'toolbar')
+    templateLoadwrasse(items.entry.layout[i],'toolbar')
  }
 }  else {
-  templateLoad(['parentraw'],'toolbar')
-  templateLoad(['add'],'toolbar')
+  templateLoadwrasse(['parentraw'],'toolbar')
+  templateLoadwrasse(['add'],'toolbar')
 }
 }
 
@@ -228,18 +228,18 @@ function deployForm(parentid){
   var entry = {
                       parent : parentIdTemp,
                   }
-  loadformModalsemini(parentid,'','use',items.parentid,headings,entry)
+  loadformModalwrasse(parentid,'','use',items.parentid,headings,entry)
 }
 
 //////////////////////////////////////
 ////////    GET FORM BY ID  /////////
 ////////////////////////////////////                                                                                                              
-function loadformModalsemini(formdata,idItem,raw,parentid,headings,entry){
+function loadformModalwrasse(formdata,idItem,raw,parentid,headings,entry){
   console.log(formdata,idItem,raw,parentid,headings)
   var headings = JSON.stringify(headings)
   var entry = JSON.stringify(entry)
   jQuery.ajax({
-    'url': '/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings+'&entry='+entry,
+    'url': '/issues/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings+'&entry='+entry,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -252,19 +252,19 @@ function loadformModalsemini(formdata,idItem,raw,parentid,headings,entry){
 ////////    BUTTON CLICK OPEN RAW FORM  /////////
 ////////////////////////////////////////////////
 function deployparentrawForm(parentid){
-  loadformModalsemini(parentid,parentid,'raw',parentid)
+  loadformModalwrasse(parentid,parentid,'raw',parentid)
 }
 
 ///////////////////////////////////
 ////////  LOADING OF TOOLS ///////
 /////////////////////////////////
-function templateLoad(template,location){
+function templateLoadwrasse(template,location){
 //Ensure that the first load error is covered , also any other errors.
 if(template){
   jQuery.ajax({
    'async': true,
    'global': false,
-   'url': '/semini/templatename?template='+template,
+   'url': '/issues/templatename?template='+template,
    'success': function (dataSchemaObject) {
      jQuery('#'+location).append(dataSchemaObject)
    }
@@ -280,7 +280,7 @@ function deployFormComponent(formToUse){
   //This is hard wired , and likely to cause issues.
   var headings = ["description","detail","icon","headings"]
   var entry =''
-   loadformModalsemini(formToUse,'','component',items.elementID,headings,entry)
+   loadformModalwrasse(formToUse,'','component',items.elementID,headings,entry)
 }
 
 //////////////////////////////////////////////
@@ -290,7 +290,7 @@ function deployFormUse(formToUse){
   //This is hard wired , and likely to cause issues.
   var headings = ["description","detail","icon","headings"]
   var entry =''
-  loadformModalsemini(formToUse,'','use',templateload,headings,entry)
+  loadformModalwrasse(formToUse,'','use',templateloadwrasse,headings,entry)
 }
 
 //////////////////////////////////////////////
@@ -319,7 +319,7 @@ function modifybutton(parentid){
   var entry = {
     parent : parentIdTemp,
   }
-  loadformModalsemini(parentid,parentIdTemp,'self',items.parentid,headings,entry)
+  loadformModalwrasse(parentid,parentIdTemp,'self',items.parentid,headings,entry)
 }
 
 //////////////////////////////////////////////////
@@ -327,7 +327,7 @@ function modifybutton(parentid){
 ////////////////////////////////////////////////
 function deployparentrawForm(parentid){
      parentid = parentid.replace('_parentraw', '');
-  loadformModalsemini(parentid,parentid,'raw',parentid)
+  loadformModalwrasse(parentid,parentid,'raw',parentid)
 }
 
 //////////////////////////////////////////////////
@@ -335,16 +335,16 @@ function deployparentrawForm(parentid){
 ////////////////////////////////////////////////
 function copyParentRaw(parentid){
   parentid = parentid.replace('_copy', '');
-  loadformModalsemini(parentid,parentid,'copyraw',parentid)
+  loadformModalwrasse(parentid,parentid,'copyraw',parentid)
 }
 
 //////////////////////////////////////
 ////////    GET FORM BY ID  /////////
 ////////////////////////////////////                                                                                                              
-function loadformModalsemini(formdata,idItem,raw,parentid,headings){
+function loadformModalwrasse(formdata,idItem,raw,parentid,headings){
   var headings = JSON.stringify(headings)
   jQuery.ajax({
-    'url': '/semini/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings,
+    'url': '/issues/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -358,7 +358,7 @@ function loadformModalsemini(formdata,idItem,raw,parentid,headings){
 ////////////////////////
 function useForm(id){
   id = id.replace('_use', '');
-  loadformModalsemini(id,'','use',id)
+  loadformModalwrasse(id,'','use',id)
 }
 
 //////////////////////////
@@ -370,9 +370,9 @@ function modifyItem(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformModalsemini(id,id,'self',id,headings)
+    loadformModalwrasse(id,id,'self',id,headings)
   } else {
-    loadformModalsemini(childType,id,'self',id,headings)
+    loadformModalwrasse(childType,id,'self',id,headings)
   }
 }
 
@@ -384,9 +384,9 @@ function tableraw(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformModalsemini(id,id,'raw',id)
+    loadformModalwrasse(id,id,'raw',id)
   } else {
-    loadformModalsemini(childType,id,'raw',id)
+    loadformModalwrasse(childType,id,'raw',id)
   }
 }
 
@@ -399,9 +399,9 @@ function createComp(id){
   //there is some kind of wierd lowcase requiremtns.
   parentid = $('#'+id+'').data('parentid')
   if (!childType) {
-    loadformModalsemini(childType,'','use',id)
+    loadformModalwrasse(childType,'','use',id)
   } else {
-    loadformModalsemini(parentid,'','use',id)
+    loadformModalwrasse(parentid,'','use',id)
   }
 }
 

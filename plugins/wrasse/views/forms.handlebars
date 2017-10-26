@@ -1,56 +1,17 @@
 <div class="row">
   <div class="col-md-6">
-    <h1>Issues</h1>
-    <p>Use the interface below to modify all site issues and logging.</p>
-  </div> 
-
-
-
-  {{#if user}}
+    <h1>Forms</h1>
+    <p>Use the interface below to modify all site forms.</p>
+  </div>
   <div class="col-md-6" style="text-align: right">
   <div class="btn-group" role="group" aria-label="...">
-<!-- Split button -->
- 
-  <button type="button" class="btn btn-default  btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-    <span class="sr-only">Toggle Dropdown</span>
-  </button>
-  <ul class="dropdown-menu dropdown-menu-right">
-    <li><a  href="" data-toggle="modal" data-target="#myModal" onclick="addIssue('59e837ba9399ad427c493d4f','59ea2a21f7d5bc22d8dafa0b')" title="Add items"><i class="fa fa-plus" aria-hidden="true"></i>  Add a new issue.</a></li>
-    <li><a href="#"><i class="fa fa-list" aria-hidden="true"></i>  View associated issues.</a></li>
-  </ul>
- 
-<script type="text/javascript">
-  ////////////////////////////////////////////////////
-////////    BUTTON CLICK ADD NEW DB ITEM  /////////
-//////////////////////////////////////////////////
-function addIssue(form,grouping){
-  loadformModalwrasse(form,'','component',grouping,'','')
-}
-//////////////////////////////////////
-////////    GET FORM BY ID  /////////
-//////////////////////////////////                                                                                                              
-function loadformModalwrasse(formdata,idItem,raw,parentid,headings,entry){
-  console.log( 'Button click : plugins/wrasse/views/issues' )
-  var headings = JSON.stringify(headings)
-  var entry = JSON.stringify(entry)
-  jQuery.ajax({
-    'url': '/issues/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings+'&entry='+entry,
-    'async': true,
-    'global': false,
-    'success': function (dataSchemaObject) {
-      $('#formAreaModal').html(dataSchemaObject)
-    }
-  });
-}
-</script>
+    <a  class="btn btn-default btn-xs"  data-toggle="modal" data-target="#myModal" onclick="newMenuItem()" title="Add items"><i class="fa fa-plus" aria-hidden="true"></i></a>
+    <a  class="btn btn-default btn-xs"  data-toggle="modal" data-target="#myModal" onclick="editRaw()" title="Edit this item raw"><i class="fa fa-file-code-o" aria-hidden="true"></i></a>
 </div>
+    
   </div>  
-{{/if}}
-
-
-</div>  
-<hr>
+  
+</div>  <hr>
 <div class="row" id="page">
   <div class="col-md-4" id="navMenuPanel">
     <div id="myProgress">
@@ -84,7 +45,7 @@ function loadformModalwrasse(formdata,idItem,raw,parentid,headings,entry){
 /////////////////////////////
 ////     DEBUG AREA     //// 
 ///////////////////////////
-console.log( 'Template Loading : plugins/wrasse/views/issues' )
+console.log( 'Tempalte Name : plugins/wrasse/views/forms' )
 console.log( '-------------------------' )
 console.log( 'databaseid : ',databaseid )
 console.log( 'Formids : ',Formids )
@@ -92,7 +53,7 @@ console.log( 'navmenuHeadings : ',navmenuHeadings )
 console.log( 'databaseMenu : ',databaseMenu )
 console.log( 'temp : ',temp )
 console.log( '-------------------------' )
-console.log( 'Template Loading : plugins/wrasse/views/issues' )
+console.log( 'Tempalte Name : plugins/wrasse/views/forms' )
 
 /////////////////////////////////// 
 //////  GET JSTREE BY ID    //////
@@ -104,6 +65,7 @@ function jstreeGet(ids){
     'global': false,
     'success': function (dataSchemaObject) {
      var dataSchemaObject = JSON.parse(dataSchemaObject)
+     console.log(dataSchemaObject)
       //Add the headings to the page.
       $('#descriptions').html(dataSchemaObject.thisitem[0].name)
       $('#details').html(dataSchemaObject.thisitem[0].detail)
@@ -268,7 +230,9 @@ jQuery('#'+locations)
         templateloading(ids)
       }
     })
-    console.log( 'Template Loading : plugins/wrasse/views/issues' )
+
+
+    console.log('Admin Page')
     console.log('---------------------------')
     console.log(' databaseid :', databaseid )
     console.log(' Formids :', Formids )
@@ -276,7 +240,7 @@ jQuery('#'+locations)
     console.log(' databaseMenu :', databaseMenu )
     console.log(' temp :', temp )
     console.log('---------------------------')
-    console.log( 'Template Loading : plugins/wrasse/views/issues' )
+    console.log('Admin Page')
 
   }
 
@@ -284,7 +248,6 @@ jQuery('#'+locations)
 ////////  EVENT LISTNER FUNCTION AREA DATABASE ///////
 /////////////////////////////////////////////////////
 function templateloading(ids){
- 
 //Ensure that the first load error is covered , also any other errors.
 if(ids){
   jQuery.ajax({
@@ -352,8 +315,6 @@ function newMenuItem(parentid){
 function editRaw(parentid){
   newMenuItems(Formids,databaseid,'raw',databaseid,'',navmenuHeadings)
 }
-
-
 
 </script>
 

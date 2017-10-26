@@ -123,10 +123,9 @@ function tablist(){
    for (var i = 0; i < items.entry.tabs.length; i++) {
 //used for 0 length items
 if (i==0) {
-
 switch(true){
-  case (items.entry.tabs=='tablecomponent'):
-   html +='<li role="presentation" class="active"><a href="#'+items.entry.tabs[i]+'" aria-controls="'+items.entry.tabs[i]+'" role="tab" data-toggle="tab">Components</a></li>'
+  case (items.entry.tabs=='issuecomponent'):
+   html +='<li role="presentation" class="active"><a href="#'+items.entry.tabs[i]+'" aria-controls="'+items.entry.tabs[i]+'" role="tab" data-toggle="tab">Issues</a></li>'
   break;
     case (items.entry.tabs=='producttable'):
    html +='<li role="presentation" class="active"><a href="#'+items.entry.tabs[i]+'" aria-controls="'+items.entry.tabs[i]+'" role="tab" data-toggle="tab">Products</a></li>'
@@ -135,12 +134,9 @@ switch(true){
     html +='<li role="presentation" class="active"><a href="#'+items.entry.tabs[i]+'" aria-controls="'+items.entry.tabs[i]+'" role="tab" data-toggle="tab">'+capitalize(items.entry.tabs[i])+'</a></li>'
   break;
 }
-
-
- 
 } else {
-  if (items.entry.tabs=='tablecomponent') {
-    html +='<li role="presentation"><a href="#'+items.entry.tabs[i]+'" aria-controls="'+items.entry.tabs[i]+'" role="tab" data-toggle="tab">Components</a></li>'
+  if (items.entry.tabs=='issuecomponent') {
+    html +='<li role="presentation"><a href="#'+items.entry.tabs[i]+'" aria-controls="'+items.entry.tabs[i]+'" role="tab" data-toggle="tab">Issues</a></li>'
   } else {
    html +='<li role="presentation"><a href="#'+items.entry.tabs[i]+'" aria-controls="'+items.entry.tabs[i]+'" role="tab" data-toggle="tab">'+capitalize(items.entry.tabs[i])+'</a></li>'
  }

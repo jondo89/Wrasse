@@ -167,13 +167,14 @@ if (!raw) {
 /////////////////////////////
 ////      DEBUG         //// 
 ///////////////////////////
+/*
 console.log('-----------getdata------------')
 console.log('formdata : ',JSON.stringify(formdata))
 console.log('idItem : ',JSON.stringify(idItem))
 console.log('raw :',JSON.stringify(raw))
 console.log('formdata : ',formdata)
 console.log('-----------getdata------------')
-
+*/
 /////////////////////////////
 ////      DEBUG         //// 
 ///////////////////////////
@@ -252,7 +253,6 @@ exports.jstree = function(req, res) {
   //Debugging  
   debugging(req,debugMode)
   var ids = req.query.ids
-
   var query = formsModel.find(
   {
     $and : 
@@ -279,8 +279,8 @@ exports.jstree = function(req, res) {
         thisitem : docs,
         children : docs1
       }
-      console.log(ids)
-      console.log(temp)
+      
+      //console.log(temp)
       res.send(JSON.stringify(temp))
     })
   })
@@ -485,6 +485,7 @@ query1.exec(function (err, query1_return) {
   } else {
     template = 'formtable' 
   }
+
   res.render(directory+template, {
     query  :  JSON.stringify(query_return),
     query1 :  JSON.stringify(query1_return),
@@ -626,7 +627,8 @@ console.log('raw :',JSON.stringify(raw))
 console.log('parentItem :',JSON.stringify(parentItem[0]))
 console.log('headings :',headings)
 console.log('entry :',entry)
-console.log('-----------getform------------')*/
+console.log('-----------getform------------') 
+*/
 /////////////////////////////
 ////      DEBUG         //// 
 ///////////////////////////
@@ -663,16 +665,23 @@ var formdata = req.param('formdata')
 if (!formdata) {
   formdata =''
 }
-//Which id data to use.
-var idItem = req.param('idItem')
-if (!idItem) {
-  idItem =formdata
-}
+
 //Edit Self / Edit Raw or create new.
 var raw = req.param('raw')
 if (!raw) {
   raw ='false'
 }
+
+
+ 
+
+//Which id data to use.
+var idItem = req.param('idItem')
+if (!idItem) {
+  idItem =formdata
+
+
+
 
 //Find the data to be viewed on the form.
 var query1 = formsModel.find(
@@ -688,6 +697,27 @@ var query1 = formsModel.find(
     }
     ]
   })
+
+
+} else {
+
+  //Find the data to be viewed on the form.
+var query1 = wrasseModel.find(
+{
+  $and : 
+  [
+  {$or: [
+    {"elementID": idItem },
+    {"_id":  idItem }
+    ]}, 
+    {
+      "active": "true" 
+    }
+    ]
+  })
+
+}
+
 /////////////////////////////
 ////      DEBUG         //// 
 ///////////////////////////
@@ -709,6 +739,7 @@ formsModel.find({
   if(err){console.log('Error Here'); return;} 
   query1.exec(function (err, docs2) {
     if(err){console.log('Error Here'); return;}
+
     var temp = docs2[0] 
       //if the entry id is blank then autopopulate the entry ID with the current ID.
       if (docs2[0].elementID == '' ) {
@@ -736,4 +767,41 @@ res.send({
 });
 })
 })
+}
+
+
+//////////////////////////////////////////
+///////////   READ  GROUPS  /////////////
+////////////////////////////////////////
+exports.groups = function(req, res) {
+  //Debugging  
+debugging(req,debugMode)
+  formsModel.
+  find({
+    'entry.parent' :req.param('data'),
+    'active' : 'true'
+  }).
+  exec(function (err, docs1) {
+    if(err){console.log('Error Here'); return;}   
+
+
+    if(docs1){
+      for (var i = 0; i < docs1.length; i++) {
+        //the menu item elementid should arrive poulated to avoid confusion.
+        if(docs1[i].elementID==''){
+          docs1[i].elementID=docs1[i]._id
+        }
+      }
+    } else {
+      console.log('docs1 failed')
+    } 
+
+
+/*
+console.log('-----------groups------------')
+console.log('docs1 : ',JSON.stringify(docs1))
+console.log('-----------groups------------')
+*/
+res.send(JSON.stringify(docs1));
+});
 }

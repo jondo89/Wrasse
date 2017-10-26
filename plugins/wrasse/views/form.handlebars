@@ -1,10 +1,30 @@
 
+         
+
+<div class="row">
+  <div class="col-md-2">
+     {{#if user.picture}}
+     <a href="/users/{{user.username}}">
+              <img src="{{user.picture}}" class="navbar-avatar-pic" style="border-radius: 5px;width: 100%">
+              {{else}}
+              <img src="{{user.gravatar}}" class="navbar-avatar-pic" style="border-radius: 5px;width: 100%">
+              {{/if}}
+</a>
+     <h5>{{user.name}}  <small>{{user.username}}</small></h5>
+ 
+  </div>
+  <div class="col-md-10">
+      
 <div id="formDelivery">
   <div style="text-align: center;">
     <i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></i>
     <span>Loading...</span>  
   </div>
 </div>
+  </div>
+</div>
+
+
 
 
 
@@ -33,7 +53,7 @@
   {{/if}}
   
 
-var WYSIWYG = []
+  var WYSIWYG = []
 
 
   {{#if headings}}
@@ -45,7 +65,7 @@ var WYSIWYG = []
 ////////////////////////////////////
 ////        DEBUG AREA         //// 
 //////////////////////////////////
-console.log( 'Tempalte Name : plugins/semini/views/form' )
+console.log( 'Tempalte Name : plugins/wrasse/views/form' )
 console.log( '-------------------------' )
 console.log( 'formdata :',formdata )
 console.log( 'idItem :',idItem )
@@ -61,7 +81,7 @@ console.log( 'entry :',entry )
 var entry
 {{/if}}
 console.log( '-------------------------' )
-console.log( 'Tempalte Name : plugins/semini/views/form' )
+console.log( 'Tempalte Name : plugins/wrasse/views/form' )
 ////////////////////////////////////
 ////        DEBUG AREA         //// 
 //////////////////////////////////
@@ -101,7 +121,7 @@ $(document).ready(function(){
 ///////////////////////////////////////////////////////
 function getdatacomp(formdata,idItem,raw){
   jQuery.ajax({
-    'url': '/forms/getdatacomp?formdata='+formdata+'&idItem='+idItem+'&raw='+raw,
+    'url': '/issues/getdatacomp?formdata='+formdata+'&idItem='+idItem+'&raw='+raw,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -118,7 +138,7 @@ function getdatacomp(formdata,idItem,raw){
 ///////////////////////////////////////
 function getdata(formdata,idItem,raw){
   jQuery.ajax({
-    'url': '/forms/getdata?formdata='+formdata+'&idItem='+idItem+'&raw='+raw,
+    'url': '/issues/getdata?formdata='+formdata+'&idItem='+idItem+'&raw='+raw,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -171,12 +191,17 @@ switch (true){
   break;
   case(objectOld.formdata[i].entry.type =='checkbox'):
   tempSchema.properties[objectOld.formdata[i]['elementID']] = {
-    "title":objectOld.formdata[i].entry.description,
-    "dependencies": tempDepend
+    
+    "dependencies": tempDepend,
   }
   tempoptions.fields[objectOld.formdata[i]['elementID']] = {
     'type' : objectOld.formdata[i].entry.type,
-    "rightLabel":[objectOld.formdata[i].entry.detail]
+    "rightLabel":[objectOld.formdata[i].entry.detail],  
+        "data": {
+        "toggle":1   ,
+        "value" : "value"
+         },
+
   }   
   break;
   case(objectOld.formdata[i].entry.type =='text'):
@@ -223,12 +248,8 @@ switch (true){
     "type": "textarea",
     "rightLabel":[objectOld.formdata[i].entry.detail]
   }   
-  
-
-
+   
 WYSIWYG.push(objectOld.formdata[i]['elementID'])    
-
-
 
 
   break;
@@ -249,7 +270,6 @@ WYSIWYG.push(objectOld.formdata[i]['elementID'])
 
 
   case(objectOld.formdata[i].entry.type =='Latitude' || objectOld.formdata[i].entry.type =='Longitude' || objectOld.formdata[i].entry.type =='Altitude'):
-  
   var location = 'mapLoad'
   if (objectOld.formdata[i].entry.type =='Latitude') {
    lat = objectOld.formdata[i].elementID
@@ -492,7 +512,7 @@ if (!temp == undefined) {
     jQuery.ajax({
       'async': true,
       'global': false,
-      'url': '/forms/getformfield?data='+temp ,
+      'url': '/issues/getformfield?data='+temp ,
       'success': function (dataSchemaObject) {
         if (dataSchemaObject) {
           var dataSchemaObject = JSON.parse(dataSchemaObject);
@@ -519,9 +539,22 @@ function wysiwyg(){
   $('[name="'+WYSIWYG[i]+'"]').froalaEditor({ 
     toolbarButtons: ['undo', 'redo' , 'bold', '|', 'alert', 'clear', 'insert'],
     heightMin: 250,
-      heightMax: 250
+      heightMax: 250,
   })
-}
+
+
+
+ 
+
+} 
+$( "input[type=checkbox]" ).bootstrapToggle({
+        on: 'Closed',
+      off: 'Open',
+      width : "120",
+      onstyle:"danger"
+})
+ 
+ 
 }
 
 
@@ -538,11 +571,11 @@ switch(true){
     "schema": schema,
     "options": options,
     "postRender": function(control) {
-      wysiwyg()
       //only set the data if the form is for use.
       if (idItem !='') {
         $("#form_"+formdata+idItem+formid1).alpaca('get').setValue(data.idItem.entry)
       }
+  wysiwyg()
     }    
   });
   break;
@@ -551,11 +584,11 @@ switch(true){
     "schema": schema,
     "options": options,
     "postRender": function(control) {
-      wysiwyg()
       //only set the data if the form is for use.
       if (idItem !='') {
         $("#form_"+formdata+idItem+formid1).alpaca('get').setValue(data.idItem)
       }
+      wysiwyg() 
     }    
   });
   break;
@@ -564,11 +597,11 @@ switch(true){
     "schema": schema,
     "options": options,
     "postRender": function(control) {
-      wysiwyg()
       //only set the data if the form is for use.
       if (idItem !='') {
         $("#form_"+formdata+idItem+formid1).alpaca('get').setValue(data.idItem.entry)
       }
+ wysiwyg()
     }    
   });
   break;
@@ -577,7 +610,6 @@ switch(true){
     "schema": schema,
     "options": options,
     "postRender": function(control) {
-      wysiwyg()
       //only set the data if the form is for use.
       findandappendSelect()
       if (idItem !='') {
@@ -586,6 +618,7 @@ switch(true){
         long = 0
         mapset(data.idItem.entry)
       }
+      wysiwyg()
     }    
   });
   break;
@@ -594,7 +627,6 @@ switch(true){
     "schema": schema,
     "options": options,
     "postRender": function(control) {
-      wysiwyg()
       //only set the data if the form is for use.
       if (idItem !='') {
         $("#form_"+formdata+idItem+formid1).alpaca('get').setValue(data.idItem.entry)
@@ -603,6 +635,7 @@ switch(true){
           mapset(data.idItem.entry)
         }
       }
+      wysiwyg()
     }    
   });
   break;
@@ -787,7 +820,7 @@ switch(true){
 
 //Jquery send to server
 jQuery.ajax({
-  'url': '/semini/createform',
+  'url': '/issues/createform',
   'type': 'POST', 
   'dataType': 'json',
   'contentType': 'application/json', 
@@ -907,7 +940,6 @@ function displayLocationElevation(location, elevator) {
 //////////   ADDING THE MORE INFO BUTTON       /////////
 ///////////////////////////////////////////////////////
 function findandappendSelect(){
-
   if (query2) { 
     for (var i = 0; i < query2.length; i++) {
       if(query2[i].entry.objectType ){
