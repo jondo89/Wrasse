@@ -404,7 +404,7 @@ function loadformModal(formdata,idItem,raw,parentid,headings){
   console.log('Entering here' , parentid)
   var headings = JSON.stringify(headings)
   jQuery.ajax({
-    'url': '/issues/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings,
+    'url': '/forms/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {

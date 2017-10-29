@@ -654,7 +654,7 @@ function copthisitem(id){
 ////////////////////////////////////////////////
 function deployparentrawForm(parentid){
   parentid = parentid.replace('_parentraw', '');
-  loadformModalwrasse(parentid,parentid,'raw',parentid)
+  loadformModal(parentid,parentid,'raw',parentid)
 }
 
 //////////////////////////////////////////////////
@@ -712,9 +712,9 @@ function EditWithraw(id){
   childType = $('#'+id+'').data('childtype')
   //Used for the check self when modifiing.
   if (!childType) {
-    loadformModalwrasse(id,id,'raw',id)
+    loadformModal(id,id,'raw',id)
   } else {
-    loadformModalwrasse(childType,id,'raw',id)
+    loadformModal(childType,id,'raw',id)
   }
 }
 
@@ -733,4 +733,20 @@ function createComp(id){
   }
 }
 
+
+//////////////////////////////////////
+////////    GET FORM BY ID  /////////
+////////////////////////////////////                                                                                                            
+function loadformModal(formdata,idItem,raw,parentid,headings){
+  console.log('Entering here' , parentid)
+  var headings = JSON.stringify(headings)
+  jQuery.ajax({
+    'url': '/forms/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings,
+    'async': true,
+    'global': false,
+    'success': function (dataSchemaObject) {
+      $('#formAreaModal').html(dataSchemaObject)
+    }
+  });
+}
 </script>

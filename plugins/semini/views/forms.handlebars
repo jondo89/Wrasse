@@ -29,7 +29,7 @@
 </div>  
 <div class="col-md-8" id="browserArea">
   <div id="panel">  
-    <div style="border-width: 2px; border-style: dashed; border-color: grey;padding:55px;text-align: center;border-radius: 5px;"><strong> Heads up!</strong> Click on the nodes of the navigation tree to interact with the site.</div>
+<div class="awesome"><div style="background-color: #fff !important;padding: 5px"><div style="padding:25px"><h3>Heads up! <small>Click on the nodes of the navigation tree to interact with the site.</small></h3><div style="text-align: center"><p>To get started view the <a href="/documentation">Documentation section</a> on this site or sign in / sign up.</p></div> </div></div></div>
   </div>
 </div>
 </div>
@@ -69,7 +69,7 @@ function jstreeGet(ids){
       //Add the headings to the page.
       $('#descriptions').html(dataSchemaObject.thisitem[0].name)
       $('#details').html(dataSchemaObject.thisitem[0].detail)
-      $('#panel').html('<div style="border-width: 2px; border-style: dashed; border-color: grey;padding:55px;text-align: center;border-radius: 5px;"><strong> Heads up!</strong> Click on the nodes of the navigation tree to interact with the site.</div>')
+$('#panel').html('<div class="awesome"><div style="background-color: #fff !important;padding: 5px"><div style="padding:25px"><h3>Heads up! <small>Click on the nodes of the navigation tree to interact with the site.</small></h3><div style="text-align: center"><p>To get started view the <a href="/documentation">Documentation section</a> on this site or sign in / sign up.</p></div> </div></div></div>')
       var dataSchemaObject1 = fitstFormat(dataSchemaObject.children)
       //manipulate data to work with the jstree
       var jsTreeData = dataJStreeConvert (dataSchemaObject1)

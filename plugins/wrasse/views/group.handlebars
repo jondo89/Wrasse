@@ -239,7 +239,7 @@ function loadformModalwrasse(formdata,idItem,raw,parentid,headings,entry){
   var headings = JSON.stringify(headings)
   var entry = JSON.stringify(entry)
   jQuery.ajax({
-    'url': '/issues/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings+'&entry='+entry,
+    'url': '/forms/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings+'&entry='+entry,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -264,7 +264,7 @@ if(template){
   jQuery.ajax({
    'async': true,
    'global': false,
-   'url': '/issues/templatename?template='+template,
+   'url': '/forms/templatename?template='+template,
    'success': function (dataSchemaObject) {
      jQuery('#'+location).append(dataSchemaObject)
    }
@@ -344,7 +344,7 @@ function copyParentRaw(parentid){
 function loadformModalwrasse(formdata,idItem,raw,parentid,headings){
   var headings = JSON.stringify(headings)
   jQuery.ajax({
-    'url': '/issues/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings,
+    'url': '/forms/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {

@@ -7,6 +7,20 @@
 
 
   {{#if user}}
+
+
+
+  <div class="col-md-6" style="text-align: right">
+  <div class="btn-group" role="group" aria-label="...">
+    <a  class="btn btn-default btn-xs"  data-toggle="modal" data-target="#myModal" onclick="newMenuItem()" title="Add items"><i class="fa fa-plus" aria-hidden="true"></i></a>
+    <a  class="btn btn-default btn-xs"  data-toggle="modal" data-target="#myModal" onclick="editRaw()" title="Edit this item raw"><i class="fa fa-file-code-o" aria-hidden="true"></i></a>
+</div>
+    
+  </div>  
+
+
+
+
   <div class="col-md-6" style="text-align: right">
   <div class="btn-group" role="group" aria-label="...">
 <!-- Split button -->
@@ -17,7 +31,7 @@
   </button>
   <ul class="dropdown-menu dropdown-menu-right">
     <li><a  href="" data-toggle="modal" data-target="#myModal" onclick="addIssue('59e837ba9399ad427c493d4f','59ea2a21f7d5bc22d8dafa0b')" title="Add items"><i class="fa fa-plus" aria-hidden="true"></i>  Add a new issue.</a></li>
-    <li><a href="#"><i class="fa fa-list" aria-hidden="true"></i>  View associated issues.</a></li>
+    <li><a href="/issues/#59ea2a21f7d5bc22d8dafa0b_anchor"><i class="fa fa-list" aria-hidden="true"></i>  View associated issues.</a></li>
   </ul>
  
 <script type="text/javascript">
@@ -68,7 +82,7 @@ function loadformModalwrasse(formdata,idItem,raw,parentid,headings,entry){
 </div>  
 <div class="col-md-8" id="browserArea">
   <div id="panel">  
-    <div style="border-width: 2px; border-style: dashed; border-color: grey;padding:55px;text-align: center;border-radius: 5px;"><strong> Heads up!</strong> Click on the nodes of the navigation tree to interact with the site.</div>
+<div class="awesome"><div style="background-color: #fff !important;padding: 5px"><div style="padding:25px"><h3>Heads up! <small>Click on the nodes of the navigation tree to interact with the site.</small></h3><div style="text-align: center"><p>To get started view the <a href="/documentation">Documentation section</a> on this site or sign in / sign up.</p></div> </div></div></div>
   </div>
 </div>
 </div>
@@ -107,7 +121,7 @@ function jstreeGet(ids){
       //Add the headings to the page.
       $('#descriptions').html(dataSchemaObject.thisitem[0].name)
       $('#details').html(dataSchemaObject.thisitem[0].detail)
-      $('#panel').html('<div style="border-width: 2px; border-style: dashed; border-color: grey;padding:55px;text-align: center;border-radius: 5px;"><strong> Heads up!</strong> Click on the nodes of the navigation tree to interact with the site.</div>')
+$('#panel').html('<div class="awesome"><div style="background-color: #fff !important;padding: 5px"><div style="padding:25px"><h3>Heads up! <small>Click on the nodes of the navigation tree to interact with the site.</small></h3><div style="text-align: center"><p>To get started view the <a href="/documentation">Documentation section</a> on this site or sign in / sign up.</p></div> </div></div></div>')
       var dataSchemaObject1 = fitstFormat(dataSchemaObject.children)
       //manipulate data to work with the jstree
       var jsTreeData = dataJStreeConvert (dataSchemaObject1)
@@ -234,7 +248,10 @@ function loadNavMenu(locations,dataNav){
     },
     "multiple": false,
     "plugins" : [   "search" , "state"]
-  });
+  }).on('ready.jstree', function(e, data) {
+      $('#jstree').jstree(true).deselect_all();
+      $('#jstree').jstree(true).select_node(location.hash.slice(1)); 
+});
 
 /////////////////////////////////
 ////////  SEARCH NAV MENU ///////
@@ -330,7 +347,7 @@ function collapse() {
 function newMenuItems(formdata,idItem,raw,parentid,injectParentid,headings){
   var headings = JSON.stringify(headings)
   jQuery.ajax({
-    'url': '/issues/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings,
+    'url': '/forms/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
