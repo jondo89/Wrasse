@@ -12,6 +12,15 @@
       
 
 
+<div style="text-align: right">
+  <a href="" class="btn btn-success">New Issue</a>
+  <input id="toggle-one" checked type="checkbox">  
+</div>
+
+ 
+
+
+
 
 
     <div id='formDelivery' style="/*overflow: auto;*/">
@@ -165,13 +174,14 @@ if (tableData !== null) {
 
       
 
+
 ////////////////////////////
 ////////    READ  /////////
 ///////////////////////////
 function dataTableLoad (data,id,headings){
   html = ''
   if (items.entry.buttons) {
-    html += '<thead><tr style="text-align"><td colspan="3"><span><a onclick="sort()"><i class="fa fa-check" aria-hidden="true"></i>  8 Open     </a></span><span><a onclick=sort()"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>  5 Closed  </a></span></th></tr><tr><td style="width:1px"></th>'
+    html += '<thead><tr><td style="width:1px"></th>'
   }else{
    html += '<thead><tr>'
  }
@@ -184,17 +194,34 @@ html += '</tr></thead>'
 html += '<tbody>'
 //pull in the element id of query 2 for the correct mofiy form
 var componentFom = query1[0].elementID
+
+var open = 0
+var closed = 0  
 for (var i = 0; i < data.length; i++) {
   if (items.entry.buttons) {
 //Icon Changes on the closed and open items.
+
+
+
 if (data[i].Closed == true) { 
-  html += '<tr><td class="details-control" style="text-align:center;vertical-align:middle;color:#5cb85c " id="'+data[i]['_id']+'" data-parentid="'+data[i]['parentid']+'" data-childType="'+componentFom+'"><i class="fa fa-check" aria-hidden="true"></i></td>'
+  html += '<tr><td data-search="closed" class="details-control" style="text-align:center;vertical-align:middle;color:#5cb85c " id="'+data[i]['_id']+'" data-parentid="'+data[i]['parentid']+'" data-childType="'+componentFom+'"><i class="fa fa-check-square-o" aria-hidden="true"></i></td>'
+  closed +=1
 } else {
- html += '<tr><td class="details-control" style="text-align:center;vertical-align:middle;color:#d9534f " id="'+data[i]['_id']+'" data-parentid="'+data[i]['parentid']+'" data-childType="'+componentFom+'"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></td>'
+ html += '<tr><td data-search="open" class="details-control" style="text-align:center;vertical-align:middle;color:#d9534f " id="'+data[i]['_id']+'" data-parentid="'+data[i]['parentid']+'" data-childType="'+componentFom+'"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></td>'
+ open +=1
 }
 }else{
   html += '<tr>'
 }
+
+ //Active the toggle swith with details.
+  $(function() {
+    $('#toggle-one').bootstrapToggle({
+      on: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> '+ open +' Open',
+      off: '<i class="fa fa-check-square-o" aria-hidden="true"></i> ' + closed+' Closed'
+    });
+  })
+
 for (var j = 0; j < headings.length; j++) {
   switch(true){
     case(headings[j]=='Url'):
@@ -235,6 +262,7 @@ html += '</tr>'
 }
 html += '<tbody>'
 $('#'+id).html(html)
+
 } 
 
 /////////////////////////////////////////////////////////////////////
@@ -375,7 +403,7 @@ $( '#'+id+' thead th' ).each(function(){
     counter+=1
   }  else {
     html+='<div class="col-md-4" id="filter_col'+counter+1+'" data-column="'+counter+'" style="padding-bottom:5px">'
-    html+='  <input  name="textinput" type="text" placeholder="Search '+$( this ).text()+'" class="form-control input-md" id="col'+counter+'_filter">'
+    html+='  <input  name="textinput" type="text" placeholder="Search '+$( this ).text()+'" class="form-control AdvancedSearch input-md" id="col'+counter+'_filter">'
     html+='  </div>'
     counter+=1
   }
@@ -384,16 +412,30 @@ html+='</div>'
 html+='</fieldset>'
 html+='</form>'
 $('#AdvancedSearch').html(html)
+
 function filterColumn ( i ) {
   table.column( i ).search(
     $('#col'+i+'_filter').val()
     ).draw();
 }
-$('input.form-control').on( 'keyup click', function () {
+
+$('input.AdvancedSearch').on( 'keyup click', function () {
   filterColumn( $(this).parents('div').attr('data-column') );
 } );
 $('.dt-buttons').prepend('<a class="btn btn-default btn-xs" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-search" aria-hidden="true"></i></a>')
 //end of advanced filter option.
+
+$('#toggle-one').change(function(){
+  if ($('#toggle-one').prop('checked') == true) {
+    table.columns(0).search("open" ).draw();
+  } else {
+    table.columns(0).search("closed").draw();
+  }
+})
+
+ table.columns(0).search("open" ).draw();
+
+
 }
 
 ////////////////////////////////////////////////////////////////////
