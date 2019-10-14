@@ -1,9 +1,9 @@
 {
-  "name": "Wrasse",
+  "name": "Cleaner-wrasse",
   "description": "",
-  "sitename" : "Wrasse",
-  "website" : "https://wrasse.herokuapp.com/",
-  "repo" : "https://github.com/Isithelo/wrasse",
+  "sitename" : "Cleaner-wrasse",
+  "website" : "https://cleaner-wrasse.herokuapp.com/",
+  "repo" : "https://github.com/jonodo89/cleaner-wrasse",
   "scripts": {
   },
   "env": {

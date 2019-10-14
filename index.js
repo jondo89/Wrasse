@@ -13,12 +13,17 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var recaptcha = require('express-recaptcha');
 var braintree = require("braintree");
+var helpers = require('handlebars-helpers')(['string']);
+var Handlebars = require("handlebars");
+var MomentHandler = require("handlebars.moment");
+MomentHandler.registerHelpers(Handlebars);
+
 
 // Load environment variables from .env file
-dotenv.load();
-
-
-
+ 
+dotenv.config()
+ 
+//Primary app variable.
 var app = express();
 
 ///////////////////////////////////////
@@ -31,7 +36,6 @@ try {
   console.log('Favicon not found in the required directory.')
 }
 
-
 ////////////////////////////////////////////////////
 ///////   HEROKU VS LOCALHOST .ENV SWAP    ////////
 //////////////////////////////////////////////////
@@ -41,18 +45,17 @@ if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB);
 }
 
+//Mongo error trap.
 mongoose.connection.on('error', function() {
   console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
   process.exit(1);
 });
 
-//////////////////////////////////////////////////
-///////   MONGODB INITIATE CONNECTION    ////////
-////////////////////////////////////////////////
+//Define the mongo enviroment
 var db = mongoose.connection;
 db.once('open', function() {
   // we're connected!
-  console.log('mongoose connection ok')
+  console.log('\x1b[36m%s\x1b[0m', 'mongoose connection ok')
   //compile the schema for mongoose
 });
 
@@ -66,20 +69,120 @@ var gateway = braintree.connect({
   privateKey: process.env.PRIVATEKEY
 });
 
+/////////////////////////////////////////////
+///////   HTTPS TRAFFIC REDIRECT    ////////
+///////////////////////////////////////////
+// Redirect all HTTP traffic to HTTPS
+ function ensureSecure(req, res, next){
+  if(req.headers["x-forwarded-proto"] === "https"){
+  // OK, continue
+  return next();
+};
+res.redirect('https://'+req.hostname+req.url);
+};
+// Handle environments
+if (app.get('env') == 'production') {
+  app.all('*', ensureSecure);
+}
+
+/////////////////////////////////////////////
+///////   LOCALHOST PORT SETTING    ////////
+///////////////////////////////////////////
+app.set('port', process.env.PORT || 5000);
+
+
+app.use(compression());
+app.use(logger('dev'));
+
+//This pumps up the payload to accomidate larger data sets
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: false }));
+//extend
+app.use(bodyParser.json({limit: '200mb'}));
+app.use(bodyParser.urlencoded({limit: '200mb', extended: true}));
+ 
+
+
+app.use(methodOverride('_method'));
+app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true }));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(function(req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
+app.use(express.static(path.join(__dirname, 'public')));
+
+//This is to allow for NPM updating of Javascipt packages.
+app.use('/scripts/quill', express.static(path.join(__dirname, 'node_modules/quill/dist')));
+
+
+///////////////////////////////////////////////s
+////     SET YOUR APP.JSON DETAILS        //// 
+/////////////////////////////////////////////
+var myModule = require('./app.json');
+var sitename = myModule.sitename
+var website = myModule.website
+var repo = myModule.repo
+app.locals.sitename = sitename
+app.locals.website = website
+app.locals.repo = repo
+var partialsDir = ['views/partials']
+
+///////////////////////////////
+////       ROUTING        //// 
+/////////////////////////////
+
+/*
+///////////////////////////////////////////////
+////       FRATERNATE NPM MODULE          //// 
+/////////////////////////////////////////////
+var fraternate = require("fraternate");
+//Append the partial directory inside the NPM module.
+partialsDir.push('./node_modules/fraternate/views/partials')
+app.use('/', fraternate);
+*/
+///////////////////////////////////////////
+////       WRASSE NPM MODULE          //// 
+/////////////////////////////////////////
+var cleanerwrasse = require("cleaner-wrasse");
+//Append the partial directory inside the NPM module.
+partialsDir.push('./node_modules/cleaner-wrasse/views/partials')
+app.use('/', cleanerwrasse);
+
+ 
+ 
+
 /////////////////////////////////////////
 ///////   HANDLEBARS HELPERS    ////////
 ///////////////////////////////////////
 var hbs = exphbs.create({
-  defaultLayout: 'main',
+  defaultLayout: __dirname+'/views/layouts/main',
+  partialsDir:partialsDir,
   helpers: {
-    ifeq: function(a, b, options) {
-      if (a === b) {
-        return options.fn(this);
-      }
-      return options.inverse(this);
-    },
+    ifEquals: function(arg1, arg2, options) {
+    return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+},
+    getNullsasblank :function(val) {
+    if(val === undefined ||val =='undefined') {
+        return "null";
+    }
+    return val;
+},
+debug: function(optionalValue) {
+  console.log("Current Context");
+  console.log("====================");
+  console.log(this);
+
+  if (optionalValue) {
+    console.log("Value");
+    console.log("====================");
+    console.log(optionalValue);
+  }
+},
     toJSON : function(object) {
-      return JSON.stringify(object);
+      return JSON.stringify(object, null, 2);
     },
     partial: function (name) {
       return name;
@@ -103,7 +206,8 @@ var hbs = exphbs.create({
             return str.substring(0,400) + '...';
           return str;
         }
-      },      'dots' : function(str) {
+      },  
+      'dots' : function(str) {
         if (str) {
           if (str.length > 150)
             return str.substring(0,150) + '...';
@@ -119,93 +223,9 @@ var hbs = exphbs.create({
       }
     }
   });
-
-/////////////////////////////////////////////
-///////   HTTPS TRAFFIC REDIRECT    ////////
-///////////////////////////////////////////
- // Redirect all HTTP traffic to HTTPS
- function ensureSecure(req, res, next){
-  if(req.headers["x-forwarded-proto"] === "https"){
-  // OK, continue
-  return next();
-};
-res.redirect('https://'+req.hostname+req.url);
-};
-// Handle environments
-if (app.get('env') == 'production') {
-  app.all('*', ensureSecure);
-}
-
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-
-
-
-/////////////////////////////////////////////
-///////   LOCALHOST PORT SETTING    ////////
-///////////////////////////////////////////
-app.set('port', process.env.PORT || 4000);
-
-
-//////////////////////////////////////////
-///////   GENERAL APP SETTINGS   ////////
-////////////////////////////////////////
-app.use(compression());
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(expressValidator());
-app.use(methodOverride('_method'));
-app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true }));
-app.use(flash());
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(function(req, res, next) {
-  res.locals.user = req.user;
-  next();
-});
-app.use(express.static(path.join(__dirname, 'public')));
-
-
-///////////////////////////////////////////////s
-////     SET YOUR APP.JSON DETAILS        //// 
-/////////////////////////////////////////////
-var myModule = require('./app.json');
-var sitename = myModule.sitename
-var website = myModule.website
-var repo = myModule.repo
-app.locals.sitename = sitename
-app.locals.website = website
-app.locals.repo = repo
-
-
-///////////////////////////////
-////       ROUTING        //// 
-/////////////////////////////
-
-
-//FRATERNATE
-//Set Handlebars view directory for plugins
-app.set('views', path.join(__dirname, 'plugins/fraternate/views/'));
-//Fratenate Routing
-var fraternateRouting = require('./plugins/fraternate/routes/routes');
-app.use('/', fraternateRouting);
-
-//WRASSE
-//Set Handlebars view directory for plugins
-app.set('views', path.join(__dirname, 'plugins/wrasse/views/'));
-//Wrasse Routing
-var wrasseRouting = require('./plugins/wrasse/routes/routes');
-app.use('/', wrasseRouting);
-
-//SEMINI
- //Set Handlebars view directory for plugins
-app.set('views', path.join(__dirname, 'plugins/semini/views/'));
-//Fratenate Routing
-var seminiRouting = require('./plugins/semini/routes/routes');
-app.use('/', seminiRouting);
-
-
+ 
 /////////////////////////////
 ////       500          //// 
 /////////////////////////// 
@@ -213,30 +233,37 @@ app.use(function(err, req, res, next) {
   // log the error, treat it like a 500 internal server error
   // maybe also log the request so you have more debug information
   //log.error(err, req);
-
   // during development you may want to print the errors to your console
-  //console.log(err.stack);
-req.flash('error', { msg: JSON.stringify(err)});
+  console.log(err.stack,"trigger 500 errors");
+  req.flash('error', { msg: JSON.stringify(err)});
   // send back a 500 with a generic message
   res.status(500);
   res.redirect('/500');
 });
 
 /////////////////////////////
-////       404          //// 
+////       500          //// 
 ///////////////////////////
 app.get('/500', function(req, res){
-  res.render('../../../views/500',{
+  console.log('Calling the 500 error')
+  res.render('500',{
+    siteName : sitename,
+    pagetitle : 'Error 500' + ' | '+sitename,
     layout:false
   });
-});
+}); 
 
 /////////////////////////////
 ////       404          //// 
 ///////////////////////////
 app.get('*', function(req, res){
-  res.render('../../../views/404',{layout:false});
+  res.render('404',{
+    siteName : sitename,
+    pagetitle : 'Error 404' + ' | '+sitename,
+    layout:false
+  });
 });
+
 
 // Production error handler
 if (app.get('env') === 'production') {
@@ -250,4 +277,7 @@ app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
 
+
 module.exports = app;
+
+

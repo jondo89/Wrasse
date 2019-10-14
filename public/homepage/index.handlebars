@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>{{siteName}}</title>
+  {{>css}}
+</head>
+<body id="page-top">
+ <script async defer src="https://buttons.github.io/buttons.js"></script>
+ {{>header}}
+ {{>javascript}}
+ <div id='toToppo' style="z-index: 1000;  position:relative"><a href="#" title="Scroll to top of page."><i class="fa fa-arrow-up fa-2x" aria-hidden="true"></i></a></div>
+ <style type="text/css">
+  #toToppo a {
+    padding: 5px 5px;
+    background: #000;
+    color: #fff;
+    position: fixed;
+    z-index: -15px;
+    bottom: 15px;
+    right: 15px;
+    display: none;
+    text-decoration: none;
+    border-radius: 5px
+  }
+</style>
+<script type="text/javascript">
+  $(document).ready(function(){
+                //Check to see if the window is top if not then display button
+                $(window).scroll(function(){
+                  if ($(this).scrollTop() > 100) {
+                    $('#toToppo a').fadeIn();
+                  } else {
+                    $('#toToppo a').fadeOut();
+                  }
+                });
+                //Click event to scroll to top
+                $('#toToppo a').click(function(){
+                  $('html, body').animate({scrollTop : 0},600);
+                  return false;
+                });
+              });
+            </script>
+            <header class="masthead">
+              <div class="container h-100">
+                <div class="row h-100">
+                  <div class="col-lg-7 my-auto">
+                    <div class="header-content mx-auto">
+                      <h1 class="display-1">Cleaner-wrasse</h1>
+                      <p class="lead">Nodejs Mongodb Express.js Handlebars.js. Issue tracking CRUD, designed to duplicate the Github issue tracking system.</p>
+                      <div class="btn-group btn-group-lg" role="group">
+                        <a href="/signup" role="button" class="btn btn-outline-light">Get Started</a>
+                        <a href="/users" role="button" class="btn btn-outline-light">View Users</a>
+                      </div><p></p>
+                      <code >npm install cleaner-wrasse</code>
+                      <div style="padding-top: 25px">
+                        <h4 class="media-heading">Don’t forget to star on GitHub!</h4>
+                        <p></p>
+                        <a class="github-button" href="https://github.com/jondo89/Wrasse" data-size="large" data-show-count="true" aria-label="Star Isithelo/{{siteName}} on GitHub">Star</a> 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-5 my-auto">
+                   {{> signuphomepage}}  
+                 </div>
+               </div>
+             </div>
+           </header>
+           <div class="container">
+             <section >
+              <h5 class="display-3" id="introduction">Introduction</h5>
+              <h3>Cleaner-wrasse is a issue tracking system , deisgned to duplicate the Github issue tracking system . It is built with nodejs , mongodb , expressjs and handlbars. </h3>
+              <p>This site is mounted on Github . i.e the complete live workign copy of this site can be duplicated from the github website and deployed to your localhost.</p>
+              <p>There are 2 active NPM modules , namely this npm pacakge <code>cleaner-wrasse</code> and <code>fraternate.</code></p>
+              <p>Fraternate handles the user managmenet and orginizational srcutre , and the cleaner-wrasse package the issue tracking seen on this page.</p>
+            </section>
+          </div>
+          <hr>
+          <div class="container">
+           <section >
+            <h5 class="display-3" id="introduction">Routing</h5>
+            <p>The following expressjs routing is applicable to the forms and static page deployments for the issue tracking forms.</p>
+            <p></p>
+            {{>crud}}
+          </div>
+          <p></p>
+        </section>
+      </div>
+      <hr>
+      <div class="container">
+       <section >
+        <h5 class="display-3">Create</h5>
+        <h3>Create a new issue. Ensure that the login process is followed, with instructions for users that are not logged in. WYSIWYG is managed with <a href="https://quilljs.com/" target="_blank">Quilljs</a> </h3>
+        <div class="col-12" style="text-align: center;">
+          <h5>GiHub Sample Image</h5>
+          <img src="/img/newgithub.jpg" class="img-fluid">
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <h5>Handlbars Deploy</h5>
+            <p>Deploy the template from handlebars, this is static HTML.</p>
+            {{>wrasseform}}
+          </div>
+          <div class="col-6">
+            <h5>Ajax Call</h5>    
+            <p>Deploy the form to an div with ID via AJAX call.</p>
+            <div class="card" style="text-align: center;">
+              <a href="" class="btn btn-outline-primary">Call with Ajax</a>
+            </div>
+          </div>
+          <div class="col-6">
+            <h5>Stand alone page</h5>
+            <p>Deploy the template from handlebars to a stand alone static route, this is static HTML.</p>
+            <div class="card">
+             <div class="card-body">
+              <h5>Demo</h5>
+              <div style="text-align: center;">
+                <a href="/issues/new" target="_blank" class="btn btn-success">New issue</a>
+                <small>Click this to view the proccess.</small> 
+              <div class="bd-example bg-light mt-4">
+               <p>
+                <code  >
+                 &#60;a href="/issues/new" class="btn btn-success"&#62;New issue&#60;/a&#62;
+               </code></p>
+             </div>                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <h5>Stand alone page with a specific parameter</h5>
+          <p>Deploy the template from handlebars to a stand alone static route with an appended <code>id</code> for linking with other issues or items. This is static HTML.</p>
+          <div class="card">
+           <div class="card-body">
+            <h5>Demo</h5>
+            <div style="text-align: center;">
+              <a href="/issues/new" target="_blank" class="btn btn-success">New issue</a>
+              <small>Click this to view the proccess.</small> 
+              <div class="bd-example bg-light mt-4">
+               <p>
+                <code  >
+                 &#60;a href="/issues/new" class="btn btn-success"&#62;New issue&#60;/a&#62;
+               </code></p>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+</div>
+<hr>
+<div class="container">
+ <section >
+  <h5 class="display-3">Read</h5>
+  <h3>View all issues , include a filter and search option. Allow for editing and addition of new issues here.</h3>
+  <div class="col-12" style="text-align: center;">
+    <h5>GiHub Sample Image</h5>
+    <img src="/img/githubtable.jpg" class="img-fluid">
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <h5>Handlbars Deploy All</h5>
+      <p>Deploy the template from handlebars, this is static HTML.</p>
+      {{>wrasseissuelist}}
+    </div>
+    <div class="col-6">
+      <h5>Handlbars Deploy by Id</h5>
+      <p>Deploy the template from handlebars, this is static HTML.</p>
+      {{>wrasseissuelist}}
+    </div>
+    <div class="col-6">
+      <h5>Ajax Call</h5>   <p> This is some text within a card body. </p>
+      <div style="text-align: center; " class="card">
+        <a href="" class="btn btn-outline-primary">Call with Ajax</a>
+      </div>
+    </div>
+    <div class="col-6">
+      <h5>Ajax Call by Id</h5>   <p> This is some text within a card body. </p>
+      <div style="text-align: center; " class="card">
+        <a href="" class="btn btn-outline-primary">Call with Ajax</a>
+      </div>
+    </div>
+  </section>
+</div>
+<hr>
+<div class="container">
+ <section >
+  <h5 class="display-3">Update.</h5>
+  <h3>Select an issue , update an exisiting by editing , close or repoen an issue.</h3>
+  <div class="col-12" style="text-align: center;">
+    <h5>GiHub Sample Image</h5>
+    <img src="/img/update.jpg" class="img-fluid">
+  </div>
+  <p>This functionality is included in the click through options above.</p>
+</section>
+</div>
+<hr>
+<div class="container">
+ <section >
+  <h5 class="display-3">Delete.</h5>
+  <h3>Select an issue and remove it if if belongs to you.</h3>
+  <div class="col-12" style="text-align: center;">
+    <h5>GiHub Sample Image</h5>
+    <img src="/img/delete.jpg" class="img-fluid">
+  </div>
+  <p>This functionality is included in the click through options above.</p>
+</section>
+</div>
+<hr>
+<div class="container">
+ <section >
+  <h5 class="display-3">The Mongoose Structure in Mongodb</h5>
+  <p>The <a href="https://mongoosejs.com/" target="_blank">Mongoosejs</a> schema used for creation of entries in Mongodb </p>
+  <pre>
+   var cleanerWrasse = mongoose.Schema({
+   'username' : String,    //Used to capture the username , Username could be an ID.
+   'userID' : String,      //Used to capture the username , Username would be an ID.
+   'image' : String,       //Used to capture the Base64 image of the user ; saved in this form to simplify queries. Optional
+   'name' : String,        //Username and name are not the same.
+   'title' : String,       //As per github , Issues require a title.
+   'description' : String, //The html issue input.
+   'linkedID' : String ,    //used for linking the issue to a specific location.
+   'issueType' : String ,   //Additional fine grain control.
+   'revision' :{ type: String, default: 'created' }, //Status tracking.
+   'created' : { type: Date, default: Date.now },    //Date and time
+   'active' : { type: String, default: "open" },     //Track if the issue is open or closed.
+ }, { collection: 'cleanerWrasse' });
+</pre>
+</section>
+</div>
+{{>footer}}
+</body>
+</html>

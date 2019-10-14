@@ -1,36 +1,61 @@
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-<div style="padding-top: 155px">
-	<footer>
-		<div class="row">
-			<div class="col-md-4" style="text-align: center;padding: 15px">
-				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<ins class="adsbygoogle"
-				style="display:block"
-				data-ad-client="ca-pub-4051238795083187"
-				data-ad-slot="6384881635"
-				data-ad-format="auto"></ins>
-				<script>
-					(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</div>
-			<div class="col-md-4" style="text-align: center;padding: 15px">
-				<a href="/">
-					<img src="/img/Logo square 300x300.png" style="height: 55px"> 
-				</a><p></p>
-				<a href="https://isithelo.com/" target="_blank">Isithelo Mining</a> | <a target="_blank" href="{{repo}}">{{sitename}} Repo</a>
-				<p>
-					<p></p> 
-				</p>
-				<!-- Place this tag where you want the button to render. -->
-			</div>
-			<div class="col-md-4" style="text-align: center;padding: 15px">
-				<h5>More details</h5>
-				<a href="/terms">Terms</a> | <a href="/privacy">Privacy</a> | <a href="/contact">Contact</a>
-				<p> 
-					<div>
-						<span>
-							 <a class="github-button" href="https://github.com/Isithelo/{{sitename}}" data-size="large" data-show-count="true" aria-label="Star Isithelo/{{sitename}} on GitHub">Star</a> 
-						</span>	
-					</div>
-				</footer>
-			</div>
+ <style type="text/css">
+  @media screen and (max-width: 600px) {
+    .mobilehide {
+      visibility: hidden;
+      clear: both;
+      float: left;
+      margin: 10px auto 5px 20px;
+      width: 28%;
+      display: none;
+    }
+  }
+</style>
+
+<hr>
+
+<div class="container" style="padding-top: 45px;padding-bottom: 75px">
+  <div class="row">
+   <div class="col-md-3 mobilehide" style="">
+
+    <h4>Introduction</h4>
+    <ul>
+      <li><a href="/introduction">Introduction</a></li>
+    </ul>    
+  </div>
+  <div class="col-md-3 mobilehide" style="">
+   <h4>Collaborate <small>Would you like to contribute?</small></h4>
+   <ul>
+    <li> <a href="/contact">Contact us</a></li>
+  </ul>
+  <h4>Site Details</h4>
+  <ul>
+    <li><a href="/users">Users</a></li>
+    <li><a href="/organizations">Organizations</a></li>
+  </ul>
+</div>
+<div class="col-md-3 mobilehide" style="">
+  {{#unless user}}
+  <h4>Sign up to get started!</h4>
+  <span><small><p><a href="/signup" class="btn btn-success">Sign up</a>  Sign up its free.</p></small></span>
+  {{/unless}}
+  <h4>Issues <small>List your issues with the interface.</small></h4>
+  <ul>
+    <li><a href="/issues/view">Issues</a></li>
+  </ul> 
+</div>
+<div class="col-md-3" style="">
+  <a href="/" style="font-size: 25px;text-decoration: none;color: black">
+    <h3><img src="/img/Logo square 300x300.png" style="height: 35px"> {{siteName}}</h3>
+    <p></p>
+  </a>   
+  <p>
+    An <a href="https://isithelo.com/" target="_blank"> Isithelo Technical Solutions </a> Production  
+    <p><p>
+      Built with <a target="_blank" href="https://github.com/Isithelo/Heavy-lifting">Heavy-lifting</a>           
+    </p>
+    <h4>More details</h4>
+    <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a> | <a href="/contact">Contact</a>
+  </div>
+</div>
+</div>
+
