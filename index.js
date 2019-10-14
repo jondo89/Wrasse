@@ -124,25 +124,18 @@ app.use('/scripts/quill', express.static(path.join(__dirname, 'node_modules/quil
 var myModule = require('./app.json');
 var sitename = myModule.sitename
 var website = myModule.website
+var description = myModule.description
 var repo = myModule.repo
 app.locals.sitename = sitename
 app.locals.website = website
 app.locals.repo = repo
+app.locals.description = description
 var partialsDir = ['views/partials']
 
 ///////////////////////////////
 ////       ROUTING        //// 
 /////////////////////////////
 
-/*
-///////////////////////////////////////////////
-////       FRATERNATE NPM MODULE          //// 
-/////////////////////////////////////////////
-var fraternate = require("fraternate");
-//Append the partial directory inside the NPM module.
-partialsDir.push('./node_modules/fraternate/views/partials')
-app.use('/', fraternate);
-*/
 ///////////////////////////////////////////
 ////       WRASSE NPM MODULE          //// 
 /////////////////////////////////////////
@@ -150,6 +143,16 @@ var cleanerwrasse = require("cleaner-wrasse");
 //Append the partial directory inside the NPM module.
 partialsDir.push('./node_modules/cleaner-wrasse/views/partials')
 app.use('/', cleanerwrasse);
+
+///////////////////////////////////////////////
+////       FRATERNATE NPM MODULE          //// 
+/////////////////////////////////////////////
+var fraternate = require("fraternate");
+//Append the partial directory inside the NPM module.
+partialsDir.push('./node_modules/fraternate/views/partials')
+app.use('/', fraternate);
+ 
+
 
  
  

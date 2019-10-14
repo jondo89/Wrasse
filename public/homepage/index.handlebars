@@ -90,145 +90,62 @@
         </section>
       </div>
       <hr>
-      <div class="container">
-       <section >
-        <h5 class="display-3">Create</h5>
-        <h3>Create a new issue. Ensure that the login process is followed, with instructions for users that are not logged in. WYSIWYG is managed with <a href="https://quilljs.com/" target="_blank">Quilljs</a> </h3>
-        <div class="col-12" style="text-align: center;">
-          <h5>GiHub Sample Image</h5>
-          <img src="/img/newgithub.jpg" class="img-fluid">
-        </div>
-        <div class="row">
-          <div class="col-6">
-            <h5>Handlbars Deploy</h5>
-            <p>Deploy the template from handlebars, this is static HTML.</p>
-            {{>wrasseform}}
-          </div>
-          <div class="col-6">
-            <h5>Ajax Call</h5>    
-            <p>Deploy the form to an div with ID via AJAX call.</p>
-            <div class="card" style="text-align: center;">
-              <a href="" class="btn btn-outline-primary">Call with Ajax</a>
-            </div>
-          </div>
-          <div class="col-6">
-            <h5>Stand alone page</h5>
-            <p>Deploy the template from handlebars to a stand alone static route, this is static HTML.</p>
-            <div class="card">
-             <div class="card-body">
-              <h5>Demo</h5>
-              <div style="text-align: center;">
-                <a href="/issues/new" target="_blank" class="btn btn-success">New issue</a>
-                <small>Click this to view the proccess.</small> 
-              <div class="bd-example bg-light mt-4">
-               <p>
-                <code  >
-                 &#60;a href="/issues/new" class="btn btn-success"&#62;New issue&#60;/a&#62;
-               </code></p>
-             </div>                
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-6">
-          <h5>Stand alone page with a specific parameter</h5>
-          <p>Deploy the template from handlebars to a stand alone static route with an appended <code>id</code> for linking with other issues or items. This is static HTML.</p>
-          <div class="card">
-           <div class="card-body">
-            <h5>Demo</h5>
-            <div style="text-align: center;">
-              <a href="/issues/new" target="_blank" class="btn btn-success">New issue</a>
-              <small>Click this to view the proccess.</small> 
-              <div class="bd-example bg-light mt-4">
-               <p>
-                <code  >
-                 &#60;a href="/issues/new" class="btn btn-success"&#62;New issue&#60;/a&#62;
-               </code></p>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
- </section>
-</div>
-<hr>
+
+
+
 <div class="container">
- <section >
-  <h5 class="display-3">Read</h5>
-  <h3>View all issues , include a filter and search option. Allow for editing and addition of new issues here.</h3>
-  <div class="col-12" style="text-align: center;">
-    <h5>GiHub Sample Image</h5>
-    <img src="/img/githubtable.jpg" class="img-fluid">
+  <section>
+
+
+<div class="row">
+  <div class="col-3">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Create</a>
+      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Read</a>
+      <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Update</a>
+      <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Delete</a>
+    </div>
   </div>
-  <div class="row">
-    <div class="col-6">
-      <h5>Handlbars Deploy All</h5>
-      <p>Deploy the template from handlebars, this is static HTML.</p>
-      {{>wrasseissuelist}}
+  <div class="col-9">
+    <div class="tab-content" id="v-pills-tabContent">
+      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">{{>create}}</div>
+      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">{{>read}}</div>
+      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">{{>update}}</div>
+      <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">{{>delete}}</div>
     </div>
-    <div class="col-6">
-      <h5>Handlbars Deploy by Id</h5>
-      <p>Deploy the template from handlebars, this is static HTML.</p>
-      {{>wrasseissuelist}}
-    </div>
-    <div class="col-6">
-      <h5>Ajax Call</h5>   <p> This is some text within a card body. </p>
-      <div style="text-align: center; " class="card">
-        <a href="" class="btn btn-outline-primary">Call with Ajax</a>
-      </div>
-    </div>
-    <div class="col-6">
-      <h5>Ajax Call by Id</h5>   <p> This is some text within a card body. </p>
-      <div style="text-align: center; " class="card">
-        <a href="" class="btn btn-outline-primary">Call with Ajax</a>
-      </div>
-    </div>
+  </div>
+</div>
+
+
   </section>
 </div>
+
 <hr>
 <div class="container">
  <section >
-  <h5 class="display-3">Update.</h5>
-  <h3>Select an issue , update an exisiting by editing , close or repoen an issue.</h3>
-  <div class="col-12" style="text-align: center;">
-    <h5>GiHub Sample Image</h5>
-    <img src="/img/update.jpg" class="img-fluid">
-  </div>
-  <p>This functionality is included in the click through options above.</p>
+ {{>crud}}
 </section>
 </div>
-<hr>
-<div class="container">
- <section >
-  <h5 class="display-3">Delete.</h5>
-  <h3>Select an issue and remove it if if belongs to you.</h3>
-  <div class="col-12" style="text-align: center;">
-    <h5>GiHub Sample Image</h5>
-    <img src="/img/delete.jpg" class="img-fluid">
-  </div>
-  <p>This functionality is included in the click through options above.</p>
-</section>
-</div>
+
 <hr>
 <div class="container">
  <section >
   <h5 class="display-3">The Mongoose Structure in Mongodb</h5>
   <p>The <a href="https://mongoosejs.com/" target="_blank">Mongoosejs</a> schema used for creation of entries in Mongodb </p>
   <pre>
-   var cleanerWrasse = mongoose.Schema({
-   'username' : String,    //Used to capture the username , Username could be an ID.
-   'userID' : String,      //Used to capture the username , Username would be an ID.
-   'image' : String,       //Used to capture the Base64 image of the user ; saved in this form to simplify queries. Optional
-   'name' : String,        //Username and name are not the same.
-   'title' : String,       //As per github , Issues require a title.
-   'description' : String, //The html issue input.
-   'linkedID' : String ,    //used for linking the issue to a specific location.
-   'issueType' : String ,   //Additional fine grain control.
-   'revision' :{ type: String, default: 'created' }, //Status tracking.
-   'created' : { type: Date, default: Date.now },    //Date and time
-   'active' : { type: String, default: "open" },     //Track if the issue is open or closed.
- }, { collection: 'cleanerWrasse' });
+ var wrasse = mongoose.Schema({
+                'username' : String,    //Used to capture the username , Username could be an ID.
+                'userID' : String,      //Used to capture the username , Username would be an ID.
+                'image' : String,       //Used to capture the Base64 image of the user ; saved in this form to simplify queries. Optional
+                'name' : String,        //Username and name are not the same.
+                'title' : String,       //As per github , Issues require a title.
+                'description' : String, //The html issue input.
+                'parentid' : String ,    //used for linking the issue to a specific location.
+                'issueType' : String ,   //Additional fine grain control.
+                'revision' :{ type: String, default: 'created' }, //Status tracking.
+                'created' : { type: Date, default: Date.now },    //Date and time
+                'active' : { type: String, default: "open" },     //Track if the issue is open or closed.
+              }, { collection: 'issues' });
 </pre>
 </section>
 </div>

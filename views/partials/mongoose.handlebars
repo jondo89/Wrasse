@@ -1,0 +1,17 @@
+ <h5 class="display-3">The Mongoose Structure in Mongodb</h5>
+  <p>The <a href="https://mongoosejs.com/" target="_blank">Mongoosejs</a> schema used for creation of entries in Mongodb </p>
+  <pre>
+   var cleanerWrasse = mongoose.Schema({
+   'username' : String,    //Used to capture the username , Username could be an ID.
+   'userID' : String,      //Used to capture the username , Username would be an ID.
+   'image' : String,       //Used to capture the Base64 image of the user ; saved in this form to simplify queries. Optional
+   'name' : String,        //Username and name are not the same.
+   'title' : String,       //As per github , Issues require a title.
+   'description' : String, //The html issue input.
+   'linkedID' : String ,    //used for linking the issue to a specific location.
+   'issueType' : String ,   //Additional fine grain control.
+   'revision' :{ type: String, default: 'created' }, //Status tracking.
+   'created' : { type: Date, default: Date.now },    //Date and time
+   'active' : { type: String, default: "open" },     //Track if the issue is open or closed.
+ }, { collection: 'cleanerWrasse' });
+</pre>
