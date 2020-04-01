@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "plugins\\wrasse\\routes"
+		},
+		{
+			"path": "node_modules\\cleaner-wrasse\\controllers"
+		},
+		{
+			"path": "node_modules\\cleaner-wrasse"
+		}
+	],
+	"settings": {}
+}
