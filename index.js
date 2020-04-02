@@ -8,6 +8,7 @@ var flash = require('express-flash');
 var bodyParser = require('body-parser');
  
 var dotenv = require('dotenv');
+ 
 var exphbs = require('express-handlebars');
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -42,6 +43,20 @@ mongoose.set('useUnifiedTopology', true);
 ////////////////////////////////////////////////////
 ///////   HEROKU VS LOCALHOST .ENV SWAP    ////////
 //////////////////////////////////////////////////
+
+const result = dotenv.config()
+
+if (result.error) {
+  if (process.env.NODE_ENV === "production" && result.error.code === "ENOENT") {
+    console.info("expected this error because we are in production without a .env file")
+  } else {
+    throw result.error
+  }
+}
+
+
+
+
 if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
 } else {
