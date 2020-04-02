@@ -22,8 +22,8 @@ header.masthead {
   padding-top: 150px;
   padding-bottom: 100px;
   color: #ffffff;
-  background: url(../img/bg-pattern.png), #000000;
-  background: url(../img/bg-pattern.png), linear-gradient(to left, #000000, #000000);
+  background: url(../img/background.gif), #000000;
+  background: url(../img/background.gif), linear-gradient(to left, #000000, #000000);
 }
 
 header.masthead .header-content {
