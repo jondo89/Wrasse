@@ -6,7 +6,7 @@ var methodOverride = require('method-override');
 var session = require('express-session');
 var flash = require('express-flash');
 var bodyParser = require('body-parser');
- 
+var expressValidator = require('express-validator');
 var dotenv = require('dotenv');
 var exphbs = require('express-handlebars');
 var mongoose = require('mongoose');
@@ -17,12 +17,10 @@ var helpers = require('handlebars-helpers')(['string']);
 var Handlebars = require("handlebars");
 var MomentHandler = require("handlebars.moment");
 MomentHandler.registerHelpers(Handlebars);
-
-
-// Load environment variables from .env file
  
+
 dotenv.config()
- 
+
 //Primary app variable.
 var app = express();
 
@@ -36,38 +34,25 @@ try {
   console.log('Favicon not found in the required directory.')
 }
 
+//You can also configure useCreateIndex by passing it through the connection options.
+mongoose.set('useCreateIndex', true);
+//To opt in to using the new topology engine, use the below line:
+mongoose.set('useUnifiedTopology', true);
+
 ////////////////////////////////////////////////////
 ///////   HEROKU VS LOCALHOST .ENV SWAP    ////////
 //////////////////////////////////////////////////
 if (process.env.MONGODB_URI) {
-  mongoose
-  .connect(process.env.MONGO_URI, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-  }).then(
-  () => console.log('\x1b[36m%s\x1b[0m', 'mongoose connection ok')
-  )
-.catch(err => {
-console.log('DB Connection Error:'+ err.message);
-})
+  mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
 } else {
-  mongoose
-  .connect('mongodb://localhost:27017/test', {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true,
-  })
-  .then(() => console.log('\x1b[36m%s\x1b[0m', 'mongoose connection ok'))
-.catch(err => {
-console.log('DB Connection Error:'+ err.message);
-})
+  mongoose.connect(process.env.MONGODB, {useNewUrlParser: true});
 }
 
 //Mongo error trap.
 mongoose.connection.on('error', function() {
   console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
   process.exit(1);
-}); 
+});
 
 
  
