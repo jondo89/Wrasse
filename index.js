@@ -40,25 +40,37 @@ try {
 ///////   HEROKU VS LOCALHOST .ENV SWAP    ////////
 //////////////////////////////////////////////////
 if (process.env.MONGODB_URI) {
-  mongoose.connect(process.env.MONGODB_URI);
+  mongoose
+  .connect(process.env.MONGO_URI, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  }).then(
+  () => console.log('\x1b[36m%s\x1b[0m', 'mongoose connection ok')
+  )
+.catch(err => {
+console.log('DB Connection Error:'+ err.message);
+})
 } else {
-  mongoose.connect(process.env.MONGODB);
+  mongoose
+  .connect('mongodb://localhost:27017/test', {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+  })
+  .then(() => console.log('\x1b[36m%s\x1b[0m', 'mongoose connection ok'))
+.catch(err => {
+console.log('DB Connection Error:'+ err.message);
+})
 }
 
 //Mongo error trap.
 mongoose.connection.on('error', function() {
   console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
   process.exit(1);
-});
+}); 
 
-//Define the mongo enviroment
-var db = mongoose.connection;
-db.once('open', function() {
-  // we're connected!
-  console.log('\x1b[36m%s\x1b[0m', 'mongoose connection ok')
-  //compile the schema for mongoose
-});
 
+ 
 ////////////////////////////////////////////
 ///////   BRAINTREE INTEGRATION    ////////
 //////////////////////////////////////////
