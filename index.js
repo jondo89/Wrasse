@@ -6,9 +6,7 @@ var methodOverride = require('method-override');
 var session = require('express-session');
 var flash = require('express-flash');
 var bodyParser = require('body-parser');
- 
-
- 
+ const { check, validationResult } = require('express-validator');
 var exphbs = require('express-handlebars');
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -42,9 +40,7 @@ mongoose.set('useUnifiedTopology', true);
 ///////   HEROKU VS LOCALHOST .ENV SWAP    ////////
 //////////////////////////////////////////////////
 
-console.log(process.env)
  
-
  
 
 
@@ -52,10 +48,9 @@ if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
 } else {
 
-  var dotenv = require('dotenv');
-dotenv.config()
-
-  mongoose.connect(process.env.MONGODB, {useNewUrlParser: true});
+    var dotenv = require('dotenv');
+    dotenv.config()
+    mongoose.connect(process.env.MONGODB, {useNewUrlParser: true});
 }
 
 //Mongo error trap.
