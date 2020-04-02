@@ -7,7 +7,7 @@ var session = require('express-session');
 var flash = require('express-flash');
 var bodyParser = require('body-parser');
  
-var dotenv = require('dotenv');
+
  
 var exphbs = require('express-handlebars');
 var mongoose = require('mongoose');
@@ -19,8 +19,6 @@ var Handlebars = require("handlebars");
 var MomentHandler = require("handlebars.moment");
 MomentHandler.registerHelpers(Handlebars);
  
-
-dotenv.config()
 
 //Primary app variable.
 var app = express();
@@ -53,6 +51,10 @@ console.log(process.env)
 if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
 } else {
+
+  var dotenv = require('dotenv');
+dotenv.config()
+
   mongoose.connect(process.env.MONGODB, {useNewUrlParser: true});
 }
 
