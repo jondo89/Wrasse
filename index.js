@@ -6,7 +6,7 @@ var methodOverride = require('method-override');
 var session = require('express-session');
 var flash = require('express-flash');
 var bodyParser = require('body-parser');
-var expressValidator = require('express-validator');
+ 
 var dotenv = require('dotenv');
 var exphbs = require('express-handlebars');
 var mongoose = require('mongoose');
