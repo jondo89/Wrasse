@@ -111,7 +111,9 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(function(req, res, next) {
-  res.locals.user = req.user;
+  if(req.user){
+    res.locals.user = JSON.parse(JSON.stringify(req.user));
+  }
   next();
 });
 app.use(express.static(path.join(__dirname, 'public')));

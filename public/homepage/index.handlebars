@@ -44,6 +44,9 @@
                 });
               });
             </script>
+
+            {{#unless user}}
+
             <header class="masthead">
               <div class="container h-100">
                 <div class="row h-100">
@@ -69,6 +72,8 @@
                </div>
              </div>
            </header>
+           {{/unless}}
+ 
            <div class="container">
              <section >
               <h5 class="display-3" id="introduction">Introduction</h5>
@@ -90,63 +95,63 @@
         </section>
       </div>
       <hr>
-
-
-
-<div class="container">
-  <section>
-<h1 class="display-1">Functionality</h1>
-<br>
-<br>
-
-<div class="row">
-  <div class="col-3">
-    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-      <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Create</a>
-      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Read</a>
-      <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Update</a>
-      <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Delete</a>
-    </div>
-  </div>
-  <div class="col-9">
-    <div class="tab-content" id="v-pills-tabContent">
-      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">{{>create}}</div>
-      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">{{>read}}</div>
-      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">{{>update}}</div>
-      <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">{{>delete}}</div>
-    </div>
-  </div>
-</div>
-
-
-  </section>
-</div>
-
  
  
 
-<hr>
-<div class="container">
- <section >
-  <h5 class="display-3">The Mongoose Structure in Mongodb</h5>
-  <p>The <a href="https://mongoosejs.com/" target="_blank">Mongoosejs</a> schema used for creation of entries in Mongodb </p>
-  <pre>
- var wrasse = mongoose.Schema({
-                'username' : String,    //Used to capture the username , Username could be an ID.
-                'userID' : String,      //Used to capture the username , Username would be an ID.
-                'image' : String,       //Used to capture the Base64 image of the user ; saved in this form to simplify queries. Optional
-                'name' : String,        //Username and name are not the same.
-                'title' : String,       //As per github , Issues require a title.
-                'description' : String, //The html issue input.
-                'parentid' : String ,    //used for linking the issue to a specific location.
-                'issueType' : String ,   //Additional fine grain control.
-                'revision' :{ type: String, default: 'created' }, //Status tracking.
-                'created' : { type: Date, default: Date.now },    //Date and time
-                'active' : { type: String, default: "open" },     //Track if the issue is open or closed.
-              }, { collection: 'issues' });
-</pre>
-</section>
-</div>
-{{>footer}}
+      <div class="container">
+        <section>
+          <h1 class="display-1">Functionality</h1>
+          <br>
+          <br>
+
+          <div class="row">
+            <div class="col-3">
+              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Create</a>
+                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Read</a>
+                <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Update</a>
+                <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Delete</a>
+              </div>
+            </div>
+            <div class="col-9">
+              <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">{{>create}}</div>
+                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">{{>read}}</div>
+                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">{{>update}}</div>
+                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">{{>delete}}</div>
+              </div>
+            </div>
+          </div>
+
+
+        </section>
+      </div>
+
+      
+      
+
+      <hr>
+      <div class="container">
+       <section >
+        <h5 class="display-3">The Mongoose Structure in Mongodb</h5>
+        <p>The <a href="https://mongoosejs.com/" target="_blank">Mongoosejs</a> schema used for creation of entries in Mongodb </p>
+        <pre>
+         var wrasse = mongoose.Schema({
+         'username' : String,    //Used to capture the username , Username could be an ID.
+         'userID' : String,      //Used to capture the username , Username would be an ID.
+         'image' : String,       //Used to capture the Base64 image of the user ; saved in this form to simplify queries. Optional
+         'name' : String,        //Username and name are not the same.
+         'title' : String,       //As per github , Issues require a title.
+         'description' : String, //The html issue input.
+         'parentid' : String ,    //used for linking the issue to a specific location.
+         'issueType' : String ,   //Additional fine grain control.
+         'revision' :{ type: String, default: 'created' }, //Status tracking.
+         'created' : { type: Date, default: Date.now },    //Date and time
+         'active' : { type: String, default: "open" },     //Track if the issue is open or closed.
+       }, { collection: 'issues' });
+     </pre>
+   </section>
+ </div>
+ {{>footer}}
 </body>
 </html>
