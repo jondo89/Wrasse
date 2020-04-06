@@ -72,33 +72,27 @@
                </div>
              </div>
            </header>
+           {{else}}
+           
            {{/unless}}
  
-           <div class="container">
+       {{#if user}}
+ <div class="container mt-2">
+  <div class="row">
+    <div class="col-md-3">
+      {{>rightpanel}}
+
+    </div>
+    <div class="col-md-9">
+              <div class="container">
              <section >
-              <h5 class="display-3" id="introduction">Introduction</h5>
+              <h5 class="display-1" id="introduction">Introduction</h5>
               <h3>Cleaner wrasse is an issue tracking system, designed to duplicate the Github issue tracking system. It is built with nodejs , mongodb , expressjs and handlebars.js. </h3>
               <p>This site is mounted on Github . i.e. the complete live working copy of this site can be duplicated from the GitHub website and deployed to your localhost.</p>
               <p>There are 2 active NPM modules , namely this npm pacakge <code>cleaner-wrasse</code> and <code>fraternate.</code></p>
               <p>Fraternate handles the user management and organizational structure, and the cleaner-wrasse package the issue tracking seen on this page.</p>
             </section>
-          </div>
-          <hr>
-          <div class="container">
-           <section >
-            <h5 class="display-3" id="introduction">Routing</h5>
-            <p>The following express.js routing is applicable to the forms and static page deployments for the issue tracking forms.</p>
-            <p></p>
-            {{>crud}}
-          </div>
-          <p></p>
-        </section>
-      </div>
-      <hr>
- 
- 
-
-      <div class="container">
+       
         <section>
           <h1 class="display-1">Functionality</h1>
           <br>
@@ -127,13 +121,53 @@
         </section>
       </div>
 
-      
-      
 
+
+    </div>
+
+  </div>
+   
+ </div>
+       {{else}}
+        <div class="container mt-2">
+ 
+              <div class="container">
+             <section >
+              <h5 class="display-1" id="introduction">Introduction</h5>
+              <h3>Cleaner wrasse is an issue tracking system, designed to duplicate the Github issue tracking system. It is built with nodejs , mongodb , expressjs and handlebars.js. </h3>
+              <p>This site is mounted on Github . i.e. the complete live working copy of this site can be duplicated from the GitHub website and deployed to your localhost.</p>
+              <p>There are 2 active NPM modules , namely this npm pacakge <code>cleaner-wrasse</code> and <code>fraternate.</code></p>
+              <p>Fraternate handles the user management and organizational structure, and the cleaner-wrasse package the issue tracking seen on this page.</p>
+            </section>
+          </div>
+
+    </div>
+
+  
+       {{/if}}
+
+
+          <hr>
+          <div class="container">
+           <section >
+            <h5 class="display-1" id="introduction">Routing</h5>
+            <p>The following express.js routing is applicable to the forms and static page deployments for the issue tracking forms.</p>
+            <p></p>
+            {{>crud}}
+          </div>
+          <p></p>
+        </section>
+      </div>
       <hr>
+ 
+
+
+      
+      
+ 
       <div class="container">
        <section >
-        <h5 class="display-3">The Mongoose Structure in Mongodb</h5>
+        <h5 class="display-1">The Mongoose Structure in Mongodb</h5>
         <p>The <a href="https://mongoosejs.com/" target="_blank">Mongoosejs</a> schema used for creation of entries in Mongodb </p>
         <pre>
          var wrasse = mongoose.Schema({

@@ -12,11 +12,14 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var recaptcha = require('express-recaptcha');
 var braintree = require("braintree");
+
 var helpers = require('handlebars-helpers')(['string']);
 var Handlebars = require("handlebars");
 var MomentHandler = require("handlebars.moment");
 MomentHandler.registerHelpers(Handlebars);
  
+
+
 
 //Primary app variable.
 var app = express();
@@ -110,16 +113,20 @@ app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitia
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+ 
+
 app.use(function(req, res, next) {
   if(req.user){
     res.locals.user = JSON.parse(JSON.stringify(req.user));
   }
   next();
 });
-app.use(express.static(path.join(__dirname, 'public')));
 
-//This is to allow for NPM updating of Javascipt packages.
-app.use('/scripts/quill', express.static(path.join(__dirname, 'node_modules/quill/dist')));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'node_modules/jquery/')));//spicific directory for jquery
+
+
+
 
 
 ///////////////////////////////////////////////s
