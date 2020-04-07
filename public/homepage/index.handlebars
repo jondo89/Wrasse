@@ -77,13 +77,6 @@
            {{/unless}}
  
        {{#if user}}
- <div class="container mt-2">
-  <div class="row">
-    <div class="col-md-3">
-      {{>rightpanel}}
-
-    </div>
-    <div class="col-md-9">
               <div class="container">
              <section >
               <h5 class="display-1" id="introduction">Introduction</h5>
@@ -92,7 +85,10 @@
               <p>There are 2 active NPM modules , namely this npm pacakge <code>cleaner-wrasse</code> and <code>fraternate.</code></p>
               <p>Fraternate handles the user management and organizational structure, and the cleaner-wrasse package the issue tracking seen on this page.</p>
             </section>
-       
+          </div>
+       <hr>
+
+        <div class="container mt-2">
         <section>
           <h1 class="display-1">Functionality</h1>
           <br>
@@ -123,9 +119,7 @@
 
 
 
-    </div>
-
-  </div>
+  
    
  </div>
        {{else}}
