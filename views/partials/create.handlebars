@@ -1,58 +1,70 @@
     <h5 class="display-3">Create</h5>
-        <h3>Create a new issue. Ensure that the login process is followed, with instructions for users that are not logged in. WYSIWYG is managed with <a href="https://quilljs.com/" target="_blank">Quilljs</a> </h3>
-        <div class="col-12" style="text-align: center;">
-          <h5>GiHub Sample Image</h5>
-          <img src="/img/newgithub.jpg" class="img-fluid">
+    <p>Create a new issue. Ensure that the login process is followed, with instructions for users that are not logged in. WYSIWYG is managed with <a href="https://quilljs.com/" target="_blank">Quilljs</a> </p>
+  <br>
+    <div class="row">
+      <div class="col-6">
+        <h5>Handlbars Deploy</h5>
+        <p>Deploy the template from handlebars, this is static HTML.</p>
+        {{>wrasseform}}
+      </div>
+      <div class="col-6">
+        <h5>Ajax Call</h5>    
+        <p>Deploy the form to an div with ID via AJAX call.</p>
+        <br>
+        <div id="ajaxFormLocation">
+          <button href="" class="btn btn-outline-primary" onclick="getForm('ajaxFormLocation')">Call with Ajax</button>
         </div>
-        <div class="row">
-          <div class="col-6">
-            <h5>Handlbars Deploy</h5>
-            <p>Deploy the template from handlebars, this is static HTML.</p>
-            {{>wrasseform}}
-          </div>
-          <div class="col-6">
-            <h5>Ajax Call</h5>    
-            <p>Deploy the form to an div with ID via AJAX call.</p>
-            <div class="card" style="text-align: center;">
-              <a href="" class="btn btn-outline-primary">Call with Ajax</a>
-            </div>
-          </div>
-          <div class="col-6">
-            <h5>Stand alone page</h5>
-            <p>Deploy the template from handlebars to a stand alone static route, this is static HTML.</p>
-            <div class="card">
-             <div class="card-body">
-              <h5>Demo</h5>
-              <div style="text-align: center;">
-                <a href="/issues/new" target="_blank" class="btn btn-success">New issue</a>
-                <small>Click this to view the proccess.</small> 
-              <div class="bd-example bg-light mt-4">
-               <p>
-                <code  >
-                 &#60;a href="/issues/new" class="btn btn-success"&#62;New issue&#60;/a&#62;
-               </code></p>
-             </div>                
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-6">
-          <h5>Stand alone page with a specific parameter</h5>
-          <p>Deploy the template from handlebars to a stand alone static route with an appended <code>id</code> for linking with other issues or items. This is static HTML.</p>
-          <div class="card">
-           <div class="card-body">
-            <h5>Demo</h5>
-            <div style="text-align: center;">
-              <a href="/issues/newgroup" target="_blank" class="btn btn-success">New issue</a>
-              <small>Click this to view the proccess.</small> 
-              <div class="bd-example bg-light mt-4">
-               <p>
-                <code  >
-                 &#60;a href="/issues/new" class="btn btn-success"&#62;New issue&#60;/a&#62;
-               </code></p>
-             </div>
-           </div>
+
+      </div>
+      <div class="col-6">
+        <h5>Stand alone page</h5>
+        <p>Deploy the template from handlebars to a stand alone static route, this is static HTML.</p>
+        <div class="card">
+         <div class="card-body">
+          <h5>Demo</h5>
+          <div style="text-align: center;">
+            <a href="/issues/new" target="_blank" class="btn btn-success">New issue</a>
+            <small>Click this to view the proccess.</small> 
+            <div class="bd-example bg-light mt-4">
+             <p>
+              <code  >
+               &#60;a href="/issues/new" class="btn btn-success"&#62;New issue&#60;/a&#62;
+             </code></p>
+           </div>                
          </div>
        </div>
      </div>
    </div>
+   <div class="col-6">
+    <h5>Stand alone page with a specific parameter</h5>
+    <p>Deploy the template from handlebars to a stand alone static route with an appended <code>id</code> for linking with other issues or items. This is static HTML.</p>
+    <div class="card">
+     <div class="card-body">
+      <h5>Demo</h5>
+      <div style="text-align: center;">
+        <a href="/issues/newgroup" target="_blank" class="btn btn-success">New issue</a>
+        <small>Click this to view the proccess.</small> 
+        <div class="bd-example bg-light mt-4">
+         <p>
+          <code  >
+           &#60;a href="/issues/new" class="btn btn-success"&#62;New issue&#60;/a&#62;
+         </code></p>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+<script type="text/javascript">
+ function getForm(location) {
+   jQuery.ajax({
+     'async': true,
+     'global': false,
+     'url': '/issues/getform',
+     'success': function (dataSchemaObject) {
+       jQuery('#'+location).html(dataSchemaObject)
+     }
+   });
+ }
+</script>
