@@ -44,16 +44,22 @@
                 });
               });
             </script>
-            {{#unless user}}
+           
             <header class="masthead">
               <div class="container h-100">
                 <div class="row h-100">
                   <div class="col-lg-7 my-auto">
                     <div class="header-content mx-auto">
                       <h1 class="display-1">Cleaner-wrasse</h1>
-                      <p class="lead">Nodejs Mongodb Express.js Handlebars.js. Cleaner-Wrasse is an issue tracking CRUD designed to duplicate the Github issue tracking system.</p>
+                      <p class="lead">Node.js Mongodb Express.js Handlebars.js. Cleaner-Wrasse is an issue tracking CRUD designed to duplicate the Github issue tracking system.</p>
                       <div class="btn-group btn-group-lg" role="group">
-                        <a href="/signup" role="button" class="btn btn-outline-light">Get Started</a>
+                        {{#unless user}} 
+  <a href="/signup" role="button" class="btn btn-outline-light">Get Started</a>
+
+  {{else}}
+  <a href="#Functionality" role="button" class="btn btn-outline-light">Get Started</a>
+{{/unless}}
+                        
                         <a href="/users" role="button" class="btn btn-outline-light">View Users</a>
                       </div><p></p>
                       <code >npm install cleaner-wrasse</code>
@@ -65,65 +71,110 @@
                     </div>
                   </div>
                   <div class="col-lg-5 my-auto">
-                   {{> signuphomepage}}  
+
+{{#unless user}} 
+  {{> signuphomepage}}  
+{{/unless}}
+
+                  
                  </div>
                </div>
              </div>
            </header>
-           {{else}}
-           {{/unless}}
-           <div class="container">
-             <section >
-              <h5 class="display-1" id="introduction">Introduction</h5>
-              <h3>Cleaner wrasse is an issue tracking system, designed to duplicate the Github issue tracking system. It is built with nodejs , mongodb , expressjs and handlebars.js. </h3>
-              <p>This site is mounted on Github . i.e. the complete live working copy of this site can be duplicated from the GitHub website and deployed to your localhost.</p>
-              <p>There are 2 active NPM modules , namely this npm pacakge <code>cleaner-wrasse</code> and <code>fraternate.</code></p>
-              <p>Fraternate handles the user management and organizational structure, and the cleaner-wrasse package the issue tracking seen on this page.</p>
-            </section>
-          </div>
-          <hr>
-          <div class="container mt-2">
-                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">{{>create}}</div>
-                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">{{>read}}</div>
-                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">{{>update}}</div>
-                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">{{>delete}}</div>
-          </div>
+        
+ 
+<div class="container">
+<section>
+    <h5 class="display-3">The Framework.</h5>
+ 
+               <h3>Nodejs Mongodb Express.js Handlebars.js. Cleaner-Wrasse is an issue tracking CRUD designed to duplicate the Github issue tracking system.</h3>
+              <br>
+                  <h3>Designed and built with the following packages.</h3>
+                <div class="row mt-5">
+                  <div class="col-3" >
+                    <p> 
+                      <a href="/installation" target="_blank">
+                        <img style="max-width: 155px;height: 55px"  src="/img/logo/node.png">   
+                      </a>
+                    </p>
+                    <p>Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.</p>
+                    <code>You need to download and install on your PC to run the localhost.</code>
+                  </div>
 
+                  <div class="col-3" >
+                    <p> 
+                      <a href="/installation" target="_blank">
+                        <img style="max-width: 155px;height: 55px"  src="/img/logo/mongdb.png"> 
+                      </a>
+                      <p>MongoDB is a free and open-source cross-platform document-oriented database program.</p>
+                      <code>You need to download and install on your PC to run the localhost.</code>
+                    </p>
+                  </div>
+                  <div class="col-3" >
+                    <p> 
+                      <a href="/installation" target="_blank">
+                        <img style="max-width: 155px;height: 55px"  src="/img/logo/express.png"> 
+                      </a>
+                      <p>Express.js, or simply Express, is a web application framework for Node.js,</p>
+                      <code>This is included in the Wrasse GitHub Repo.</code>
+                    </p>
+                  </div>
 
-          <div class="container mt-2">
+                  <div class="col-3" >
+                    <p> 
+                      <a href="/installation" target="_blank">
+                        <img style="max-width: 155px;height: 55px"  src="/img/logo/handlebars.png"> 
+                      </a>
+                      <p>Handlebars provides the power necessary to let you build semantic templates effectively with no frustration.</p>
+                      <code>This is included in the Wrasse GitHub Repo.</code>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <hr>
+
+          <div class="container mt-2" id="Functionality">
             <section>
               <h1 class="display-1">Functionality</h1>
+              <p>The following functions are availble. The full functionality is best experienced as a logged in user.</p>
+              {{#unless user}}
+              {{>notloggedin}}
+              {{/unless}}
               <br>
               <br>
               <div class="row">
                 <div class="col-3">
                   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Basic Form</a>
-                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Basic Form Deploy via Ajax</a>
-                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Update</a>
-                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Delete</a>
+                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Basic Form via Handlebars</a>
+                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Basic Form via Ajax</a>
+                    <a class="nav-link" id="v-pills-modal-tab" data-toggle="pill" href="#v-pills-modal" role="tab" aria-controls="v-pills-modal" aria-selected="false">Basic Form via Modal</a>      <hr>              
+                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">View All</a>
+                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">View All via Ajax</a><p></p>
+                    <a class="nav-link" id="v-pills-viewgroup-tab" data-toggle="pill" href="#v-pills-viewgroup" role="tab" aria-controls="v-pills-viewgroup" aria-selected="false">View Group</a>                    
+                    <a class="nav-link" id="v-pills-viewgroupajax-tab" data-toggle="pill" href="#v-pills-viewgroupajax" role="tab" aria-controls="v-pills-viewgroupajax" aria-selected="false">View Group via Ajax</a><p></p>
+                    <a class="nav-link" id="v-pills-standalone-tab" data-toggle="pill" href="#v-pills-standalone" role="tab" aria-controls="v-pills-standalone" aria-selected="false">Stand Alone Page Links</a>                    
                   </div>
                 </div>
                 <div class="col-9">
                   <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">{{>basicform}}</div>
-                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">{{>formviaajax}}</div>
-                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">{{>update}}</div>
-                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">{{>delete}}</div>
+                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">{{>ajaxformview}}</div>
+                    <div class="tab-pane fade" id="v-pills-modal" role="tabpanel" aria-labelledby="v-pills-modal-tab">
+                      <h5 class="display-3">Basic Form via Modal</h5>
+<p>Deploy the basic form using a handlebars partial.</p>
+                      {{>ajaxformviewmodal ids=(uniqueid)}}</div>
+                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">{{>viewall}}</div>
+                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">{{>ajaxviewall}}</div>
+                    <div class="tab-pane fade" id="v-pills-viewgroup" role="tabpanel" aria-labelledby="v-pills-viewgroup-tab">{{>viewgroup}}</div>
+                    <div class="tab-pane fade" id="v-pills-viewgroupajax" role="tabpanel" aria-labelledby="v-pills-viewgroupajax-tab">{{>ajaxviewgroup}}</div>
+                    
+                    <div class="tab-pane fade" id="v-pills-standalone" role="tabpanel" aria-labelledby="v-pills-standalone-tab">{{>standalone}}</div>
                   </div>
                 </div>
               </div>
             </section>
           </div>
-
-
-
-
-
-
-
-
-
 
         </div>
         <hr>
@@ -134,6 +185,7 @@
           <p></p>
           {{>crud}}
         </div>
+        
         <p></p>
       </section>
     </div>
@@ -158,7 +210,38 @@
      }, { collection: 'issues' });
    </pre>
  </section>
+
+
 </div>
+
+
+ 
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="exampleModalScrollable" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Flag and Issue</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="ajaxFormLocationmodal"></div>      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 {{>footer}}
+ 
+
 </body>
+
+
 </html>
+
+

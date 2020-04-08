@@ -115,6 +115,7 @@ app.use(passport.initialize());
 app.use(passport.session());
  
 
+
 app.use(function(req, res, next) {
   if(req.user){
     res.locals.user = JSON.parse(JSON.stringify(req.user));
@@ -168,6 +169,19 @@ app.use('/', fraternate);
  
  
 
+//////////////////////////////////////////
+////        CREATE UNIQUE ID         //// 
+////////////////////////////////////////
+function create_uid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+    .toString(16)
+    .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+  s4() + '-' + s4() + s4() + s4();
+}
+
 /////////////////////////////////////////
 ///////   HANDLEBARS HELPERS    ////////
 ///////////////////////////////////////
@@ -200,6 +214,9 @@ debug: function(optionalValue) {
     },
     partial: function (name) {
       return name;
+    },
+    uniqueid: function (uniqueid) {
+      return create_uid();
     },
     'dotdotdot' : function(str) {
       if (str) {
