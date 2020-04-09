@@ -14,18 +14,7 @@
 </div><br>
  
 <div style="text-align: right;position: absolute;top:5px;right: 5px">            
-<!-- Example single danger button -->
-<div class="btn-group">
-  <button type="button" class="btn btn-sm btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <i class="fas fa-exclamation-circle"></i>
-  </button>
-  <div class="dropdown-menu dropdown-menu-right">
-    <a class="dropdown-item disabled" href="#" tabindex="-1" aria-disabled="true">id : basicformviaajax</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Flag an Issue</a>
-    <a class="dropdown-item" href="#">View Issues</a>
-  </div>
-</div>
+  {{>issuebutton parentid="basicformviaajax"}}
 </div> 
 
 <script type="text/javascript">
@@ -33,7 +22,7 @@
     jQuery.ajax({
       'async': true,
       'global': false,
-      'url': '/issues/ajax/'+'wrasseform',
+      'url': '/issues/ajax/'+'wrasseform/basicformviaajax',
       'success': function (dataSchemaObject) {
         jQuery('#'+location).html(dataSchemaObject)
       }
