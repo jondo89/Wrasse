@@ -12,14 +12,10 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var recaptcha = require('express-recaptcha');
 var braintree = require("braintree");
-
 var helpers = require('handlebars-helpers')(['string']);
 var Handlebars = require("handlebars");
 var MomentHandler = require("handlebars.moment");
 MomentHandler.registerHelpers(Handlebars);
- 
-
-
 
 //Primary app variable.
 var app = express();
@@ -43,10 +39,6 @@ mongoose.set('useUnifiedTopology', true);
 ///////   HEROKU VS LOCALHOST .ENV SWAP    ////////
 //////////////////////////////////////////////////
 
- 
- 
-
-
 if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
 } else {
@@ -62,8 +54,6 @@ mongoose.connection.on('error', function() {
   process.exit(1);
 });
 
-
- 
 ////////////////////////////////////////////
 ///////   BRAINTREE INTEGRATION    ////////
 //////////////////////////////////////////
@@ -95,7 +85,6 @@ if (app.get('env') == 'production') {
 ///////////////////////////////////////////
 app.set('port', process.env.PORT || 5000);
 
-
 app.use(compression());
 app.use(logger('dev'));
 
@@ -106,16 +95,12 @@ app.use(logger('dev'));
 app.use(bodyParser.json({limit: '200mb'}));
 app.use(bodyParser.urlencoded({limit: '200mb', extended: true}));
  
-
-
 app.use(methodOverride('_method'));
 app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true }));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
  
-
-
 app.use(function(req, res, next) {
   if(req.user){
     res.locals.user = JSON.parse(JSON.stringify(req.user));
@@ -125,10 +110,6 @@ app.use(function(req, res, next) {
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules/jquery/')));//spicific directory for jquery
-
-
-
-
 
 ///////////////////////////////////////////////s
 ////     SET YOUR APP.JSON DETAILS        //// 
@@ -164,11 +145,6 @@ var fraternate = require("fraternate");
 partialsDir.push('./node_modules/fraternate/views/partials')
 app.use('/', fraternate);
  
-
-
- 
- 
-
 //////////////////////////////////////////
 ////        CREATE UNIQUE ID         //// 
 ////////////////////////////////////////
@@ -307,7 +283,6 @@ if (app.get('env') === 'production') {
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
-
 
 module.exports = app;
 
