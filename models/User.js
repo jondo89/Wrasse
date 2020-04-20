@@ -78,7 +78,12 @@ var mailOptions = {
 // send mail with defined transport object
 transporter.sendMail(mailOptions, (error, info) => {
   if (error) {
-    return console.log(error);
+    console.log('The Mailer is encountering an error. Likly incorrect management mail address or password.')
+    console.log(error);
+    return ;
+      
+      
+    
   }
 });
 }

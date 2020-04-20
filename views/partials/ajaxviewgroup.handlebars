@@ -1,23 +1,30 @@
       <h5 class="display-3">View group via Ajax</h5>
       <p>Deploy the table list based on a parentid.</p>
 
+ <div class="alert alert-secondary" role="alert">
+  This group item id is : <strong>viewgroupajax</strong>
+</div>
+ <div style="position: absolute;top:5px;right: 5px">            
+  {{>issuebutton parentid="viewgroupajax"}}
+</div> 
  
-
 <div class="card">
  <div class="card-body">
-  <h5>Demo</h5><br>
-         <div id="ajaxviewallLocation">
-          <button href="" class="btn btn-success" onclick="getviewall('ajaxviewallLocation')">Call with Ajax</button>
+  <h5>Demo</h5><br><button href="" class="btn btn-success" onclick="viewgroupajax('{{ids}}_1')">Call with Ajax</button>
+         <div id="{{ids}}_1">
+          
         </div>
 </div>
 </div>
  
 <script type="text/javascript">
-  function getviewall(location) {
+  
+  function viewgroupajax(location) {
+  jQuery('#'+location).html('<i class="fas fa-spinner fa-spin"></i>')  
     jQuery.ajax({
       'async': true,
       'global': false,
-      'url': '/issues/ajaxview/',
+      'url': '/issues/ajaxview/viewgroupajax',
       'success': function (dataSchemaObject) {
         jQuery('#'+location).html(dataSchemaObject)
       }

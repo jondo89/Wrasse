@@ -1,0 +1,41 @@
+
+ 
+<div class="row">
+        <div class="col-6" style="max-height: 450px;overflow: auto">
+<h5>The routing of the express website is shown below.</h5>
+<code>The testing framework uses this structure.</code>
+<div class="list-group">
+ {{#each routing}}
+  <h5 class="mb-1">{{@key}}</h5>
+<ul class="list-group">
+  {{#each this}} 
+
+  <li class="list-group-item"> 
+
+
+ 
+    <div class="d-flex w-100 justify-content-between"> 
+       <code>{{this.url}}</code>
+       <code>{{this.type}}</code>
+    </div>
+    <p class="mb-1">{{this.description}}</p>
+    <div style="text-align: right;">
+{{>issuebutton parentid=this.url}}
+ </div>
+ </li>
+ 
+               {{/each}}
+          </ul>     
+        {{/each}}   
+</div>
+        </div>
+        <div class="col-6" style="max-height: 450px;overflow: auto">
+                    <h5>The primary routing JSON object deployed directly from the node server.</h5>
+                <code>NULL routes are due to server JSON.stringify passing of the seperate function routes. View the index.js of the npm cleaner-wrasse to understand the middleware routing.</code>
+             <pre>{{toJSON routing}}</pre>
+        </div>
+</div>
+
+<p></p>
+
+ 
