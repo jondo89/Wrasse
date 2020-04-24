@@ -1,8 +1,7 @@
 const request = require('supertest');
 const express = require('express');
 
-const app = require('../index.js')
-app.set('port', process.env.PORT || 3003);
+var app = 'localhost:5000'
 
 
  
