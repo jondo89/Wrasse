@@ -1,0 +1,33 @@
+<h5 class="display-3">Form via Ajax </h5><p>Depoly the form using a handlebars partial. A hidden id can be injected into the form to group issues by a topic or ID.</p>
+
+<div class="alert alert-secondary" role="alert">
+  This group item id is : <strong>basicformviaajax</strong>
+</div>
+
+<div class="card">
+ <div class="card-body">
+  <h5>Demo</h5><br>
+  <div id="ajaxFormLocations">
+    <button href="" class="btn btn-success" onclick="getForm('ajaxFormLocations')">Flag an issue</button>
+  </div>
+</div>
+</div><br>
+ 
+<div style=" position: absolute;top:5px;right: 5px">            
+  {{>issuebutton parentid="basicformviaajax"}}
+</div> 
+
+<script type="text/javascript">
+
+  function getForm(location) {
+    jQuery('#'+location).html('<i class="fas fa-spinner fa-spin"></i>')
+    jQuery.ajax({
+      'async': true,
+      'global': false,
+      'url': '/issues/ajax/'+'wrasseform/basicformviaajax',
+      'success': function (dataSchemaObject) {
+        jQuery('#'+location).html(dataSchemaObject)
+      }
+    });
+  }
+</script>

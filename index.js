@@ -7,22 +7,37 @@ var session = require('express-session');
 var flash = require('express-flash');
 var bodyParser = require('body-parser');
 const { check, validationResult } = require('express-validator');
-var exphbs = require('express-handlebars');
+
 var mongoose = require('mongoose');
 var passport = require('passport');
 var recaptcha = require('express-recaptcha');
 var braintree = require("braintree");
-
 var helpers = require('handlebars-helpers')(['string']);
 var Handlebars = require("handlebars");
 var MomentHandler = require("handlebars.moment");
 MomentHandler.registerHelpers(Handlebars);
- 
-
-
 
 //Primary app variable.
 var app = express();
+ 
+
+//This pumps up the payload to accomidate larger data sets
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: false }));
+//extend
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({limit: '200mb', extended: true}));
+
+app.use(bodyParser.urlencoded({ extended: false }))
+if (process.env.NODE_ENV !== 'test') {
+/////////////////////////////////////////////
+///////   LOCALHOST PORT SETTING    ////////
+///////////////////////////////////////////
+app.set('port', process.env.PORT || 5000);
+
+}
+
+
 
 ///////////////////////////////////////
 ///////   FAVICON LOCATION    ////////
@@ -43,17 +58,13 @@ mongoose.set('useUnifiedTopology', true);
 ///////   HEROKU VS LOCALHOST .ENV SWAP    ////////
 //////////////////////////////////////////////////
 
- 
- 
-
-
 if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
 } else {
 
-    var dotenv = require('dotenv');
-    dotenv.config()
-    mongoose.connect(process.env.MONGODB, {useNewUrlParser: true});
+  var dotenv = require('dotenv');
+  dotenv.config()
+  mongoose.connect(process.env.MONGODB, {useNewUrlParser: true});
 }
 
 //Mongo error trap.
@@ -62,8 +73,6 @@ mongoose.connection.on('error', function() {
   process.exit(1);
 });
 
-
- 
 ////////////////////////////////////////////
 ///////   BRAINTREE INTEGRATION    ////////
 //////////////////////////////////////////
@@ -78,7 +87,7 @@ var gateway = braintree.connect({
 ///////   HTTPS TRAFFIC REDIRECT    ////////
 ///////////////////////////////////////////
 // Redirect all HTTP traffic to HTTPS
- function ensureSecure(req, res, next){
+function ensureSecure(req, res, next){
   if(req.headers["x-forwarded-proto"] === "https"){
   // OK, continue
   return next();
@@ -90,22 +99,10 @@ if (app.get('env') == 'production') {
   app.all('*', ensureSecure);
 }
 
-/////////////////////////////////////////////
-///////   LOCALHOST PORT SETTING    ////////
-///////////////////////////////////////////
-app.set('port', process.env.PORT || 5000);
-
 
 app.use(compression());
 app.use(logger('dev'));
 
-//This pumps up the payload to accomidate larger data sets
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: false }));
-//extend
-app.use(bodyParser.json({limit: '200mb'}));
-app.use(bodyParser.urlencoded({limit: '200mb', extended: true}));
- 
 
 
 app.use(methodOverride('_method'));
@@ -113,7 +110,6 @@ app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitia
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
- 
 
 app.use(function(req, res, next) {
   if(req.user){
@@ -123,10 +119,6 @@ app.use(function(req, res, next) {
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'node_modules/jquery/')));//spicific directory for jquery
-
-
-
 
 
 ///////////////////////////////////////////////s
@@ -142,6 +134,9 @@ app.locals.website = website
 app.locals.repo = repo
 app.locals.description = description
 var partialsDir = ['views/partials']
+
+
+
 
 ///////////////////////////////
 ////       ROUTING        //// 
@@ -162,11 +157,22 @@ var fraternate = require("fraternate");
 //Append the partial directory inside the NPM module.
 partialsDir.push('./node_modules/fraternate/views/partials')
 app.use('/', fraternate);
- 
 
 
- 
- 
+
+var exphbs = require('express-handlebars');
+//////////////////////////////////////////
+////        CREATE UNIQUE ID         //// 
+////////////////////////////////////////
+function create_uid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+    .toString(16)
+    .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+  s4() + '-' + s4() + s4() + s4();
+}
 
 /////////////////////////////////////////
 ///////   HANDLEBARS HELPERS    ////////
@@ -176,30 +182,33 @@ var hbs = exphbs.create({
   partialsDir:partialsDir,
   helpers: {
     ifEquals: function(arg1, arg2, options) {
-    return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
-},
+      return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+    },
     getNullsasblank :function(val) {
-    if(val === undefined ||val =='undefined') {
+      if(val === undefined ||val =='undefined') {
         return "null";
-    }
-    return val;
-},
-debug: function(optionalValue) {
-  console.log("Current Context");
-  console.log("====================");
-  console.log(this);
+      }
+      return val;
+    },
+    debug: function(optionalValue) {
+      console.log("Current Context");
+      console.log("====================");
+      console.log(this);
 
-  if (optionalValue) {
-    console.log("Value");
-    console.log("====================");
-    console.log(optionalValue);
-  }
-},
+      if (optionalValue) {
+        console.log("Value");
+        console.log("====================");
+        console.log(optionalValue);
+      }
+    },
     toJSON : function(object) {
       return JSON.stringify(object, null, 2);
     },
     partial: function (name) {
       return name;
+    },
+    uniqueid: function (uniqueid) {
+      return create_uid();
     },
     'dotdotdot' : function(str) {
       if (str) {
@@ -239,7 +248,8 @@ debug: function(optionalValue) {
   });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
- 
+
+
 /////////////////////////////
 ////       500          //// 
 /////////////////////////// 
@@ -287,10 +297,11 @@ if (app.get('env') === 'production') {
   });
 }
 
-app.listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + app.get('port'));
-});
 
+
+app.listen(app.get('port'), function() {
+  //console.log('Express server listening on port ' + app.get('port'));
+});
 
 module.exports = app;
 

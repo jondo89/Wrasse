@@ -1,0 +1,29 @@
+<h5 class="display-3">View all linked to a User</h5>
+<p>View issues creaetd by a user.</p>
+<div style="position: absolute;top:5px;right: 5px">            
+	{{>issuebutton parentid="viewalluser"}}
+</div>
+<div class="row">
+	<div class="col-12">
+		<div class="alert alert-secondary" role="alert">
+			This group item id is : <strong>viewalluser</strong>
+		</div>
+		<div class="card">
+			<div class="card-body">
+				<h5>Demo</h5>
+			  {{>usercard  ids=(uniqueid)  username='TestUser'}}
+				<div style="text-align: center;">
+					<div class="bd-example bg-light mt-4">
+						<p>
+							<code>
+								<var>{</var><var>{>usercard ids=(uniqueid) username='TestUser'</var><var>}</var><var>}</var>
+							</code>
+						</p>
+					</div>                
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
