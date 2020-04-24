@@ -155,9 +155,11 @@
                       <br>              
                       <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">View All</a>
                       <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">View All via Ajax</a>
+                  
                       <br>
                       <a class="nav-link" id="v-pills-viewgroup-tab" data-toggle="pill" href="#v-pills-viewgroup" role="tab" aria-controls="v-pills-viewgroup" aria-selected="false">View Group as Page</a>                    
                       <a class="nav-link" id="v-pills-viewgroupajax-tab" data-toggle="pill" href="#v-pills-viewgroupajax" role="tab" aria-controls="v-pills-viewgroupajax" aria-selected="false">View Group via Ajax</a>
+                      <a class="nav-link" id="v-pills-usersview-tab" data-toggle="pill" href="#v-pills-usersview" role="tab" aria-controls="v-pills-usersview" aria-selected="false">View all linked to a User</a>                          
                       <br>
                     </div>
                   </div>
@@ -170,6 +172,7 @@
                         <p>Deploy the form using a handlebars partial.</p>
                         {{>ajaxformviewmodal ids=(uniqueid)}}</div>
                         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">{{>viewall}}</div>
+                        <div class="tab-pane fade" id="v-pills-usersview" role="tabpanel" aria-labelledby="v-pills-usersview-tab">{{>viewalluser}}</div>
                         <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">{{>ajaxviewall}}</div>
                         <div class="tab-pane fade" id="v-pills-viewgroup" role="tabpanel" aria-labelledby="v-pills-viewgroup-tab">{{>viewgroup}}</div>
                         <div class="tab-pane fade" id="v-pills-viewgroupajax" role="tabpanel" aria-labelledby="v-pills-viewgroupajax-tab">{{>ajaxviewgroup}}</div>

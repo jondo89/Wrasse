@@ -1,6 +1,8 @@
 var crypto = require('crypto');
 var bcrypt = require('bcrypt-nodejs');
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
+  , Schema = mongoose.Schema
+  , ObjectId = Schema.ObjectId;
 
 ///////////////////////////////////////////////
 ////     SET YOUR APP.JSON DETAILS        //// 
@@ -20,24 +22,29 @@ var schemaOptions = {
 
 var userSchema = new mongoose.Schema({
   name: String,
+  lastname: String,
   email: { type: String, unique: true},
   password: String,
   bio: String,
   plan: {
-          name: String,//THe plan type saved on braintree
+          name: String,//The plan type saved on braintree
           braintreeid: String, //The plan ID saved on braintree
+          payfast :Schema.Types.Mixed,
         },
+  paypalsubscriber : String, //true or false
   phone: String,
   fax: String,
   braintreeid:String,//Used to query the braintree customer payment details.
   username: String,
+  firstsignup: String,
   passwordResetToken: String,
-  permission: String,
+  permission: String,//Administrator/Editor/Author/Contributor/Subscriber
   passwordResetExpires: Date,
   company: String,
   location: String,
   website: String,
   picture: String,
+  image: String,
   facebook: String,
   twitter: String,
   google: String,
@@ -54,12 +61,13 @@ function signupEmail(user){
   var port = process.env.MAIL_PORT
   var useremail = process.env.MAIL_USERNAME
   var passwords = process.env.MAIL_PASSWORD
+  var host = process.env.MAIL_HOST
   var temp = {}
   'use strict';
   var nodemailer = require('nodemailer');
 // create reusable transporter object using the default SMTP transport
 var transporter = nodemailer.createTransport({
-  host: 'mail.isithelo.com',
+  host: host,
   tls: {
     rejectUnauthorized: false
   },
@@ -70,20 +78,15 @@ var transporter = nodemailer.createTransport({
     }
   }); 
 var mailOptions = {
-  from: user.name + ' ' + '<'+ user.email + '>', // sender address
+  from: user.username + ' ' + '<'+ user.email + '>', // sender address
   to: process.env.MAIL_USERNAME, // list of receivers
-  subject: '✔ A user has edited their information. | '+ sitename, // Subject line
+  subject: '✔ A user has edited their information on '+ sitename + '.', // Subject line
   html:  '<h2>The following user has been edited.</h2><p>Code :</p> <pre>'+user+'</pre>',
 }
 // send mail with defined transport object
 transporter.sendMail(mailOptions, (error, info) => {
   if (error) {
-    console.log('The Mailer is encountering an error. Likly incorrect management mail address or password.')
-    console.log(error);
-    return ;
-      
-      
-    
+    return console.log(error);
   }
 });
 }

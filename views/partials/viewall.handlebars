@@ -1,18 +1,19 @@
-      <h5 class="display-3">View all </h5>
+
+      <h5 class="display-1">View all </h5>
       <p>Deploy the template from handlebars, this is static HTML.</p>
-    
-<div class="alert alert-secondary" role="alert">
-  This group item id is : <strong>viewall</strong>
-</div>
+      <div></div>
+      <div class="alert alert-secondary" role="alert">
+      	This group item id is : <strong>viewall</strong>
+      </div>
 
       <div class="card">
- <div class="card-body">
-  <h5>Demo</h5><br>
-     {{>wrasseissuelist  ids=(uniqueid)}}
-</div>
-</div>
+      	<div class="card-body">
+      		<h5>Demo</h5><br>
+      		{{>wrasseissuelist  ids=(uniqueid) status='open'}}
+      	</div>
+      </div>
 
 
-<div style="position: absolute;top:5px;right: 5px">            
-  {{>issuebutton parentid="viewall"}}
-</div> 
+      <div style="position: absolute;top:5px;right: 5px">            
+      	{{>issuebutton parentid="viewall"}}
+      </div> 
