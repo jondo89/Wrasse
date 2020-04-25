@@ -31,7 +31,7 @@
     "express-validator": "^6.2.0",
     "finalhandler": "^1.1.2",
     "flash": "^1.1.0",
-    "fraternate": "^1.3.21",
+    "fraternate": "^1.3.23",
     "fresh": "^0.5.2",
     "handlebars-helpers": "^0.10.0",
     "handlebars.moment": "^1.0.4",
