@@ -91,4 +91,11 @@ describe("End point testing of Fraternate sitemap", () => {
       done();
     });
   });
+    it('Try to fail user image crash.', function(done) {
+    request(app)
+    .get('/profilepic/eval("console.log("poops"))"').then(response => {
+      expect(response.statusCode).toBe(200)
+      done();
+    });
+  });
 });
