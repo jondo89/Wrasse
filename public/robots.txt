@@ -25,4 +25,4 @@ Disallow: /unlink/
 Disallow: /auth/
 Disallow: /licence/
 
-Sitemap: https://fraternate.herokuapp.com/sitemap.xml
+Sitemap: https://wrasse.herokuapp.com/sitemap.xml
