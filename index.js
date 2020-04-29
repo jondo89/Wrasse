@@ -13,9 +13,7 @@ var passport = require('passport');
 var recaptcha = require('express-recaptcha');
 var braintree = require("braintree");
 var helpers = require('handlebars-helpers')(['string']);
-var Handlebars = require("handlebars");
-var MomentHandler = require("handlebars.moment");
-MomentHandler.registerHelpers(Handlebars);
+
 
 //Primary app variable.
 var app = express();
@@ -160,7 +158,7 @@ app.use('/', fraternate);
 
 
 
-var exphbs = require('express-handlebars');
+
 //////////////////////////////////////////
 ////        CREATE UNIQUE ID         //// 
 ////////////////////////////////////////
@@ -173,6 +171,9 @@ function create_uid() {
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
   s4() + '-' + s4() + s4() + s4();
 }
+
+var exphbs = require('express-handlebars');
+ 
 
 /////////////////////////////////////////
 ///////   HANDLEBARS HELPERS    ////////
@@ -246,6 +247,20 @@ var hbs = exphbs.create({
       }
     }
   });
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
