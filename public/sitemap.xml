@@ -10,12 +10,6 @@
     <loc>https://wrasse.herokuapp.com/issues/view</loc>
   </url>
   <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/homepage</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/users</loc>
-  </url>
-  <url>
     <loc>https://wrasse.herokuapp.com/issues/view/homepage</loc>
   </url>
   <url>
@@ -28,19 +22,13 @@
     <loc>https://wrasse.herokuapp.com/installation</loc>
   </url>
   <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/basicform</loc>
+    <loc>https://wrasse.herokuapp.com/users</loc>
   </url>
   <url>
     <loc>https://wrasse.herokuapp.com/issues/view/basicform</loc>
   </url>
   <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/basicformviaajax</loc>
-  </url>
-  <url>
     <loc>https://wrasse.herokuapp.com/issues/view/basicformviaajax</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/basicformviamodal</loc>
   </url>
   <url>
     <loc>https://wrasse.herokuapp.com/issues/view/basicformviamodal</loc>
@@ -49,118 +37,22 @@
     <loc>https://wrasse.herokuapp.com/issues/view/customprofile</loc>
   </url>
   <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/viewall</loc>
-  </url>
-  <url>
     <loc>https://wrasse.herokuapp.com/issues/view/viewall</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/viewalluser</loc>
   </url>
   <url>
     <loc>https://wrasse.herokuapp.com/issues/view/viewalluser</loc>
   </url>
   <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/viewallajax</loc>
-  </url>
-  <url>
     <loc>https://wrasse.herokuapp.com/issues/view/viewallajax</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/viewallgroup</loc>
   </url>
   <url>
     <loc>https://wrasse.herokuapp.com/issues/view/viewallgroup</loc>
   </url>
   <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/viewgroupajax</loc>
-  </url>
-  <url>
     <loc>https://wrasse.herokuapp.com/issues/view/viewgroupajax</loc>
   </url>
   <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/standalonenewpage</loc>
-  </url>
-  <url>
     <loc>https://wrasse.herokuapp.com/issues/view/standalonenewpage</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/issues/create</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/view/issues/create</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/issues/new/:parentid</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/view/issues/new/:parentid</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/issues/new/</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/view/issues/new/</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/issues/view/:receivedid</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/view/issues/view/:receivedid</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/issues/view/</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/view/issues/view/</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/issues/user/view/:username</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/view/issues/user/view/:username</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/issues/update/:receivedid</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/view/issues/update/:receivedid</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/issues/close/:closeid/:receivedid</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/view/issues/close/:closeid/:receivedid</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/issues/delete/:deleteid/:receivedid</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/view/issues/delete/:deleteid/:receivedid</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/issues/ajax/:template/:parentid</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/view/issues/ajax/:template/:parentid</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/issues/ajaxview/:receivedid</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/view/issues/ajaxview/:receivedid</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/issues/ajaxview/</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/view/issues/ajaxview/</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/issues/:username/ajaxview/</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/view/issues/:username/ajaxview/</loc>
   </url>
   <url>
     <loc>https://wrasse.herokuapp.com/introduction</loc>
@@ -172,22 +64,10 @@
     <loc>https://wrasse.herokuapp.com/privacy</loc>
   </url>
   <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/orglist</loc>
-  </url>
-  <url>
     <loc>https://wrasse.herokuapp.com/issues/view/orglist</loc>
   </url>
   <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/issuesview</loc>
-  </url>
-  <url>
     <loc>https://wrasse.herokuapp.com/issues/view/issuesview</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/new/userlist</loc>
-  </url>
-  <url>
-    <loc>https://wrasse.herokuapp.com/issues/view/userlist</loc>
   </url>
   <url>
     <loc>https://wrasse.herokuapp.com/specifications</loc>
@@ -212,5 +92,8 @@
   </url>
   <url>
     <loc>https://wrasse.herokuapp.com/licence</loc>
+  </url>
+  <url>
+    <loc>https://wrasse.herokuapp.com/issues/view/userlist</loc>
   </url>
 </urlset>
