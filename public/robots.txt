@@ -16,6 +16,8 @@ Disallow: /orguserread/
 Disallow: /contact/
 Disallow: /account/
 Disallow: /signup/
+Disallow: /issues/new/
+Disallow: /issues/view/issues/
 Disallow: /signin/
 Disallow: /signin/
 Disallow: /forgot/

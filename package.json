@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A issue tracking boilerplate designed to emulate the GitHub issue tracking system.",
   "scripts": {
-    "test:watch": "jest  --detectOpenHandles  --watchAll --maxWorkers=1"
+    "test:watch": "jest "
   },
   "dependencies": {
     "accepts": "^1.3.7",
@@ -33,6 +33,9 @@
     "flash": "^1.1.0",
     "fraternate": "^1.3.24",
     "fresh": "^0.5.2",
+    "grunt-concurrent": "^3.0.0",
+    "grunt-nodemon": "^0.4.2",
+    "grunt-open": "^0.2.4",
     "handlebars-helpers": "^0.10.0",
     "handlebars.moment": "^1.0.4",
     "heavylifting": "^1.2.57",
@@ -70,6 +73,8 @@
     "vary": "^1.1.2"
   },
   "devDependencies": {
+    "grunt": "^1.1.0",
+    "grunt-run": "^0.8.1",
     "handlebars": "^4.7.6",
     "handlebars-helper-moment": "^0.2.0",
     "jest": "^25.4.0"
