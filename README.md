@@ -1,11 +1,11 @@
 # Wrasse
 
-### [VIEW THE DEMO](https://fraternate.herokuapp.com) or
-### [VIEW THE NPM MODULE - Wrasse](https://www.npmjs.com/package/cleaner-wrasse)
-
 ## What is Wrasse?
 
 Cleaner-Wrasse is an open-source issue tracking CRUD designed to duplicate the Github issue tracking system. Download the Full stack boilerplate using Node.js Mongodb Express.js Handlebars.js from Github.
+
+### [VIEW THE DEMO](https://fraternate.herokuapp.com) or
+### [VIEW THE NPM MODULE - Wrasse](https://www.npmjs.com/package/cleaner-wrasse)
 
 ## Features
 
