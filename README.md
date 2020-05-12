@@ -1,10 +1,7 @@
 # Wrasse
 
-### [VIEW THE DEMO](https://wrasse.herokuapp.com) or
-### [VIEW THE DEMO](https://fraternate.herokuapp.com)
-
-### [VIEW THE NPM MODULE - FRATERNATE](https://www.npmjs.com/package/fraternate)
-### [VIEW THE NPM MODULE - CLEANER-WRASSE](https://www.npmjs.com/package/fraternate)
+### [VIEW THE DEMO](https://fraternate.herokuapp.com) or
+### [VIEW THE NPM MODULE - Wrasse](https://www.npmjs.com/package/cleaner-wrasse)
 
 ## What is Wrasse?
 
