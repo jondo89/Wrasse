@@ -75,7 +75,7 @@
   "devDependencies": {
     "grunt": "^1.1.0",
     "grunt-run": "^0.8.1",
-    "handlebars": "^4.7.6",
+    "handlebars": "^4.7.7",
     "handlebars-helper-moment": "^0.2.0",
     "jest": "^25.5.4"
   },
