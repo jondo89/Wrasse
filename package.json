@@ -73,7 +73,7 @@
     "vary": "^1.1.2"
   },
   "devDependencies": {
-    "grunt": "^1.1.0",
+    "grunt": "^1.5.3",
     "grunt-run": "^0.8.1",
     "handlebars": "^4.7.6",
     "handlebars-helper-moment": "^0.2.0",
