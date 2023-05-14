@@ -1,8 +1,8 @@
 {
-  "name": "Cleaner-wrasse",
+  "name": "Cleaner-Wrasse",
   "description": "A issue tracking boilerplate designed to emulate the GitHub issue tracking system.",
   "sitename" : "Cleaner-wrasse",
-  "website" : "https://cleaner-wrasse.herokuapp.com/",
+  "website" : "https://wrasse.herokuapp.com/",
   "repo" : "https://github.com/jonodo89/cleaner-wrasse",
   "scripts": {
   },

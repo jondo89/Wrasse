@@ -1,0 +1,171 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/" style=" ">
+    <img alt="{{siteName}}" src="/img/Logo square inverse 50x50.png" style="height: 35px;width:35px;padding: 5px"> 
+  </a> 
+  <form class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search {{siteName}}" aria-label="Search">
+    <button class="btn btn-outline-warning my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+  </form>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="ml-4">
+      </li>
+      {{#each collections}}
+      {{#ifEquals this.navmenu1 'true'}}
+      <li >
+        <a class="nav-link" style="color: white" href="/{{@key}}">{{this.pagetitle}}</a>
+      </li>
+      {{else}}
+      {{/ifEquals}}
+      {{/each}}
+      <li class="ml-4">
+      </li>
+      {{#each collections}}
+      {{#ifEquals this.navmenu4 'true'}}
+      <li>
+        <a class="nav-link"  href="/{{@key}}">{{this.pagetitle}}</a>
+      </li>
+      {{else}}
+      {{/ifEquals}}
+      {{/each}}
+      <li>
+        <a class="nav-link mr-3" href="/issues/view">Issues</a>
+      </li>  
+      {{#if user}}
+      {{#ifEquals user.permission 'superadmin'}}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLin2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Admin
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          {{#if debugging}}
+          <h6 class="dropdown-header">Form Setup</h6>
+          <a class="dropdown-item" href="/semini/navigation">Navigation Menus</a>
+          <a class="dropdown-item" href="/semini/view">Database Setup</a>
+          <div class="dropdown-divider"></div>
+          {{/if}}
+          <h6 class="dropdown-header">Form Design</h6>
+          {{#each collections}}
+          {{#ifEquals this.navmenu3 'true'}}
+          <a class="dropdown-item" href="/{{@key}}">{{this.pagetitle}}</a>
+          {{else}}
+          {{/ifEquals}}
+          {{/each}}
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/sitemap">Site Map</a>
+        </div>
+      </li>
+      {{/ifEquals}}
+      {{/if}}
+    </ul>
+    <ul class="navbar-nav my-2 my-lg-0">
+      <!-- Custom Content goes here. -->
+      {{#unless user}}
+      <!-- Custom Content goes here. -->
+      <!-- Custom Content goes here. -->
+      {{/unless}}
+      <!-- Custom Content goes here. -->
+      <!-- Custom Content goes here. -->
+      {{#if user}}
+      {{#if user}}
+      {{#each collections}}
+      {{#ifEquals this.navmenu2 'true'}}
+      <a class="nav-link" style="color: white" href="/{{@key}}">{{this.pagetitle}}</a>
+      {{else}}
+      {{/ifEquals}}
+      {{/each}}
+    </li>
+    {{/if}}
+    <div class="btn-group">
+      <button type="button" class="btn btn-outline-secondary dropdown-toggle mr-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-plus" aria-hidden="true"></i> <span class="caret"></span>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <div>
+         <table class="">
+          <tbody>
+            <tr>
+              <th scope="row"><a href="/database/5bcc5f966b1f164294a25d9f" class="dropdown-item newConv" >Project Details</a></th>
+              <td><a href="/components/query/default/5bcc5f966b1f164294a25d9f" target="_blank" class="dropdown-item newConv" ><i class="fas fa-plus"></i></a></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="/database/58fdb5100c8b981ccc7c242c" class="dropdown-item newConv" >Operation</a></th>
+              <td><a href="/components/query/default/58fdb5100c8b981ccc7c242c" target="_blank" class="dropdown-item newConv" ><i class="fas fa-plus"></i></a></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="/database/5902cfc1d8bc512b40c9b172" class="dropdown-item newConv" >Conveyor Systems</a></th>
+              <td><a href="/components/query/default/5902cfc1d8bc512b40c9b172" target="_blank" class="dropdown-item newConv" ><i class="fas fa-plus"></i></a></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="/database/5bb45cf3e8e8092114aea76c" class="dropdown-item newConv" >Belt Speed</a></th>
+              <td><a href="/components/query/default/5bb45cf3e8e8092114aea76c" target="_blank" class="dropdown-item newConv" ><i class="fas fa-plus"></i></a></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="/database/5bb308e5e8e8092114aea6fa" class="dropdown-item newConv" >Conveyor Installation</a></th>
+              <td><a href="/components/query/default/5bb308e5e8e8092114aea6fa" target="_blank" class="dropdown-item newConv" ><i class="fas fa-plus"></i></a></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="/database/5a4cba3f6f44d54584a5fb89" class="dropdown-item newConv" >Design Capacity</a></th>
+              <td><a href="/components/query/default/5a4cba3f6f44d54584a5fb89" target="_blank" class="dropdown-item newConv" ><i class="fas fa-plus"></i></a></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="/database/5dc16c81d8f9bc25f8db3fd5" class="dropdown-item newConv" >Design Scenarios</a></th>
+              <td><a href="/components/query/default/5dc16c81d8f9bc25f8db3fd5" target="_blank" class="dropdown-item newConv" ><i class="fas fa-plus"></i></a></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="/database/5902fa49e39d634468d2b7a3" class="dropdown-item newConv" >Material</a></th>
+              <td><a href="/components/query/default/5902fa49e39d634468d2b7a3" target="_blank" class="dropdown-item newConv" ><i class="fas fa-plus"></i></a></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="/database/5bb3079ee8e8092114aea6f8" class="dropdown-item newConv" >Idlers</a></th>
+              <td><a href="/components/query/default/5bb3079ee8e8092114aea6f8" target="_blank" class="dropdown-item newConv" ><i class="fas fa-plus"></i></a></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="/database/5a50a0704e84af45d0cdb05d" class="dropdown-item newConv" >Conveyor Chute Work</a></th>
+              <td><a href="/components/query/default/5a50a0704e84af45d0cdb05d" target="_blank" class="dropdown-item newConv" ><i class="fas fa-plus"></i></a></td>
+            </tbody>
+          </table>
+        </div>
+        <div class="dropdown-divider"></div>
+        <a  class="dropdown-item" href="/organizations/new-payfast"><i class="fas fa-users"></i> New Organization</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/issues/new/sitewide"><i class="text-success fas fa-exclamation-circle"></i> New Issue</a>
+      </div>
+    </div>
+    {{/if}}
+    <!-- Custom Content goes here. -->
+    <!-- Custom Content goes here. -->
+    {{#if user}}
+    <div class="btn-group">
+      <button type="button" class="btn btn-outline-secondary dropdown-toggle mr-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{#if user.image}}
+        <img src="{{user.image}}" class="navbar-avatar-pic" style=" ">
+        {{else}}
+        <img src="https://www.gravatar.com/avatar/{{user._id}}?s=32&d=retro&r=G" class="navbar-avatar-pic" style=" ">
+        {{/if}}
+        <i class="caret"></i>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right"  id="usermenu"> 
+        <a  class="dropdown-item" >Signed in as <strong>{{user.username}}</strong>  </a>
+        <div class="dropdown-divider"></div>   
+        <a  class="dropdown-item" href="/users/{{user.username}}">Your Profile</a>
+        <a  class="dropdown-item" href="/users/{{user.username}}/settings/profile">Settings</a>
+        <a  class="dropdown-item" href="/start/introduction">Introduction</a>
+        <div class="dropdown-divider"></div> 
+        <a  class="dropdown-item" href="/issues/view">Issues - {{siteName}}</a>
+        <div class="dropdown-divider"></div> 
+        <a  class="dropdown-item" href="/signout">Sign out</a>
+      </div>
+    </div>
+    {{else}}
+    <li style="display: inline-flex;color: grey;">
+      <a style="color: white"  class="nav-link mr-2" href="/signin">Sign in</a>
+      <a class="btn btn-outline-secondary" style="color: white;white-space: nowrap;" class="nav-link" href="/signup">Sign up</a> 
+      {{/if}}
+      <!-- Custom Content goes here. -->
+    </ul>
+  </div>
+</nav>

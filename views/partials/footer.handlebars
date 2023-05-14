@@ -1,4 +1,4 @@
- <style type="text/css">
+<style type="text/css">
   @media screen and (max-width: 600px) {
     .mobilehide {
       visibility: hidden;
@@ -10,61 +10,93 @@
     }
   }
 </style>
-
-<hr>
-
 <div class="container" style="padding-top: 45px;padding-bottom: 75px">
   <div class="row">
-   <div class="col-md-3 mobilehide" style="">
+    <div class="col-md-5" style="">
+      <a href="/" style="font-size: 25px;text-decoration: none;color: black">
+        <h5 class="display-2"> {{siteName}} </h5>
+      </a>  
+      <p>{{sitedescription}} <span class="badge badge-warning">{{siteversion}}</span></p>
+      <p>
+        <p><p>
+            Built with the 
+          <a target="_blank" href="https://github.com/jondo89/fraternate">Fraternate </a> user framework </li>
+        </p>
+      </div>
+      <div class="col-md-2 mobilehide" style="">
+      
+          {{#if collections}}
+   <h5>Collections</h5>
+          {{else}}
+      
+          {{/if}}
 
-    <h4>Introduction</h4>
-    <ul>
-      <li><a href="/introduction">Introduction</a></li>
-    </ul>   
 
-        <p>
-      <h4>Built with</h4> 
-      <ul>
-        <li><a target="_blank" href="https://github.com/jondo89/Heavy-lifting">Heavy-lifting</a></li>
-        <li><a target="_blank" href="https://github.com/jondo89/Fraternate">Fratenate</a></li>
-        <li><a target="_blank" href="https://github.com/jondo89/Wrasse">Cleaner-wrasse</a></li>
-      </ul>
-       
-    </p> 
+        <ul class="list-unstyled">
+          {{#each collections}}
+          {{#ifEquals this.navmenu1 'true'}}
+          <li >
+            <a href="/{{@key}}">{{this.pagetitle}}</a>
+          </li>
+          {{else}}
+          {{/ifEquals}}
+          {{/each}}
+        </ul>
+        <h5>Tools</h5>
+        <ul class="list-unstyled">
+          {{#each collections}}
+          {{#ifEquals this.navmenu2 'true'}}
+          <li >
+            <a href="/{{@key}}">{{this.pagetitle}}</a>
+          </li>
+          {{else}}
+          {{/ifEquals}}
+          {{/each}}
+        </ul>
+        <h5>Documentation</h5>
+        <ul class="list-unstyled">
+          {{#each collections}}
+          {{#ifEquals this.navmenu4 'true'}}
+          <li >
+            <a href="/{{@key}}">{{this.pagetitle}}</a>
+          </li>
+          {{else}}
+          {{/ifEquals}}
+          {{/each}}
+        </ul>  
+      </div>
+      <div class="col-md-2 mobilehide" style="">
+   {{#unless user}}
+        <h5>Sign up to get started!</h5>
+        <span><small><p><a href="/signup" class="btn btn-outline-success">Sign up</a> its free.</p></small></span>
+        {{/unless}}
+        <h5>Site Details</h5>
+        <ul class="list-unstyled">
+          <li><a href="/users">Users</a></li>
+          <li><a href="/organizations">Organizations</a></li>
+        </ul>
+   <h5>Site Map</h5>
+        <ul class="list-unstyled">
+        <li><a href="/sitemap">Site map</a></li>
+        </ul>        
+      </div>
+      <div class="col-md-2 mobilehide" style="">
+        <h5>Issues </h5><p>List your issues with the interface.</p>
+        <ul class="list-unstyled">
+          <li><a href="/issues/view">Issues</a></li>
+        </ul> 
+        <h5>T & C's</h5>
+        <ul  class="list-unstyled">
+          <li><a href="/terms">Terms</a></li>
+          <li><a href="/privacy">Privacy</a> </li>
+        </ul>
+      </div>
+      <div class="col-md-10 mobilehide" style="">
+        <h5>Collaborate </h5><p>Please feel free to contact us if you would like to work jointly on an activity or project.</p>
+        <ul class="list-unstyled">
+          <li> <a href="/contact">Contact us</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
-  <div class="col-md-3 mobilehide" style="">
-   <h4>Collaborate <small>Would you like to contribute?</small></h4>
-   <ul>
-    <li> <a href="/contact">Contact us</a></li>
-  </ul>
-  <h4>Site Details</h4>
-  <ul>
-    <li><a href="/users">Users</a></li>
-    <li><a href="/organizations">Organizations</a></li>
-  </ul>
-</div>
-<div class="col-md-3 mobilehide" style="">
-  {{#unless user}}
-  <h4>Sign up to get started!</h4>
-  <span><small><p><a href="/signup" class="btn btn-success">Sign up</a>  Sign up its free.</p></small></span>
-  {{/unless}}
-  <h4>Issues <small>List your issues with the interface.</small></h4>
-  <ul>
-    <li><a href="/issues/view">Issues</a></li>
-  </ul> 
-</div>
-<div class="col-md-3" style="">
-  <a href="/" style="font-size: 25px;text-decoration: none;color: black">
-    <h3><img src="/img/Logo square 300x300.png" style="height: 35px"> {{siteName}}</h3>
-    
-  </a>   
-  <small>{{description}}</small>
-  <p>
- 
-
-    <h4>More details</h4>
-    <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a> | <a href="/contact">Contact</a>
-  </div>
-</div>
-</div>
-
+  <div class="col-md-2"><small>© 2020 {{siteName}}</small></div>

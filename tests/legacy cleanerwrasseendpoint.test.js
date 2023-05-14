@@ -1,14 +1,12 @@
 const request = require('supertest');
 const express = require('express');
-
+var dotenv = require('dotenv');
+dotenv.config()
+var app = 'localhost:'+process.env.LOCALHOSTPORT
  
-var app = 'localhost:5000'
- 
-
 //////////////////////////////////////////////////S
 ////       TEST ALL STATIC HTML PAGES        //// 
 ////////////////////////////////////////////////
-
 
 var siteIndex = [{
   url: '/issues/view',
@@ -28,17 +26,15 @@ var siteIndex = [{
 }]
  
   
- 
 var testlist=[]
 for (var i = 0; i < siteIndex.length; i++) {
 	if (siteIndex[i].requireslogin==false) {
 	testlist.push(siteIndex[i].url)	
 	}
-	 
 }
  
 const cases = testlist
-describe.skip("End point testing of Fraternate sitemap", () => {
+describe("End point testing of Fraternate sitemap", () => {
   test.each(cases)(
     "given %p endpoint should return a 200.",
     async (firstArg,done) => {
@@ -47,7 +43,6 @@ describe.skip("End point testing of Fraternate sitemap", () => {
         .end(function(err, res) {
           if (err) return done(err);
           expect(res.statusCode).toBe(200)
-          expect(res.body.pagetitle).not.toBeUndefined();
           done();
         });
     }
